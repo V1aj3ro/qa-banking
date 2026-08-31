@@ -61,7 +61,7 @@ class GetOperationsSummaryQueryTestSchema(BaseModel):
     account_id: UUID4
 
 
-class GetOperationsSummaryResponseSchema(BaseModel):
+class GetOperationsSummaryResponseTestSchema(BaseModel):
     summary: OperationsSummaryTestSchema
 
 

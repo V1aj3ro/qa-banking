@@ -91,5 +91,5 @@ class OpenCreditCardAccountRequestTestSchema(BaseModel):
     user_id: UUID4
 
 
-class OpenCreditCardAccountResponseSchema(BaseModel):
+class OpenCreditCardAccountResponseTestSchema(BaseModel):
     account: AccountTestSchema
