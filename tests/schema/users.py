@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field, ConfigDict, EmailStr, UUID4
 from pydantic.alias_generators import to_camel
 
-from tools.fakers import fake
+from tests.tools.fakers import fake
 
 
 class UserTestSchema(BaseModel):
