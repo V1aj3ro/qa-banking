@@ -9,3 +9,10 @@ class OperationTestType(StrEnum):
     TRANSFER = "TRANSFER"
     BILL_PAYMENT = "BILL_PAYMENT"
     CASH_WITHDRAWAL = "CASH_WITHDRAWAL"
+
+
+class OperationTestStatus(StrEnum):
+    FAILED = "FAILED"
+    COMPLETED = "COMPLETED"
+    IN_PROGRESS = "IN_PROGRESS"
+    UNSPECIFIED = "UNSPECIFIED"

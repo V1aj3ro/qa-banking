@@ -15,7 +15,7 @@ class CardTestStatus(StrEnum):
     BLOCKED = "BLOCKED"
 
 
-class CardPaymentTestSystem(StrEnum):
+class CardTestPaymentSystem(StrEnum):
     UNSPECIFIED = "UNSPECIFIED"
     MASTERCARD = "MASTERCARD"
     VISA = "VISA"
