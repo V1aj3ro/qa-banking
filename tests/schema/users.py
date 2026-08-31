@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, ConfigDict, EmailStr, UUID4
+from pydantic import BaseModel, Field, ConfigDict, EmailStr
 from pydantic.alias_generators import to_camel
 
 from tests.tools.fakers import fake
@@ -10,7 +10,7 @@ class UserTestSchema(BaseModel):
         validate_by_alias=True,
         validate_by_name=True
     )
-    id: UUID4
+    id: str
     email: EmailStr
     last_name: str
     first_name: str

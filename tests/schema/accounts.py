@@ -1,4 +1,4 @@
-from pydantic import BaseModel, ConfigDict, UUID4
+from pydantic import BaseModel, ConfigDict
 from pydantic.alias_generators import to_camel
 
 from tests.schema.cards import CardTestSchema
@@ -12,11 +12,11 @@ class AccountTestSchema(BaseModel):
         validate_by_name=True
     )
 
-    id: UUID4
+    id: str
     type: AccountTestType
     cards: list[CardTestSchema]
     status: AccountTestStatus
-    user_id: UUID4
+    user_id: str
     balance: float
 
 
@@ -27,7 +27,7 @@ class GetAccountsQueryTestSchema(BaseModel):
         validate_by_name=True
     )
 
-    user_id: UUID4
+    user_id: str
 
 
 class GetAccountsResponseTestSchema(BaseModel):
@@ -47,7 +47,7 @@ class OpenDepositAccountRequestTestSchema(BaseModel):
         validate_by_name=True
     )
 
-    user_id: UUID4
+    user_id: str
 
 
 class OpenDepositAccountResponseTestSchema(BaseModel):
@@ -61,7 +61,7 @@ class OpenSavingsAccountRequestTestSchema(BaseModel):
         validate_by_name=True
     )
 
-    user_id: UUID4
+    user_id: str
 
 
 class OpenSavingsAccountResponseTestSchema(BaseModel):
@@ -75,7 +75,7 @@ class OpenDebitCardAccountRequestTestSchema(BaseModel):
         validate_by_name=True
     )
 
-    user_id: UUID4
+    user_id: str
 
 class OpenDebitCardAccountResponseTestSchema(BaseModel):
     account: AccountTestSchema
@@ -88,7 +88,7 @@ class OpenCreditCardAccountRequestTestSchema(BaseModel):
         validate_by_name=True
     )
 
-    user_id: UUID4
+    user_id: str
 
 
 class OpenCreditCardAccountResponseTestSchema(BaseModel):

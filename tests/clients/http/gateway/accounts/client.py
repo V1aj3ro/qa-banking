@@ -1,5 +1,3 @@
-from uuid import UUID
-
 import allure
 from httpx import Response, QueryParams
 
@@ -58,27 +56,27 @@ class AccountsGatewayHTTPTestClient(HTTPTestClient):
             json=request.model_dump(by_alias=True)
         )
 
-    def get_accounts(self, user_id: UUID) -> GetAccountsResponseTestSchema:
+    def get_accounts(self, user_id: str) -> GetAccountsResponseTestSchema:
         query = GetAccountsQueryTestSchema(user_id=user_id)
         response = self.get_accounts_api(query)
         return GetAccountsResponseTestSchema.model_validate_json(response.text)
 
-    def open_deposit_account(self, user_id: UUID) -> OpenDepositAccountResponseTestSchema:
+    def open_deposit_account(self, user_id: str) -> OpenDepositAccountResponseTestSchema:
         request = OpenDepositAccountRequestTestSchema(user_id=user_id)
         response = self.open_deposit_account_api(request)
         return OpenDepositAccountResponseTestSchema.model_validate_json(response.text)
 
-    def open_savings_account(self, user_id: UUID) -> OpenSavingsAccountResponseTestSchema:
+    def open_savings_account(self, user_id: str) -> OpenSavingsAccountResponseTestSchema:
         request = OpenSavingsAccountRequestTestSchema(user_id=user_id)
         response = self.open_savings_account_api(request)
         return OpenSavingsAccountResponseTestSchema.model_validate_json(response.text)
 
-    def open_debit_card_account(self, user_id: UUID) -> OpenDebitCardAccountResponseTestSchema:
+    def open_debit_card_account(self, user_id: str) -> OpenDebitCardAccountResponseTestSchema:
         request = OpenDebitCardAccountRequestTestSchema(user_id=user_id)
         response = self.open_debit_card_account_api(request)
         return OpenDebitCardAccountResponseTestSchema.model_validate_json(response.text)
 
-    def open_credit_card_account(self, user_id: UUID) -> OpenCreditCardAccountResponseTestSchema:
+    def open_credit_card_account(self, user_id: str) -> OpenCreditCardAccountResponseTestSchema:
         request = OpenCreditCardAccountRequestTestSchema(user_id=user_id)
         response = self.open_credit_card_account_api(request)
         return OpenCreditCardAccountResponseTestSchema.model_validate_json(response.text)

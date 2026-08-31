@@ -1,6 +1,6 @@
 from datetime import date
 
-from pydantic import BaseModel, Field, ConfigDict, UUID4
+from pydantic import BaseModel, Field, ConfigDict
 from pydantic.alias_generators import to_camel
 
 from tests.tools.fakers import fake
@@ -13,14 +13,14 @@ class OperationTestSchema(BaseModel):
         validate_by_alias=True,
         validate_by_name=True
     )
-    id: UUID4
+    id: str
     type: OperationTestType
     status: OperationTestStatus
     amount: float
-    card_id: UUID4
+    card_id: str
     category: str
     created_at: date
-    account_id: UUID4
+    account_id: str
 
 
 class OperationReceiptTestSchema(BaseModel):
@@ -44,7 +44,7 @@ class GetOperationsQueryTestSchema(BaseModel):
         validate_by_alias=True,
         validate_by_name=True
     )
-    account_id: UUID4
+    account_id: str
 
 
 class GetOperationsResponseTestSchema(BaseModel):
@@ -58,7 +58,7 @@ class GetOperationsSummaryQueryTestSchema(BaseModel):
         validate_by_name=True
     )
 
-    account_id: UUID4
+    account_id: str
 
 
 class GetOperationsSummaryResponseTestSchema(BaseModel):
@@ -78,8 +78,8 @@ class MakeOperationRequestTestSchema(BaseModel):
 
     status: OperationTestStatus = Field(default_factory=lambda: fake.enum(OperationTestStatus))
     amount: float = Field(default_factory=fake.amount)
-    card_id: UUID4
-    account_id: UUID4
+    card_id: str
+    account_id: str
 
 
 class MakeFeeOperationRequestTestSchema(MakeOperationRequestTestSchema):

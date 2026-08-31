@@ -6,7 +6,7 @@ class GRPCClientTestConfig(BaseModel):
     address: IPvAnyAddress
 
     @property
-    def url(self):
+    def client_url(self):
         return f"{self.address}:{self.port}"
 
 class GRPCServerTestConfig(BaseModel):

@@ -1,5 +1,3 @@
-from uuid import UUID
-
 import allure
 from httpx import Response, QueryParams
 
@@ -35,13 +33,13 @@ from tests.tools.logger import get_test_logger
 class OperationsGatewayHTTPTestClient(HTTPTestClient):
 
     @allure.step("Get operation")
-    def get_operation_api(self, operation_id: UUID) -> Response:
+    def get_operation_api(self, operation_id: str) -> Response:
         return self.get(
             f"{APITestRoutes.OPERATIONS}/{operation_id}",
         )
 
     @allure.step("Get operation receipt")
-    def get_operation_receipt_api(self, operation_id: UUID) -> Response:
+    def get_operation_receipt_api(self, operation_id: str) -> Response:
         return self.get(
             f"{APITestRoutes.OPERATIONS}/operation-receipt/{operation_id}",
         )
@@ -88,55 +86,55 @@ class OperationsGatewayHTTPTestClient(HTTPTestClient):
     def make_cash_withdrawal_operation_api(self, request: MakeCashWithdrawalOperationRequestTestSchema) -> Response:
         return self.post(f"{APITestRoutes.OPERATIONS}/make-cash-withdrawal-operation", json=request.model_dump(by_alias=True))
 
-    def get_operation(self, operation_id: UUID) -> GetOperationResponseTestSchema:
+    def get_operation(self, operation_id: str) -> GetOperationResponseTestSchema:
         response = self.get_operation_api(operation_id)
         return GetOperationResponseTestSchema.model_validate_json(response.text)
 
-    def get_operation_receipt(self, operation_id: UUID) -> GetOperationReceiptResponseTestSchema:
+    def get_operation_receipt(self, operation_id: str) -> GetOperationReceiptResponseTestSchema:
         response = self.get_operation_receipt_api(operation_id)
         return GetOperationReceiptResponseTestSchema.model_validate_json(response.text)
 
-    def get_operations(self, account_id: UUID) -> GetOperationsResponseTestSchema:
+    def get_operations(self, account_id: str) -> GetOperationsResponseTestSchema:
         query = GetOperationsQueryTestSchema(accountId=account_id)
         response = self.get_operations_api(query)
         return response.json()
 
-    def get_operations_summary(self, account_id: UUID) -> GetOperationsSummaryResponseTestSchema:
+    def get_operations_summary(self, account_id: str) -> GetOperationsSummaryResponseTestSchema:
         query = GetOperationsSummaryQueryTestSchema(accountId=account_id)
         response = self.get_operations_summary_api(query)
         return GetOperationsSummaryResponseTestSchema.model_validate_json(response.text)
 
-    def make_fee_operation(self, card_id: UUID, account_id: UUID) -> MakeFeeOperationResponseTestSchema:
+    def make_fee_operation(self, card_id: str, account_id: str) -> MakeFeeOperationResponseTestSchema:
         request = MakeFeeOperationRequestTestSchema(cardId=card_id, accountId=account_id)
         response = self.make_fee_operation_api(request)
         return MakeFeeOperationResponseTestSchema.model_validate_json(response.text)
-    def make_top_up_operation(self, card_id: UUID, account_id: UUID) -> MakeTopUpOperationResponseTestSchema:
+    def make_top_up_operation(self, card_id: str, account_id: str) -> MakeTopUpOperationResponseTestSchema:
         request = MakeTopUpOperationRequestTestSchema(cardId=card_id, accountId=account_id)
         response = self.make_top_up_operation_api(request)
         return MakeTopUpOperationResponseTestSchema.model_validate_json(response.text)
 
-    def make_cashback_operation(self, card_id: UUID, account_id: UUID) -> MakeCashbackOperationResponseTestSchema:
+    def make_cashback_operation(self, card_id: str, account_id: str) -> MakeCashbackOperationResponseTestSchema:
         request = MakeCashbackOperationRequestTestSchema(cardId=card_id, accountId=account_id)
         response = self.make_cashback_operation_api(request)
         return MakeCashbackOperationResponseTestSchema.model_validate_json(response.text)
 
-    def make_transfer_operation(self, card_id: UUID, account_id: UUID) -> MakeTransferOperationResponseTestSchema:
+    def make_transfer_operation(self, card_id: str, account_id: str) -> MakeTransferOperationResponseTestSchema:
         request = MakeTransferOperationRequestTestSchema(cardId=card_id, accountId=account_id
         )
         response = self.make_transfer_operation_api(request)
         return MakeTransferOperationResponseTestSchema.model_validate_json(response.text)
 
-    def make_purchase_operation(self, card_id: UUID, account_id: UUID) -> MakePurchaseOperationResponseTestSchema:
+    def make_purchase_operation(self, card_id: str, account_id: str) -> MakePurchaseOperationResponseTestSchema:
         request = MakePurchaseOperationRequestTestSchema(cardId=card_id, accountId=account_id)
         response = self.make_purchase_operation_api(request)
         return MakePurchaseOperationResponseTestSchema.model_validate_json(response.text)
 
-    def make_bill_payment_operation(self, card_id: UUID, account_id: UUID) -> MakeBillPaymentOperationResponseTestSchema:
+    def make_bill_payment_operation(self, card_id: str, account_id: str) -> MakeBillPaymentOperationResponseTestSchema:
         request = MakeBillPaymentOperationRequestTestSchema(cardId=card_id, accountId=account_id)
         response = self.make_bill_payment_operation_api(request)
         return MakeBillPaymentOperationResponseTestSchema.model_validate_json(response.text)
 
-    def make_cash_withdrawal_operation(self, card_id: UUID, account_id: UUID) -> MakeCashWithdrawalOperationResponseTestSchema:
+    def make_cash_withdrawal_operation(self, card_id: str, account_id: str) -> MakeCashWithdrawalOperationResponseTestSchema:
         request = MakeCashWithdrawalOperationRequestTestSchema(cardId=card_id, accountId=account_id)
         response = self.make_cash_withdrawal_operation_api(request)
         return MakeCashWithdrawalOperationResponseTestSchema.model_validate_json(response.text)
