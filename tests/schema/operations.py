@@ -3,8 +3,8 @@ from datetime import date
 from pydantic import BaseModel, Field, ConfigDict, UUID4
 from pydantic.alias_generators import to_camel
 
-from tools.fakers import fake
-from types.operations import OperationTestType, OperationTestStatus
+from tests.tools.fakers import fake
+from tests.types.operations import OperationTestType, OperationTestStatus
 
 
 class OperationTestSchema(BaseModel):
