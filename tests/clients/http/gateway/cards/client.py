@@ -29,13 +29,11 @@ class CardsGatewayHTTPTestClient(HTTPTestClient):
             json=request.model_dump(by_alias=True)
         )
 
-    def issue_virtual_card(self, user_id: str, account_id: str) -> IssueVirtualCardResponseTestSchema:
-        request = IssueVirtualCardRequestTestSchema(user_id=user_id, account_id=account_id)
+    def issue_virtual_card(self, request: IssueVirtualCardRequestTestSchema) -> IssueVirtualCardResponseTestSchema:
         response = self.issue_virtual_card_api(request)
         return IssueVirtualCardResponseTestSchema.model_validate_json(response.text)
 
-    def issue_physical_card(self, user_id: str, account_id: str) -> IssuePhysicalCardResponseTestSchema:
-        request = IssuePhysicalCardRequestTestSchema(user_id=user_id, account_id=account_id)
+    def issue_physical_card(self, request: IssuePhysicalCardRequestTestSchema) -> IssuePhysicalCardResponseTestSchema:
         response = self.issue_physical_card_api(request)
         return IssuePhysicalCardResponseTestSchema.model_validate_json(response.text)
 

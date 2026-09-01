@@ -1,6 +1,6 @@
 from datetime import date
 
-from pydantic import BaseModel, UUID4, ConfigDict
+from pydantic import BaseModel, ConfigDict
 from pydantic.alias_generators import to_camel
 
 from tests.types.cards import CardTestType, CardTestStatus, CardTestPaymentSystem
@@ -12,12 +12,12 @@ class CardTestSchema(BaseModel):
         validate_by_alias=True,
         validate_by_name=True
     )
-    id: UUID4
+    id: str
     pin: str
     cvv: str
     type: CardTestType
     status: CardTestStatus
-    account_id: UUID4
+    account_id: str
     card_number: str
     card_holder: str
     expiry_date: date
@@ -31,8 +31,8 @@ class IssueVirtualCardRequestTestSchema(BaseModel):
         validate_by_name=True
     )
 
-    user_id: UUID4
-    account_id: UUID4
+    user_id: str
+    account_id: str
 
 
 class IssueVirtualCardResponseTestSchema(BaseModel):
@@ -46,8 +46,8 @@ class IssuePhysicalCardRequestTestSchema(BaseModel):
         validate_by_name=True
     )
 
-    user_id:UUID4
-    account_id: UUID4
+    user_id:str
+    account_id: str
 
 
 class IssuePhysicalCardResponseTestSchema(BaseModel):

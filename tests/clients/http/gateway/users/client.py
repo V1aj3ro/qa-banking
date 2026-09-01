@@ -23,8 +23,7 @@ class UsersGatewayHTTPTestClient(HTTPTestClient):
         response = self.get_user_api(user_id)
         return GetUserResponseTestSchema.model_validate_json(response.text)
 
-    def create_user(self) -> CreateUserResponseTestSchema:
-        request = CreateUserRequestTestSchema()
+    def create_user(self, request: CreateUserRequestTestSchema) -> CreateUserResponseTestSchema:
         response = self.create_user_api(request)
         return CreateUserResponseTestSchema.model_validate_json(response.text)
 
