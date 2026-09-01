@@ -1,7 +1,10 @@
 import allure
 
 from tests.assertions.base import assert_equal
-from tests.schema.cards import CardTestSchema
+from tests.schema.accounts import AccountTestSchema
+from tests.schema.cards import CardTestSchema, IssuePhysicalCardResponseTestSchema, IssueVirtualCardRequestTestSchema, \
+    IssueVirtualCardResponseTestSchema
+from tests.types.cards import CardTestType
 
 
 @allure.step("Check card")
@@ -17,3 +20,18 @@ def assert_card(actual: CardTestSchema, expected: CardTestSchema):
     assert_equal(actual.pin, expected.pin, "pin")
     assert_equal(actual.type, expected.type, "type")
 
+@allure.step("Check issue physical card response")
+def assert_issue_physical_card_response(
+        issue_physical_card_response: IssuePhysicalCardResponseTestSchema,
+        open_account_response: AccountTestSchema
+) -> None:
+    assert_equal(issue_physical_card_response.card.type, CardTestType.PHYSICAL, "Card type")
+    assert_equal(issue_physical_card_response.card.account_id, open_account_response.id, "Account id")
+
+@allure.step("Check issue virtual card response")
+def assert_issue_virtual_card_response(
+        issue_virtual_card_response: IssueVirtualCardResponseTestSchema,
+        open_account_response: AccountTestSchema
+) -> None:
+    assert_equal(issue_virtual_card_response.card.type, CardTestType.VIRTUAL, "Card type")
+    assert_equal(issue_virtual_card_response.card.account_id, open_account_response.id, "Account id")
