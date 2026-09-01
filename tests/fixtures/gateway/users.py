@@ -1,5 +1,5 @@
 import pytest
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel
 
 from tests.clients.http.gateway.users.client import UsersGatewayHTTPTestClient, build_users_gateway_http_test_client
 from tests.schema.users import CreateUserResponseTestSchema, CreateUserRequestTestSchema

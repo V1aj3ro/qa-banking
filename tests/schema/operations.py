@@ -19,7 +19,7 @@ class OperationTestSchema(BaseModel):
     amount: float
     card_id: str
     category: str
-    created_at: date
+    created_at: str
     account_id: str
 
 

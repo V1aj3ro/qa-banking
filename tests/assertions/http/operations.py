@@ -46,7 +46,7 @@ def assert_make_fee_operation_response(
         response: MakeFeeOperationResponseTestSchema
 ) -> None:
     assert_equal(response.operation.status, request.status, "status")
-    assert_equal(response.operation.amount, request.amount, "amount")
+    assert_equal(response.operation.amount, -request.amount, "amount")
     assert_equal(response.operation.card_id, request.card_id, "card_id")
     assert_equal(response.operation.account_id, request.account_id, "account_id")
     assert_equal(response.operation.type, OperationTestType.FEE, "type")
@@ -57,7 +57,7 @@ def assert_make_cash_withdrawal_operation_response(
         response: MakeCashWithdrawalOperationResponseTestSchema
 ) -> None:
     assert_equal(response.operation.status, request.status, "status")
-    assert_equal(response.operation.amount, request.amount, "amount")
+    assert_equal(response.operation.amount, -request.amount, "amount")
     assert_equal(response.operation.card_id, request.card_id, "card_id")
     assert_equal(response.operation.account_id, request.account_id, "account_id")
     assert_equal(response.operation.type, OperationTestType.CASH_WITHDRAWAL, "type")
@@ -68,7 +68,7 @@ def assert_make_bill_payment_operation_response(
         response: MakeBillPaymentOperationResponseTestSchema
 ) -> None:
     assert_equal(response.operation.status, request.status, "status")
-    assert_equal(response.operation.amount, request.amount, "amount")
+    assert_equal(response.operation.amount, -request.amount, "amount")
     assert_equal(response.operation.card_id, request.card_id, "card_id")
     assert_equal(response.operation.account_id, request.account_id, "account_id")
     assert_equal(response.operation.type, OperationTestType.BILL_PAYMENT, "type")
@@ -101,7 +101,7 @@ def assert_make_transfer_operation_response(
         response: MakeTransferOperationResponseTestSchema
 ) -> None:
     assert_equal(response.operation.status, request.status, "status")
-    assert_equal(response.operation.amount, request.amount, "amount")
+    assert_equal(response.operation.amount, -request.amount, "amount")
     assert_equal(response.operation.card_id, request.card_id, "card_id")
     assert_equal(response.operation.account_id, request.account_id, "account_id")
     assert_equal(response.operation.type, OperationTestType.TRANSFER, "type")
@@ -112,7 +112,7 @@ def assert_make_purchase_operation_response(
         response: MakePurchaseOperationResponseTestSchema
 ) -> None:
     assert_equal(response.operation.status, request.status, "status")
-    assert_equal(response.operation.amount, request.amount, "amount")
+    assert_equal(response.operation.amount, -request.amount, "amount")
     assert_equal(response.operation.card_id, request.card_id, "card_id")
     assert_equal(response.operation.account_id, request.account_id, "account_id")
     assert_equal(response.operation.type, OperationTestType.PURCHASE, "type")

@@ -16,7 +16,6 @@ class AccountTestSchema(BaseModel):
     type: AccountTestType
     cards: list[CardTestSchema]
     status: AccountTestStatus
-    user_id: str
     balance: float
 
 

@@ -62,36 +62,36 @@ def accounts_gateway_http_test_client() -> AccountsGatewayHTTPTestClient:
 @pytest.fixture()
 def function_debit_card_account(
         accounts_gateway_http_test_client: AccountsGatewayHTTPTestClient,
-        function_user: UserHTTPFixture
+        function_http_user: UserHTTPFixture
 ) -> DebitCardAccountHTTPFixture:
-    request = OpenDebitCardAccountRequestTestSchema(user_id=function_user.id)
+    request = OpenDebitCardAccountRequestTestSchema(user_id=function_http_user.id)
     response = accounts_gateway_http_test_client.open_debit_card_account(request)
     return DebitCardAccountHTTPFixture(request=request, response=response)
 
 @pytest.fixture()
-def function_credit_card_account(
+def function_credit_card_http_account(
         accounts_gateway_http_test_client: AccountsGatewayHTTPTestClient,
-        function_user: UserHTTPFixture
+        function_http_user: UserHTTPFixture
 ) -> CreditCardAccountHTTPFixture:
-    request = OpenCreditCardAccountRequestTestSchema(user_id=function_user.id)
+    request = OpenCreditCardAccountRequestTestSchema(user_id=function_http_user.id)
     response = accounts_gateway_http_test_client.open_credit_card_account(request)
     return CreditCardAccountHTTPFixture(request=request, response=response)
 
 @pytest.fixture()
-def function_deposit_account(
+def function_deposit__http_account(
         accounts_gateway_http_test_client: AccountsGatewayHTTPTestClient,
-        function_user: UserHTTPFixture
+        function_http_user: UserHTTPFixture
 ) -> DepositAccountHTTPFixture:
-    request = OpenDepositAccountRequestTestSchema(user_id=function_user.id)
+    request = OpenDepositAccountRequestTestSchema(user_id=function_http_user.id)
     response = accounts_gateway_http_test_client.open_deposit_account(request)
     return DepositAccountHTTPFixture(request=request, response=response)
 
 @pytest.fixture()
-def function_savings_account(
+def function_savings__http_account(
         accounts_gateway_http_test_client: AccountsGatewayHTTPTestClient,
-        function_user: UserHTTPFixture
+        function_http_user: UserHTTPFixture
 ) -> SavingsAccountHTTPFixture:
-    request = OpenSavingsAccountRequestTestSchema(user_id=function_user.id)
+    request = OpenSavingsAccountRequestTestSchema(user_id=function_http_user.id)
     response = accounts_gateway_http_test_client.open_savings_account(request)
     return SavingsAccountHTTPFixture(request=request, response=response)
 

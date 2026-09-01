@@ -4,7 +4,8 @@ from tests.assertions.base import assert_equal, assert_length
 from tests.assertions.http.cards import assert_card
 from tests.schema.accounts import AccountTestSchema, GetAccountsResponseTestSchema, \
     OpenDebitCardAccountResponseTestSchema, OpenDepositAccountResponseTestSchema, OpenSavingsAccountResponseTestSchema, \
-    OpenCreditCardAccountResponseTestSchema
+    OpenCreditCardAccountResponseTestSchema, OpenDebitCardAccountRequestTestSchema, \
+    OpenCreditCardAccountRequestTestSchema, OpenSavingsAccountRequestTestSchema, OpenDepositAccountRequestTestSchema
 from tests.schema.users import CreateUserResponseTestSchema
 from tests.types.accounts import AccountTestType
 
@@ -15,7 +16,6 @@ def assert_account(actual: AccountTestSchema, expected: AccountTestSchema) -> No
     assert_equal(actual.id, expected.id, "id")
     assert_equal(actual.type, expected.type, "type")
     assert_equal(actual.status, expected.status, "status")
-    assert_equal(actual.user_id, expected.user_id, "user_id")
     assert_equal(actual.balance, expected.balance, "balance")
 
     assert_length(actual.cards, expected.cards, "accounts cards")
@@ -35,31 +35,27 @@ def assert_get_accounts_response(
 @allure.step("Check open deposit account response")
 def assert_open_deposit_account_response(
         open_deposit_account_response: OpenDepositAccountResponseTestSchema,
-        create_user_response: CreateUserResponseTestSchema
+        open_deposit_account_request: OpenDepositAccountRequestTestSchema
 ) -> None:
     assert_equal(open_deposit_account_response.account.type, AccountTestType.DEPOSIT, "Account type")
-    assert_equal(open_deposit_account_response.account.user_id, create_user_response.user.id, "User id")
 
 @allure.step("Check open savings account response")
 def assert_open_savings_account_response(
         open_savings_account_response: OpenSavingsAccountResponseTestSchema,
-        create_user_response: CreateUserResponseTestSchema
+        open_savings_account_request: OpenSavingsAccountRequestTestSchema
 ) -> None:
     assert_equal(open_savings_account_response.account.type, AccountTestType.SAVINGS, "Account type")
-    assert_equal(open_savings_account_response.account.user_id, create_user_response.user.id, "User id")
 
 @allure.step("Check open debit card account response")
 def assert_open_debit_card_account_response(
-        open_debit_card_account_response: OpenDebitCardAccountResponseTestSchema,
-        create_user_response: CreateUserResponseTestSchema
+    open_debit_card_account_response: OpenDebitCardAccountResponseTestSchema,
+    open_debit_card_account_request: OpenDebitCardAccountRequestTestSchema
 ) -> None:
     assert_equal(open_debit_card_account_response.account.type, AccountTestType.DEBIT_CARD, "Account type")
-    assert_equal(open_debit_card_account_response.account.user_id, create_user_response.user.id, "User id")
 
 @allure.step("Check open credit card account response")
 def assert_open_credit_card_account_response(
         open_credit_card_account_response: OpenCreditCardAccountResponseTestSchema,
-        create_user_response: CreateUserResponseTestSchema
+        open_credit_card_account_request: OpenCreditCardAccountRequestTestSchema
 ) -> None:
     assert_equal(open_credit_card_account_response.account.type, AccountTestType.CREDIT_CARD, "Account type")
-    assert_equal(open_credit_card_account_response.account.user_id, create_user_response.user.id, "User id")

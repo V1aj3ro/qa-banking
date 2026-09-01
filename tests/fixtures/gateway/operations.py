@@ -5,7 +5,7 @@ from tests.clients.http.gateway.operations.client import (
     OperationsGatewayHTTPTestClient,
     build_operations_gateway_http_test_client
 )
-from tests.fixtures.gateway.accounts import CreditCardAccountFixture
+from tests.fixtures.gateway.accounts import CreditCardAccountHTTPFixture
 from tests.schema.operations import MakeFeeOperationRequestTestSchema, MakeFeeOperationResponseTestSchema
 
 
@@ -26,7 +26,7 @@ def operations_gateway_http_test_client() -> OperationsGatewayHTTPTestClient:
 @pytest.fixture
 def function_fee_http_operation(
         operations_gateway_http_test_client: OperationsGatewayHTTPTestClient,
-        function_credit_card_account: CreditCardAccountFixture
+        function_credit_card_account: CreditCardAccountHTTPFixture
 ) -> FeeOperationHTTPFixture:
     request = MakeFeeOperationRequestTestSchema(
         account_id=function_credit_card_account.id,

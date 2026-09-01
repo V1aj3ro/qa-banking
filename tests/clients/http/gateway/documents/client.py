@@ -16,22 +16,22 @@ from tests.tools.routes import APITestRoutes
 
 class DocumentsGatewayHTTPTestClient(HTTPTestClient):
     @allure.step("Get tariff document")
-    def get_tariff_document_api(self, account_id: UUID) -> Response:
+    def get_tariff_document_api(self, account_id: str) -> Response:
         return self.get(
             f"{APITestRoutes.DOCUMENTS}/tariff-document/{account_id}"
         )
 
     @allure.step("Get contract document")
-    def get_contract_document_api(self, account_id: UUID) -> Response:
+    def get_contract_document_api(self, account_id: str) -> Response:
         return self.get(
             f"{APITestRoutes.DOCUMENTS}/contract-document/{account_id}",
         )
 
-    def get_tariff_document(self, account_id: UUID) -> GetTariffDocumentResponseTestSchema:
+    def get_tariff_document(self, account_id: str) -> GetTariffDocumentResponseTestSchema:
         response = self.get_tariff_document_api(account_id)
         return GetTariffDocumentResponseTestSchema.model_validate_json(response.text)
 
-    def get_contract_document(self, account_id: UUID) -> GetContractDocumentResponseTestSchema:
+    def get_contract_document(self, account_id: str) -> GetContractDocumentResponseTestSchema:
         response = self.get_contract_document_api(account_id)
         return GetContractDocumentResponseTestSchema.model_validate_json(response.text)
 
