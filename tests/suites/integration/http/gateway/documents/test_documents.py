@@ -6,7 +6,7 @@ import pytest
 from tests.assertions.base import assert_status_code
 from tests.assertions.http.schema import validate_json_schema
 from tests.clients.http.gateway.documents.client import DocumentsGatewayHTTPTestClient
-from tests.fixtures.gateway.accounts import CreditCardAccountHTTPFixture
+from tests.fixtures.http.gateway.accounts.schema import CreditCardAccountHTTPFixture
 from tests.schema.documents import GetTariffDocumentResponseTestSchema, GetContractDocumentResponseTestSchema
 from tests.tools.allure import AllureTag, AllureEpic, AllureFeature, AllureStory
 

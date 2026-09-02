@@ -1,19 +1,8 @@
 import pytest
-from pydantic import BaseModel
 
 from tests.clients.http.gateway.users.client import UsersGatewayHTTPTestClient, build_users_gateway_http_test_client
-from tests.schema.users import CreateUserResponseTestSchema, CreateUserRequestTestSchema
-
-
-class UserHTTPFixture(BaseModel):
-    request: CreateUserRequestTestSchema
-    response: CreateUserResponseTestSchema
-
-
-    @property
-    def id(self) -> str:
-        return self.response.user.id
-
+from tests.fixtures.http.gateway.users.schema import UserHTTPFixture
+from tests.schema.users import CreateUserRequestTestSchema
 
 
 @pytest.fixture

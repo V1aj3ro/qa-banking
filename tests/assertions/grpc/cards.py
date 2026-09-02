@@ -1,21 +1,21 @@
 import allure
 
-from tests.assertions.base import assert_equal
-from tests.schema.accounts import AccountTestSchema
-from tests.schema.cards import (
-    CardTestSchema,
-    IssuePhysicalCardResponseTestSchema,
-    IssueVirtualCardRequestTestSchema,
-    IssueVirtualCardResponseTestSchema,
-    IssuePhysicalCardRequestTestSchema
+from contracts.services.cards.card_pb2 import Card, CardType
+from contracts.services.gateway.cards.rpc_issue_physical_card_pb2 import (
+    IssuePhysicalCardResponse,
+    IssuePhysicalCardRequest
 )
+from contracts.services.gateway.cards.rpc_issue_virtual_card_pb2 import (
+    IssueVirtualCardResponse,
+    IssueVirtualCardRequest
+)
+from tests.assertions.base import assert_equal
 from tests.tools.logger import get_test_logger
-from tests.types.cards import CardTestType
 
 logger = get_test_logger("CARDS_GATEWAY_ASSERTIONS")
 
 @allure.step("Check card")
-def assert_card(actual: CardTestSchema, expected: CardTestSchema):
+def assert_card(actual: Card, expected: Card):
     assert_equal(actual.id, expected.id, "id")
     assert_equal(actual.account_id, expected.account_id, "account_id")
     assert_equal(actual.status, expected.status, "status")
@@ -29,20 +29,20 @@ def assert_card(actual: CardTestSchema, expected: CardTestSchema):
 
 @allure.step("Check issue physical card response")
 def assert_issue_physical_card_response(
-        issue_physical_card_response: IssuePhysicalCardResponseTestSchema,
-        issue_physical_card_request: IssuePhysicalCardRequestTestSchema
+        issue_physical_card_response: IssuePhysicalCardResponse,
+        issue_physical_card_request: IssuePhysicalCardRequest
 ) -> None:
     logger.info("Check issue physical card response")
 
-    assert_equal(issue_physical_card_response.card.type, CardTestType.PHYSICAL, "Card type")
+    assert_equal(issue_physical_card_response.card.type, CardType.CARD_TYPE_PHYSICAL, "Card type")
     assert_equal(issue_physical_card_response.card.account_id, issue_physical_card_request.account_id, "Account id")
 
 @allure.step("Check issue virtual card response")
 def assert_issue_virtual_card_response(
-        issue_virtual_card_response: IssueVirtualCardResponseTestSchema,
-        issue_virtual_card_request: IssueVirtualCardRequestTestSchema
+        issue_virtual_card_response: IssueVirtualCardResponse,
+        issue_virtual_card_request: IssueVirtualCardRequest
 ) -> None:
     logger.info("Check issue virtual card response")
 
-    assert_equal(issue_virtual_card_response.card.type, CardTestType.VIRTUAL, "Card type")
+    assert_equal(issue_virtual_card_response.card.type, CardType.CARD_TYPE_VIRTUAL, "Card type")
     assert_equal(issue_virtual_card_response.card.account_id, issue_virtual_card_request.account_id, "Account id")

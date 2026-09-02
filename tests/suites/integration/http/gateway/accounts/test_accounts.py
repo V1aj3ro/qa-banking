@@ -9,8 +9,8 @@ from tests.assertions.http.accounts import assert_open_debit_card_account_respon
     assert_open_credit_card_account_response, assert_get_accounts_response
 from tests.assertions.http.schema import validate_json_schema
 from tests.clients.http.gateway.accounts.client import AccountsGatewayHTTPTestClient
-from tests.fixtures.gateway.accounts import CreditCardAccountHTTPFixture
-from tests.fixtures.gateway.users import UserHTTPFixture
+from tests.fixtures.http.gateway.accounts.schema import CreditCardAccountHTTPFixture
+from tests.fixtures.http.gateway.users.schema import UserHTTPFixture
 from tests.schema.accounts import OpenDebitCardAccountRequestTestSchema, OpenDebitCardAccountResponseTestSchema, \
     OpenSavingsAccountRequestTestSchema, OpenSavingsAccountResponseTestSchema, OpenDepositAccountResponseTestSchema, \
     OpenDepositAccountRequestTestSchema, OpenCreditCardAccountRequestTestSchema, \

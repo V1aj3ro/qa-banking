@@ -1,66 +1,30 @@
 import pytest
-from pydantic import BaseModel
 
 from tests.clients.http.gateway.accounts.client import (
     AccountsGatewayHTTPTestClient,
     build_accounts_gateway_http_test_client
 )
-from tests.fixtures.gateway.users import UserHTTPFixture
+from tests.fixtures.http.gateway.accounts.schema import (
+    DebitCardAccountHTTPFixture,
+    CreditCardAccountHTTPFixture,
+    DepositAccountHTTPFixture,
+    SavingsAccountHTTPFixture
+)
+from tests.fixtures.http.gateway.users.fixtures import UserHTTPFixture
 from tests.schema.accounts import (
     OpenDebitCardAccountRequestTestSchema,
-    OpenDebitCardAccountResponseTestSchema,
     OpenCreditCardAccountRequestTestSchema,
-    OpenCreditCardAccountResponseTestSchema,
     OpenDepositAccountRequestTestSchema,
-    OpenDepositAccountResponseTestSchema,
-    OpenSavingsAccountRequestTestSchema,
-    OpenSavingsAccountResponseTestSchema
+    OpenSavingsAccountRequestTestSchema
 )
-
-
-class DebitCardAccountHTTPFixture(BaseModel):
-    request: OpenDebitCardAccountRequestTestSchema
-    response: OpenDebitCardAccountResponseTestSchema
-
-    @property
-    def id(self) -> str:
-        return self.response.account.id
-
-
-class CreditCardAccountHTTPFixture(BaseModel):
-    request: OpenCreditCardAccountRequestTestSchema
-    response: OpenCreditCardAccountResponseTestSchema
-
-    @property
-    def id(self) -> str:
-        return self.response.account.id
-
-
-class DepositAccountHTTPFixture(BaseModel):
-    request: OpenDepositAccountRequestTestSchema
-    response: OpenDepositAccountResponseTestSchema
-
-    @property
-    def id(self) -> str:
-        return self.response.account.id
-
-
-class SavingsAccountHTTPFixture(BaseModel):
-    request: OpenSavingsAccountRequestTestSchema
-    response: OpenSavingsAccountResponseTestSchema
-
-    @property
-    def id(self) -> str:
-        return self.response.account.id
-
 
 
 @pytest.fixture
 def accounts_gateway_http_test_client() -> AccountsGatewayHTTPTestClient:
     return build_accounts_gateway_http_test_client()
 
-@pytest.fixture()
-def function_debit_card_account(
+@pytest.fixture
+def function_debit_card_http_account(
         accounts_gateway_http_test_client: AccountsGatewayHTTPTestClient,
         function_http_user: UserHTTPFixture
 ) -> DebitCardAccountHTTPFixture:
@@ -68,7 +32,7 @@ def function_debit_card_account(
     response = accounts_gateway_http_test_client.open_debit_card_account(request)
     return DebitCardAccountHTTPFixture(request=request, response=response)
 
-@pytest.fixture()
+@pytest.fixture
 def function_credit_card_http_account(
         accounts_gateway_http_test_client: AccountsGatewayHTTPTestClient,
         function_http_user: UserHTTPFixture
@@ -77,7 +41,7 @@ def function_credit_card_http_account(
     response = accounts_gateway_http_test_client.open_credit_card_account(request)
     return CreditCardAccountHTTPFixture(request=request, response=response)
 
-@pytest.fixture()
+@pytest.fixture
 def function_deposit_http_account(
         accounts_gateway_http_test_client: AccountsGatewayHTTPTestClient,
         function_http_user: UserHTTPFixture
@@ -86,7 +50,7 @@ def function_deposit_http_account(
     response = accounts_gateway_http_test_client.open_deposit_account(request)
     return DepositAccountHTTPFixture(request=request, response=response)
 
-@pytest.fixture()
+@pytest.fixture
 def function_savings_http_account(
         accounts_gateway_http_test_client: AccountsGatewayHTTPTestClient,
         function_http_user: UserHTTPFixture

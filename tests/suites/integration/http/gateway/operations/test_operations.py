@@ -17,13 +17,13 @@ from tests.assertions.http.operations import (
 )
 from tests.assertions.http.schema import validate_json_schema
 from tests.clients.http.gateway.operations.client import OperationsGatewayHTTPTestClient
-from tests.fixtures.gateway.accounts import (
+from tests.fixtures.http.gateway.accounts.schema import (
     DepositAccountHTTPFixture,
     CreditCardAccountHTTPFixture,
-    function_credit_card_http_account
 )
-from tests.fixtures.gateway.cards import VirtualCardHTTPFixture
-from tests.fixtures.gateway.operations import FeeOperationHTTPFixture
+from tests.fixtures.http.gateway.accounts.fixtures import function_credit_card_http_account
+from tests.fixtures.http.gateway.cards.schema import VirtualCardHTTPFixture
+from tests.fixtures.http.gateway.operations.schema import FeeOperationHTTPFixture
 from tests.schema.operations import (
     MakeFeeOperationRequestTestSchema,
     MakeFeeOperationResponseTestSchema,

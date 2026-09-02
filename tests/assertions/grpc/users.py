@@ -1,18 +1,15 @@
 import allure
 
+from contracts.services.gateway.users.rpc_create_user_pb2 import CreateUserResponse, CreateUserRequest
+from contracts.services.gateway.users.rpc_get_user_pb2 import GetUserResponse
+from contracts.services.users.user_pb2 import User
 from tests.assertions.base import assert_equal
-from tests.schema.users import (
-    UserTestSchema,
-    CreateUserRequestTestSchema,
-    CreateUserResponseTestSchema,
-    GetUserResponseTestSchema
-)
 from tests.tools.logger import get_test_logger
 
 logger = get_test_logger("USERS_GATEWAY_ASSERTIONS")
 
 @allure.step("Check user")
-def assert_user(actual: UserTestSchema, expected: UserTestSchema) -> None:
+def assert_user(actual: User, expected: User) -> None:
     logger.info("Check user")
 
     assert_equal(actual.id, expected.id, "id")
@@ -23,7 +20,7 @@ def assert_user(actual: UserTestSchema, expected: UserTestSchema) -> None:
     assert_equal(actual.last_name, expected.last_name, "last_name")
 
 @allure.step("Check create user response")
-def assert_create_user_response(request: CreateUserRequestTestSchema, response: CreateUserResponseTestSchema) -> None:
+def assert_create_user_response(request: CreateUserRequest, response: CreateUserResponse) -> None:
     logger.info("Check create user response")
 
     assert_equal(request.email, response.user.email, "email")
@@ -34,8 +31,8 @@ def assert_create_user_response(request: CreateUserRequestTestSchema, response: 
 
 @allure.step("Check get user response")
 def assert_get_user_response(
-        get_user_response: GetUserResponseTestSchema,
-        create_user_response: CreateUserResponseTestSchema
+        get_user_response: GetUserResponse,
+        create_user_response: CreateUserResponse
 ) -> None:
     logger.info("Check get user response")
 

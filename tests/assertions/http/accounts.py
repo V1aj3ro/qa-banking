@@ -2,11 +2,18 @@ import allure
 
 from tests.assertions.base import assert_equal, assert_length
 from tests.assertions.http.cards import assert_card
-from tests.schema.accounts import AccountTestSchema, GetAccountsResponseTestSchema, \
-    OpenDebitCardAccountResponseTestSchema, OpenDepositAccountResponseTestSchema, OpenSavingsAccountResponseTestSchema, \
-    OpenCreditCardAccountResponseTestSchema, OpenDebitCardAccountRequestTestSchema, \
-    OpenCreditCardAccountRequestTestSchema, OpenSavingsAccountRequestTestSchema, OpenDepositAccountRequestTestSchema
-from tests.schema.users import CreateUserResponseTestSchema
+from tests.schema.accounts import (
+    AccountTestSchema,
+    GetAccountsResponseTestSchema,
+    OpenDebitCardAccountResponseTestSchema,
+    OpenDepositAccountResponseTestSchema,
+    OpenSavingsAccountResponseTestSchema,
+    OpenCreditCardAccountResponseTestSchema,
+    OpenDebitCardAccountRequestTestSchema,
+    OpenCreditCardAccountRequestTestSchema,
+    OpenSavingsAccountRequestTestSchema,
+    OpenDepositAccountRequestTestSchema
+)
 from tests.tools.logger import get_test_logger
 from tests.types.accounts import AccountTestType
 

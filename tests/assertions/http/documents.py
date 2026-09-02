@@ -1,7 +1,7 @@
 import allure
 
 from tests.assertions.base import assert_equal
-from tests.schema.documents import DocumentTestSchema, GetTariffDocumentResponseTestSchema
+from tests.schema.documents import DocumentTestSchema
 from tests.tools.logger import get_test_logger
 
 logger = get_test_logger("DOCUMENTS_GATEWAY_ASSERTIONS")

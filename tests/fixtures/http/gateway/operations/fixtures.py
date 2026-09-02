@@ -1,22 +1,12 @@
 import pytest
-from pydantic import BaseModel
 
 from tests.clients.http.gateway.operations.client import (
     OperationsGatewayHTTPTestClient,
     build_operations_gateway_http_test_client
 )
-from tests.fixtures.gateway.accounts import CreditCardAccountHTTPFixture
-from tests.schema.operations import MakeFeeOperationRequestTestSchema, MakeFeeOperationResponseTestSchema
-
-
-class FeeOperationHTTPFixture(BaseModel):
-    request: MakeFeeOperationRequestTestSchema
-    response: MakeFeeOperationResponseTestSchema
-
-    @property
-    def id(self) -> str:
-        return self.response.operation.id
-
+from tests.fixtures.http.gateway.accounts.schema import CreditCardAccountHTTPFixture
+from tests.fixtures.http.gateway.operations.schema import FeeOperationHTTPFixture
+from tests.schema.operations import MakeFeeOperationRequestTestSchema
 
 
 @pytest.fixture
