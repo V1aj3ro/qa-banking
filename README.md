@@ -1,4 +1,3 @@
-```markdown
 # QA Banking – Educational Banking Platform with Automated API Tests
 
 This repository contains a **full-featured banking system** built on a microservice architecture (REST + gRPC), along with a comprehensive **suite of automated API tests** written in Python using `pytest`, `Allure`, `Pydantic`, `Faker`, `HTTPX`, and `gRPC`.
@@ -53,7 +52,7 @@ cd qa-banking
 # Start all services in detached mode
 docker build -f Dockerfile.base -t base-service .
 docker compose up --build
-```
+
 
 Once started, services are available locally (typically port `8000` for HTTP, `50051` for gRPC, etc.). Exact ports are defined in `docker-compose.yaml`.
 
