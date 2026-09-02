@@ -115,3 +115,15 @@ This opens an interactive HTML report in your default browser.
 
 ---
 
+## Reports example
+### Coverage report
+![Coverage report](/tests/reports/coverage-report.png)
+
+### Allure report overview
+![Allure report overview](/tests/reports/allure-report-overview.png)
+
+### Allure report behaviors
+![Allure report behaviors](/tests/reports/allure-report-behaviors.png)
+
+
+
