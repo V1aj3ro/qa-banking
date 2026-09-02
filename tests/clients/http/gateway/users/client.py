@@ -1,6 +1,7 @@
 import allure
 from httpx import Response
 
+from tests.clients.http.api_coverage import tracker
 from tests.clients.http.client import HTTPTestClient
 from tests.clients.http.gateway.client import build_gateway_http_test_client
 from tests.schema.users import CreateUserRequestTestSchema, GetUserResponseTestSchema, CreateUserResponseTestSchema
@@ -10,12 +11,14 @@ from tests.tools.routes import APITestRoutes
 
 class UsersGatewayHTTPTestClient(HTTPTestClient):
     @allure.step("Get user")
+    @tracker.track_coverage_httpx(f"{APITestRoutes.USERS}/{{user_id}}")
     def get_user_api(self, user_id: str) -> Response:
         return self.get(
             f"{APITestRoutes.USERS}/{user_id}"
         )
 
     @allure.step("Create user")
+    @tracker.track_coverage_httpx(APITestRoutes.USERS)
     def create_user_api(self, request: CreateUserRequestTestSchema) -> Response:
         return self.post(APITestRoutes.USERS, json=request.model_dump(by_alias=True))
 

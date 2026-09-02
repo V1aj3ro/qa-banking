@@ -1,6 +1,7 @@
 import allure
 from httpx import Response
 
+from tests.clients.http.api_coverage import tracker
 from tests.clients.http.client import HTTPTestClient
 from tests.clients.http.gateway.client import build_gateway_http_test_client
 from tests.schema.cards import (
@@ -16,6 +17,7 @@ from tests.tools.routes import APITestRoutes
 
 class CardsGatewayHTTPTestClient(HTTPTestClient):
     @allure.step("Issue virtual card")
+    @tracker.track_coverage_httpx(f"{APITestRoutes.CARDS}/issue-virtual-card")
     def issue_virtual_card_api(self, request: IssueVirtualCardRequestTestSchema) -> Response:
         return self.post(
             f"{APITestRoutes.CARDS}/issue-virtual-card",
@@ -23,6 +25,7 @@ class CardsGatewayHTTPTestClient(HTTPTestClient):
         )
 
     @allure.step("Issue physical card")
+    @tracker.track_coverage_httpx(f"{APITestRoutes.CARDS}/issue-physical-card")
     def issue_physical_card_api(self, request: IssuePhysicalCardRequestTestSchema) -> Response:
         return self.post(
             f"{APITestRoutes.CARDS}/issue-physical-card",

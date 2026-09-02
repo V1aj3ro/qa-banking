@@ -1,6 +1,7 @@
 import allure
 from httpx import Response, QueryParams
 
+from tests.clients.http.api_coverage import tracker
 from tests.clients.http.client import HTTPTestClient
 from tests.schema.operations import (
     GetOperationReceiptResponseTestSchema,
@@ -33,18 +34,21 @@ from tests.tools.logger import get_test_logger
 class OperationsGatewayHTTPTestClient(HTTPTestClient):
 
     @allure.step("Get operation")
+    @tracker.track_coverage_httpx(f"{APITestRoutes.OPERATIONS}/{{operation_id}}")
     def get_operation_api(self, operation_id: str) -> Response:
         return self.get(
             f"{APITestRoutes.OPERATIONS}/{operation_id}",
         )
 
     @allure.step("Get operation receipt")
+    @tracker.track_coverage_httpx(f"{APITestRoutes.OPERATIONS}/operation-receipt/{{operation_id}}")
     def get_operation_receipt_api(self, operation_id: str) -> Response:
         return self.get(
             f"{APITestRoutes.OPERATIONS}/operation-receipt/{operation_id}",
         )
 
     @allure.step("Get operations")
+    @tracker.track_coverage_httpx(APITestRoutes.OPERATIONS)
     def get_operations_api(self, query: GetOperationsQueryTestSchema) -> Response:
         return self.get(
             APITestRoutes.OPERATIONS,
@@ -52,6 +56,7 @@ class OperationsGatewayHTTPTestClient(HTTPTestClient):
         )
 
     @allure.step("Get operations summary")
+    @tracker.track_coverage_httpx(f"{APITestRoutes.OPERATIONS}/operations-summary")
     def get_operations_summary_api(self, query: GetOperationsSummaryQueryTestSchema) -> Response:
         return self.get(
             f"{APITestRoutes.OPERATIONS}/operations-summary",
@@ -59,30 +64,37 @@ class OperationsGatewayHTTPTestClient(HTTPTestClient):
         )
 
     @allure.step("Make fee operation")
+    @tracker.track_coverage_httpx(f"{APITestRoutes.OPERATIONS}/make-fee-operation")
     def make_fee_operation_api(self, request: MakeFeeOperationRequestTestSchema) -> Response:
         return self.post(f"{APITestRoutes.OPERATIONS}/make-fee-operation", json=request.model_dump(by_alias=True))
 
     @allure.step("Make top up operation")
+    @tracker.track_coverage_httpx(f"{APITestRoutes.OPERATIONS}/make-top-up-operation")
     def make_top_up_operation_api(self, request: MakeTopUpOperationRequestTestSchema) -> Response:
         return self.post(f"{APITestRoutes.OPERATIONS}/make-top-up-operation", json=request.model_dump(by_alias=True))
 
     @allure.step("Make cashback operation")
+    @tracker.track_coverage_httpx(f"{APITestRoutes.OPERATIONS}/make-cashback-operation")
     def make_cashback_operation_api(self, request: MakeCashbackOperationRequestTestSchema) -> Response:
         return self.post(f"{APITestRoutes.OPERATIONS}/make-cashback-operation", json=request.model_dump(by_alias=True))
 
     @allure.step("Make transfer operation")
+    @tracker.track_coverage_httpx(f"{APITestRoutes.OPERATIONS}/make-transfer-operation")
     def make_transfer_operation_api(self, request: MakeTransferOperationRequestTestSchema) -> Response:
         return self.post(f"{APITestRoutes.OPERATIONS}/make-transfer-operation", json=request.model_dump(by_alias=True))
 
     @allure.step("Make purchase operation")
+    @tracker.track_coverage_httpx(f"{APITestRoutes.OPERATIONS}/make-purchase-operation")
     def make_purchase_operation_api(self, request: MakePurchaseOperationRequestTestSchema) -> Response:
         return self.post(f"{APITestRoutes.OPERATIONS}/make-purchase-operation", json=request.model_dump(by_alias=True))
 
     @allure.step("Make bill payment operation")
+    @tracker.track_coverage_httpx(f"{APITestRoutes.OPERATIONS}/make-bill-payment-operation")
     def make_bill_payment_operation_api(self, request: MakeBillPaymentOperationRequestTestSchema) -> Response:
         return self.post(f"{APITestRoutes.OPERATIONS}/make-bill-payment-operation", json=request.model_dump(by_alias=True))
 
     @allure.step("Make cash withdrawal operation")
+    @tracker.track_coverage_httpx(f"{APITestRoutes.OPERATIONS}/make-cash-withdrawal-operation")
     def make_cash_withdrawal_operation_api(self, request: MakeCashWithdrawalOperationRequestTestSchema) -> Response:
         return self.post(f"{APITestRoutes.OPERATIONS}/make-cash-withdrawal-operation", json=request.model_dump(by_alias=True))
 

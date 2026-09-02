@@ -3,6 +3,7 @@ from uuid import UUID
 import allure
 from httpx import Response
 
+from tests.clients.http.api_coverage import tracker
 from tests.clients.http.client import HTTPTestClient
 from tests.clients.http.gateway.client import (
     build_gateway_http_test_client,
@@ -16,12 +17,14 @@ from tests.tools.routes import APITestRoutes
 
 class DocumentsGatewayHTTPTestClient(HTTPTestClient):
     @allure.step("Get tariff document")
+    @tracker.track_coverage_httpx(f"{APITestRoutes.DOCUMENTS}/tariff-document/{{account_id}}")
     def get_tariff_document_api(self, account_id: str) -> Response:
         return self.get(
             f"{APITestRoutes.DOCUMENTS}/tariff-document/{account_id}"
         )
 
     @allure.step("Get contract document")
+    @tracker.track_coverage_httpx(f"{APITestRoutes.DOCUMENTS}/contract-document/{{account_id}}")
     def get_contract_document_api(self, account_id: str) -> Response:
         return self.get(
             f"{APITestRoutes.DOCUMENTS}/contract-document/{account_id}",

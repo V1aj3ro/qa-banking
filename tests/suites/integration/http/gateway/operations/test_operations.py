@@ -1,4 +1,5 @@
 from http import HTTPStatus
+from time import sleep
 
 import allure
 import pytest

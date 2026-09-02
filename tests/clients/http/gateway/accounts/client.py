@@ -1,6 +1,7 @@
 import allure
 from httpx import Response, QueryParams
 
+from tests.clients.http.api_coverage import tracker
 from tests.clients.http.client import HTTPTestClient
 from tests.clients.http.gateway.client import build_gateway_http_test_client
 from tests.schema.accounts import (
@@ -22,6 +23,7 @@ from tests.tools.routes import APITestRoutes
 
 class AccountsGatewayHTTPTestClient(HTTPTestClient):
     @allure.step("Get accounts")
+    @tracker.track_coverage_httpx(APITestRoutes.ACCOUNTS)
     def get_accounts_api(self, query: GetAccountsQueryTestSchema):
         return self.get(
             APITestRoutes.ACCOUNTS,
@@ -29,6 +31,7 @@ class AccountsGatewayHTTPTestClient(HTTPTestClient):
         )
 
     @allure.step("Open deposit account")
+    @tracker.track_coverage_httpx(f"{APITestRoutes.ACCOUNTS}/open-deposit-account")
     def open_deposit_account_api(self, request: OpenDepositAccountRequestTestSchema) -> Response:
         return self.post(
             f"{APITestRoutes.ACCOUNTS}/open-deposit-account",
@@ -36,6 +39,7 @@ class AccountsGatewayHTTPTestClient(HTTPTestClient):
         )
 
     @allure.step("Open savings account")
+    @tracker.track_coverage_httpx(f"{APITestRoutes.ACCOUNTS}/open-savings-account")
     def open_savings_account_api(self, request: OpenSavingsAccountRequestTestSchema) -> Response:
         return self.post(
             f"{APITestRoutes.ACCOUNTS}/open-savings-account",
@@ -43,6 +47,7 @@ class AccountsGatewayHTTPTestClient(HTTPTestClient):
         )
 
     @allure.step("Open debit card account")
+    @tracker.track_coverage_httpx(f"{APITestRoutes.ACCOUNTS}/open-debit-card-account")
     def open_debit_card_account_api(self, request: OpenDebitCardAccountRequestTestSchema) -> Response:
         return self.post(
             f"{APITestRoutes.ACCOUNTS}/open-debit-card-account",
@@ -50,6 +55,7 @@ class AccountsGatewayHTTPTestClient(HTTPTestClient):
         )
 
     @allure.step("Open credit card account")
+    @tracker.track_coverage_httpx(f"{APITestRoutes.ACCOUNTS}/open-credit-card-account")
     def open_credit_card_account_api(self, request: OpenCreditCardAccountRequestTestSchema) -> Response:
         return self.post(
             f"{APITestRoutes.ACCOUNTS}/open-credit-card-account",
