@@ -29,6 +29,11 @@ class OperationReceiptTestSchema(BaseModel):
 
 
 class OperationsSummaryTestSchema(BaseModel):
+    model_config = ConfigDict(
+        alias_generator=to_camel,
+        validate_by_alias=True,
+        validate_by_name=True
+    )
     spent_amount: float
     received_amount: float
     cashback_amount: float

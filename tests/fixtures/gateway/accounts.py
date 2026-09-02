@@ -1,12 +1,13 @@
 import pytest
 from pydantic import BaseModel
 
-from tests.clients.http.gateway.accounts.client import AccountsGatewayHTTPTestClient, \
+from tests.clients.http.gateway.accounts.client import (
+    AccountsGatewayHTTPTestClient,
     build_accounts_gateway_http_test_client
+)
 from tests.fixtures.gateway.users import UserHTTPFixture
 from tests.schema.accounts import (
     OpenDebitCardAccountRequestTestSchema,
-    AccountTestSchema,
     OpenDebitCardAccountResponseTestSchema,
     OpenCreditCardAccountRequestTestSchema,
     OpenCreditCardAccountResponseTestSchema,
@@ -15,7 +16,6 @@ from tests.schema.accounts import (
     OpenSavingsAccountRequestTestSchema,
     OpenSavingsAccountResponseTestSchema
 )
-
 
 
 class DebitCardAccountHTTPFixture(BaseModel):

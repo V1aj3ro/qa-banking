@@ -30,7 +30,7 @@ def assert_issue_physical_card_response(
     logger.info("Check issue physical card response")
 
     assert_equal(issue_physical_card_response.card.type, CardTestType.PHYSICAL, "Card type")
-    assert_equal(issue_physical_card_response.card.account_id, issue_physical_card_request.id, "Account id")
+    assert_equal(issue_physical_card_response.card.account_id, issue_physical_card_request.account_id, "Account id")
 
 @allure.step("Check issue virtual card response")
 def assert_issue_virtual_card_response(
