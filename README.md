@@ -1,91 +1,117 @@
-# Performance Testing Stand
+```markdown
+# QA Banking – Educational Banking Platform with Automated API Tests
 
-This project implements a full-featured **educational banking platform** designed specifically for use in
-the course [Нагрузочное тестирование на Python](https://stepik.org/course/242935/promo).
+This repository contains a **full-featured banking system** built on a microservice architecture (REST + gRPC), along with a comprehensive **suite of automated API tests** written in Python using `pytest`, `Allure`, `Pydantic`, `Faker`, `HTTPX`, and `gRPC`.
 
-The stand simulates a realistic microservice architecture and is intended for testing, debugging, and performance
-validation in a controlled training environment.
-
----
-
-## Features
-
-- Microservice-based banking system
-- API available via both **HTTP** and **gRPC**
-- Integrated observability stack: **Prometheus**, **Grafana**, **cAdvisor**
-- Event-driven architecture via **Kafka**
-- Test data storage in **PostgreSQL**, **Redis**, and **MinIO**
-- Pre-configured for use with tools like **Locust**, **Postman**, **grpcurl**, etc.
+The project is designed for learning and practicing API automation.
 
 ---
 
-## Technologies Used
+## Repository Structure
 
-| Component      | Purpose                          |
-|----------------|----------------------------------|
-| **Kafka**      | Async event-driven communication |
-| **Redis**      | Caching layer                    |
-| **PostgreSQL** | Persistent storage per service   |
-| **MinIO**      | Object storage (e.g., documents) |
-| **Prometheus** | Metrics collection               |
-| **Grafana**    | Visualization of metrics         |
-| **gRPC**       | High-performance RPC API         |
-| **HTTP**       | REST API via HTTP gateway        |
+- `services/` – Microservices (accounts, cards, documents, gateway, mock, operations, payments, users).  
+- `protos/` – gRPC contracts (`.proto` files) and generated Python code.  
+- `libs/` – Shared libraries for database, Kafka, Redis, S3, gRPC/HTTP clients, and utilities.  
+- `migrations/` – SQL migrations for PostgreSQL.  
+- `monitoring/` – Prometheus configuration.  
+- `scripts/` – Helper scripts (migrations, protobuf generation, etc.).  
+- `tests/` – **Automated test suite** (see details below).  
+- `docker-compose.yaml` – Orchestrates the entire infrastructure.  
+- `config.py` – Global application configuration.  
+- `pytest.ini` – Pytest settings.  
+- `requirements.txt` – Python dependencies (shared by the app and tests).
+
+### `tests/` Folder Breakdown
+
+- `assertions/` – Custom assertions for gRPC and HTTP responses.  
+- `clients/` – API clients (gRPC gateway clients, HTTP gateway clients).  
+- `fixtures/` – Pytest fixtures for data preparation and client creation.  
+- `schema/` – Pydantic models for request/response validation.  
+- `suites/` – Actual test cases (integration tests, grouped by service and protocol).  
+- `tools/` – Utilities (Allure helpers, configuration, data factories, logging).  
+- `types/` – Common type definitions (enums).  
+- `conftest.py` – Global fixtures and hooks.
 
 ---
 
-## Getting Started
+## Running the Banking System
 
-> Requirements: Docker & Docker Compose installed
+The tests require the system to be up and running. All services are containerised with Docker Compose.
 
-### 1. Clone the repository
+### Prerequisites
 
-```bash
-git clone https://github.com/Nikita-Filonov/performance-qa-engineer-course.git
-cd performance-qa-engineer-course
-```
+- Docker & Docker Compose  
+- Python 3.12+ (for running tests locally)  
+- Allure CLI (optional, for viewing reports)
 
-### 2. Generate gRPC/Protobuf code
-
-This project uses `.proto` files to define gRPC services and gateway interfaces.
+### Clone & Start
 
 ```bash
-./scripts/protos.sh
-```
+git clone https://github.com/V1aj3ro/qa-banking.git
+cd qa-banking
 
-> Make sure you have protoc and necessary plugins installed. See [scripts/proto.sh](./scripts/protos.sh) for details.
-
-### 3. Build base image
-
-To avoid repeated setup across all microservices, a shared base image is used:
-
-```bash
+# Start all services in detached mode
 docker build -f Dockerfile.base -t base-service .
-```
-
-### 4. Launch the stand
-
-This will build and launch all services:
-
-```bash
 docker compose up --build
 ```
 
-By default, services will be available at:
+Once started, services are available locally (typically port `8000` for HTTP, `50051` for gRPC, etc.). Exact ports are defined in `docker-compose.yaml`.
 
-- HTTP gateway: http://localhost:8003
-- gRPC gateway: localhost:9003
-- Grafana: http://localhost:3002
-- Kafka UI: http://localhost:8081
-- MinIO: http://localhost:3001
-- Postgres Admin: http://localhost:5050
+---
 
-## Architecture
+## Running Automated Tests
 
-![Architecture](./docs/architecture/core.png)
+Tests run separately but rely on the running system.
 
-## Notes
+### Install Dependencies
 
-- The stand is not intended for production use.
-- Services may be simplified or instrumented specifically for teaching and testing purposes.
-- Performance characteristics may vary between environments.
+We recommend using a virtual environment:
+
+```bash
+python -m venv venv
+source venv/bin/activate   # Linux/macOS
+venv\Scripts\activate    # Windows
+pip install -r requirements.txt
+```
+
+### Run All Tests
+
+```bash
+pytest
+```
+
+### Run with Allure Results
+
+```bash
+pytest --alluredir=./allure-results
+```
+
+### Selective Execution
+
+Use markers (defined in `pytest.ini`), for example:
+
+```bash
+pytest -m "regression"      # Regression tests
+```
+
+You can also run tests for a specific service or protocol:
+
+```bash
+pytest tests/suites/integration/http/gateway/accounts/
+pytest tests/suites/integration/grpc/gateway/cards/
+```
+
+---
+
+## 📊 Allure Reporting
+
+After running tests with the `--alluredir` flag, generate and serve the report:
+
+```bash
+allure serve allure-results
+```
+
+This opens an interactive HTML report in your default browser.
+
+---
+
