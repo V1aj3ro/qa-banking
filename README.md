@@ -48,13 +48,14 @@ The tests require the system to be up and running. All services are containerise
 ```bash
 git clone https://github.com/V1aj3ro/qa-banking.git
 cd qa-banking
-
+```
 # Start all services in detached mode
+```bash
 docker build -f Dockerfile.base -t base-service .
 docker compose up --build
+````
 
-
-Once started, services are available locally (typically port `8000` for HTTP, `50051` for gRPC, etc.). Exact ports are defined in `docker-compose.yaml`.
+Once started, services are available locally. Exact ports are defined in `docker-compose.yaml`.
 
 ---
 
@@ -64,7 +65,7 @@ Tests run separately but rely on the running system.
 
 ### Install Dependencies
 
-We recommend using a virtual environment:
+Recommend using a virtual environment:
 
 ```bash
 python -m venv venv
