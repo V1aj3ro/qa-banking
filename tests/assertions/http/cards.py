@@ -4,8 +4,10 @@ from tests.assertions.base import assert_equal
 from tests.schema.accounts import AccountTestSchema
 from tests.schema.cards import CardTestSchema, IssuePhysicalCardResponseTestSchema, IssueVirtualCardRequestTestSchema, \
     IssueVirtualCardResponseTestSchema, IssuePhysicalCardRequestTestSchema
+from tests.tools.logger import get_test_logger
 from tests.types.cards import CardTestType
 
+logger = get_test_logger("CARDS_GATEWAY_ASSERTIONS")
 
 @allure.step("Check card")
 def assert_card(actual: CardTestSchema, expected: CardTestSchema):
@@ -25,6 +27,8 @@ def assert_issue_physical_card_response(
         issue_physical_card_response: IssuePhysicalCardResponseTestSchema,
         issue_physical_card_request: IssuePhysicalCardRequestTestSchema
 ) -> None:
+    logger.info("Check issue physical card response")
+
     assert_equal(issue_physical_card_response.card.type, CardTestType.PHYSICAL, "Card type")
     assert_equal(issue_physical_card_response.card.account_id, issue_physical_card_request.id, "Account id")
 
@@ -33,5 +37,7 @@ def assert_issue_virtual_card_response(
         issue_virtual_card_response: IssueVirtualCardResponseTestSchema,
         issue_virtual_card_request: IssueVirtualCardRequestTestSchema
 ) -> None:
+    logger.info("Check issue virtual card response")
+
     assert_equal(issue_virtual_card_response.card.type, CardTestType.VIRTUAL, "Card type")
     assert_equal(issue_virtual_card_response.card.account_id, issue_virtual_card_request.account_id, "Account id")

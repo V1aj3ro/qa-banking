@@ -1,5 +1,6 @@
 from http import HTTPStatus
 
+import allure
 import pytest
 
 from tests.assertions.base import assert_status_code
@@ -13,18 +14,26 @@ from tests.fixtures.gateway.cards import VirtualCardHTTPFixture
 from tests.fixtures.gateway.users import UserHTTPFixture
 from tests.schema.accounts import OpenDebitCardAccountRequestTestSchema, OpenDebitCardAccountResponseTestSchema
 from tests.schema.operations import MakeFeeOperationRequestTestSchema, MakeFeeOperationResponseTestSchema
+from tests.tools.allure import AllureTag, AllureEpic, AllureFeature, AllureStory
 
 
+@pytest.mark.gateway
+@pytest.mark.gateway_operations
 @pytest.mark.regression
+@allure.tag(AllureTag.HTTP, AllureTag.GATEWAY_SERVICE)
+@allure.epic(AllureEpic.GATEWAY_SERVICE)
+@allure.feature(AllureFeature.OPERATIONS_GATEWAY_SERVICE)
 class TestOperationsHTTP:
+    @allure.story(AllureStory.MAKE_FEE_OPERATION)
+    @allure.title("[HTTP] Make fee operation")
     def test_make_fee_operation(
             self,
             function_virtual_http_card: VirtualCardHTTPFixture,
-            function_deposit__http_account: DepositAccountHTTPFixture,
+            function_deposit_http_account: DepositAccountHTTPFixture,
             operations_gateway_http_test_client: OperationsGatewayHTTPTestClient
     ):
         request = MakeFeeOperationRequestTestSchema(
-            account_id=function_deposit__http_account.id,
+            account_id=function_deposit_http_account.id,
             card_id=function_virtual_http_card.id
         )
         response = operations_gateway_http_test_client.make_fee_operation_api(request)

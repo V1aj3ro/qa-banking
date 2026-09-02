@@ -1,5 +1,6 @@
 from http import HTTPStatus
 
+import allure
 import pytest
 
 from tests.assertions.base import assert_status_code
@@ -9,10 +10,18 @@ from tests.clients.http.gateway.cards.client import CardsGatewayHTTPTestClient
 from tests.fixtures.gateway.accounts import DebitCardAccountHTTPFixture
 from tests.fixtures.gateway.users import UserHTTPFixture
 from tests.schema.cards import IssueVirtualCardRequestTestSchema, IssueVirtualCardResponseTestSchema
+from tests.tools.allure import AllureTag, AllureEpic, AllureFeature, AllureStory
 
 
+@pytest.mark.gateway
+@pytest.mark.gateway_cards
 @pytest.mark.regression
+@allure.tag(AllureTag.HTTP, AllureTag.GATEWAY_SERVICE)
+@allure.epic(AllureEpic.GATEWAY_SERVICE)
+@allure.feature(AllureFeature.CARDS_GATEWAY_SERVICE)
 class TestCardsHTTP:
+    @allure.story(AllureStory.ISSUE_VIRTUAL_CARD)
+    @allure.title("[HTTP] Issue virtual card")
     def test_issue_virtual_card(
             self,
             function_http_user: UserHTTPFixture,

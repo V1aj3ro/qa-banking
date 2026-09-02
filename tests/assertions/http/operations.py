@@ -9,6 +9,7 @@ from tests.schema.operations import OperationTestSchema, GetOperationsResponseTe
     MakePurchaseOperationResponseTestSchema, MakeBillPaymentOperationRequestTestSchema, \
     MakeBillPaymentOperationResponseTestSchema, MakeCashWithdrawalOperationRequestTestSchema, \
     MakeCashWithdrawalOperationResponseTestSchema
+from tests.tools.logger import get_test_logger
 from tests.types.operations import OperationTestType
 
 
@@ -24,11 +25,15 @@ def assert_operation(actual: OperationTestSchema, expected: OperationTestSchema)
     assert_equal(actual.created_at, expected.created_at, "created_at")
 
 
+logger = get_test_logger("OPERATIONS_GATEWAY_ASSERTIONS")
+
 @allure.step("Check get operations response")
 def assert_get_operations_response(
         get_operations_response: GetOperationsResponseTestSchema,
         make_operations_responses: list[OperationTestSchema]
 ) -> None:
+    logger.info("Check get operations response")
+
     assert_length(get_operations_response.operations, make_operations_responses, "Operations list")
     for index, operation in enumerate(make_operations_responses):
         assert_operation(get_operations_response.operations[index], operation)
@@ -38,6 +43,8 @@ def assert_get_operation_response(
     get_operation_response: GetOperationResponseTestSchema,
     make_operation_response: OperationTestSchema
 ) -> None:
+    logger.info("Check get operation response")
+
     assert_operation(get_operation_response.operation, make_operation_response)
 
 @allure.step("Check make fee operation response")
@@ -45,6 +52,8 @@ def assert_make_fee_operation_response(
         request: MakeFeeOperationRequestTestSchema,
         response: MakeFeeOperationResponseTestSchema
 ) -> None:
+    logger.info("Check make fee operation response")
+
     assert_equal(response.operation.status, request.status, "status")
     assert_equal(response.operation.amount, -request.amount, "amount")
     assert_equal(response.operation.card_id, request.card_id, "card_id")
@@ -56,6 +65,8 @@ def assert_make_cash_withdrawal_operation_response(
         request: MakeCashWithdrawalOperationRequestTestSchema,
         response: MakeCashWithdrawalOperationResponseTestSchema
 ) -> None:
+    logger.info("Check make cash withdrawal operation response")
+
     assert_equal(response.operation.status, request.status, "status")
     assert_equal(response.operation.amount, -request.amount, "amount")
     assert_equal(response.operation.card_id, request.card_id, "card_id")
@@ -67,6 +78,8 @@ def assert_make_bill_payment_operation_response(
         request: MakeBillPaymentOperationRequestTestSchema,
         response: MakeBillPaymentOperationResponseTestSchema
 ) -> None:
+    logger.info("Check make bill payment operation response")
+
     assert_equal(response.operation.status, request.status, "status")
     assert_equal(response.operation.amount, -request.amount, "amount")
     assert_equal(response.operation.card_id, request.card_id, "card_id")
@@ -78,6 +91,8 @@ def assert_make_top_up_operation_response(
         request: MakeTopUpOperationRequestTestSchema,
         response: MakeTopUpOperationResponseTestSchema
 ) -> None:
+    logger.info("Check make top up operation response")
+
     assert_equal(response.operation.status, request.status, "status")
     assert_equal(response.operation.amount, request.amount, "amount")
     assert_equal(response.operation.card_id, request.card_id, "card_id")
@@ -89,6 +104,8 @@ def assert_make_cashback_operation_response(
         request: MakeCashbackOperationRequestTestSchema,
         response: MakeCashbackOperationResponseTestSchema
 ) -> None:
+    logger.info("Check make cashback operation response")
+
     assert_equal(response.operation.status, request.status, "status")
     assert_equal(response.operation.amount, request.amount, "amount")
     assert_equal(response.operation.card_id, request.card_id, "card_id")
@@ -100,6 +117,8 @@ def assert_make_transfer_operation_response(
         request: MakeTransferOperationRequestTestSchema,
         response: MakeTransferOperationResponseTestSchema
 ) -> None:
+    logger.info("Check make transfer operation response")
+
     assert_equal(response.operation.status, request.status, "status")
     assert_equal(response.operation.amount, -request.amount, "amount")
     assert_equal(response.operation.card_id, request.card_id, "card_id")
@@ -111,6 +130,8 @@ def assert_make_purchase_operation_response(
         request: MakePurchaseOperationRequestTestSchema,
         response: MakePurchaseOperationResponseTestSchema
 ) -> None:
+    logger.info("Check make purchase operation response")
+
     assert_equal(response.operation.status, request.status, "status")
     assert_equal(response.operation.amount, -request.amount, "amount")
     assert_equal(response.operation.card_id, request.card_id, "card_id")

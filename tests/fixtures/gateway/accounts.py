@@ -78,7 +78,7 @@ def function_credit_card_http_account(
     return CreditCardAccountHTTPFixture(request=request, response=response)
 
 @pytest.fixture()
-def function_deposit__http_account(
+def function_deposit_http_account(
         accounts_gateway_http_test_client: AccountsGatewayHTTPTestClient,
         function_http_user: UserHTTPFixture
 ) -> DepositAccountHTTPFixture:
@@ -87,7 +87,7 @@ def function_deposit__http_account(
     return DepositAccountHTTPFixture(request=request, response=response)
 
 @pytest.fixture()
-def function_savings__http_account(
+def function_savings_http_account(
         accounts_gateway_http_test_client: AccountsGatewayHTTPTestClient,
         function_http_user: UserHTTPFixture
 ) -> SavingsAccountHTTPFixture:

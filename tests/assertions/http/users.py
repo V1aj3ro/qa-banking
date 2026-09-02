@@ -3,10 +3,14 @@ import allure
 from tests.assertions.base import assert_equal
 from tests.schema.users import UserTestSchema, CreateUserRequestTestSchema, CreateUserResponseTestSchema, \
     GetUserResponseTestSchema
+from tests.tools.logger import get_test_logger
 
+logger = get_test_logger("USERS_GATEWAY_ASSERTIONS")
 
 @allure.step("Check user")
 def assert_user(actual: UserTestSchema, expected: UserTestSchema) -> None:
+    logger.info("Check user")
+
     assert_equal(actual.id, expected.id, "id")
     assert_equal(actual.email, expected.email, "email")
     assert_equal(actual.phone_number, expected.phone_number, "phone_number")
@@ -16,6 +20,8 @@ def assert_user(actual: UserTestSchema, expected: UserTestSchema) -> None:
 
 @allure.step("Check create user response")
 def assert_create_user_response(request: CreateUserRequestTestSchema, response: CreateUserResponseTestSchema) -> None:
+    logger.info("Check create user response")
+
     assert_equal(request.email, response.user.email, "email")
     assert_equal(request.phone_number, response.user.phone_number, "phone_number")
     assert_equal(request.middle_name, response.user.middle_name, "middle_name")
@@ -27,4 +33,6 @@ def assert_get_user_response(
         get_user_response: GetUserResponseTestSchema,
         create_user_response: CreateUserResponseTestSchema
 ) -> None:
+    logger.info("Check get user response")
+
     assert_user(get_user_response.user, create_user_response.user)
