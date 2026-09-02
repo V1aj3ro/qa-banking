@@ -115,6 +115,13 @@ This opens an interactive HTML report in your default browser.
 
 ---
 
+### Coverage report
+
+After running tests generate report to `tests/reports/coverage.html`:
+```bash
+swagger-coverage-tool save-report
+```
+
 ## Reports example
 ### Coverage report
 ![Coverage report](/tests/reports/coverage-report.png)
