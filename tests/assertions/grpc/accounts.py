@@ -20,7 +20,7 @@ from contracts.services.gateway.accounts.rpc_open_savings_account_pb2 import (
     OpenSavingsAccountRequest
 )
 from tests.assertions.base import assert_equal, assert_length
-from tests.assertions.http.cards import assert_card
+from tests.assertions.grpc.cards import assert_card
 from tests.tools.logger import get_test_logger
 
 logger = get_test_logger("ACCOUNTS_GATEWAY_ASSERTIONS")
@@ -38,8 +38,8 @@ def assert_account(actual: AccountView, expected: AccountView) -> None:
     assert_length(actual.cards, expected.cards, "accounts cards")
     actual_cards = sorted(actual.cards, key=lambda c: c.id)
     expected_cards = sorted(expected.cards, key=lambda c: c.id)
-    for index, card in enumerate(expected.cards):
-        assert_card(actual.cards[index], card)
+    for index, card in enumerate(expected_cards):
+        assert_card(actual_cards[index], card)
 
 
 @allure.step("Check get accounts response")
