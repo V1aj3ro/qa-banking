@@ -80,3 +80,6 @@ def assert_open_credit_card_account_response(
     logger.info("Check open credit card account response")
 
     assert_equal(open_credit_card_account_response.account.type, AccountTestType.CREDIT_CARD, "Account type")
+
+
+
