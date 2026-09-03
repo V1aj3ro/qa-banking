@@ -9,9 +9,14 @@ test-job:
   image: ubuntu:24.04
   allow_failure: true
   before_script:
-    - export PYENV_ROOT="$HOME/.pyenv"
-    - export PATH="$PYENV_ROOT/bin:$PATH"
-    - eval "$(pyenv init -)"
+    - apt-get update
+    - apt-get install -y python3.12 python3.12-venv python3-pip
+    - python3.12 -m venv venv
+    - source venv/bin/activate
+    - pip install -r requirements.txt
+#    - export PYENV_ROOT="$HOME/.pyenv"
+#    - export PATH="$PYENV_ROOT/bin:$PATH"
+#    - eval "$(pyenv init -)"
   script:
     - docker build -f Dockerfile.base -t base-service .
     - docker compose -f docker-compose.yaml up -d --build
