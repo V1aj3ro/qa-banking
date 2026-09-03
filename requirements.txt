@@ -21,3 +21,4 @@ redis==6.2.0
 SQLAlchemy==2.0.41
 uvicorn==0.34.2
 pytest==9.1.1
+swagger_coverage_tool==0.33.0
