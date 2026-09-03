@@ -6,17 +6,11 @@ stages:
 
 test-job:
   stage: test
-  image: ubuntu:24.04
   allow_failure: true
   before_script:
-    - apt-get update
-    - apt-get install -y python3.12 python3.12-venv python3-pip
-    - python3.12 -m venv venv
-    - source venv/bin/activate
-    - pip install -r requirements.txt
-#    - export PYENV_ROOT="$HOME/.pyenv"
-#    - export PATH="$PYENV_ROOT/bin:$PATH"
-#    - eval "$(pyenv init -)"
+    - export PYENV_ROOT="$HOME/.pyenv"
+    - export PATH="$PYENV_ROOT/bin:$PATH"
+    - eval "$(pyenv init -)"
   script:
     - docker build -f Dockerfile.base -t base-service .
     - docker compose -f docker-compose.yaml up -d --build
@@ -38,16 +32,10 @@ test-job:
 
 publish-report:
   stage: test
-  image: ubuntu:24.04
   allow_failure: true
-
-  before_script:
-    - apt-get update
-    - apt-get install -y openjdk-11-jre wget tar
-    - wget https://github.com/allure-framework/allure2/releases/download/2.32.0/allure-2.32.0.tgz
-    - tar -xvf allure-2.32.0.tgz
   script:
-    - allure-2.32.0/bin/allure generate allure-results -o allure-report --clean
+    - mkdir -p public
+    - docker run --rm -v "$PWD/allure-results:/allure-results" -v "$PWD/public:/public" frankescobar/allure-docker-service allure generate /allure-results -o /public --clean
   needs: ["test-job"]
   artifacts:
     when: always
@@ -59,8 +47,7 @@ publish-report:
 pages:
   stage: deploy
   script:
-    - mkdir -p public
-    - cp -r allure-report/* public/;
+   - ls -la public
   artifacts:
     paths:
       - public
