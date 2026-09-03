@@ -20,7 +20,7 @@ test-job:
 
     - pip install --upgrade pip
     - pip install -r requirements.txt
-
+    - mkdir -p allure-results
     - python -m pytest -m "regression" --alluredir=./allure-results
 
   after_script:
