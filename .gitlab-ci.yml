@@ -1,6 +1,7 @@
 stages:
   - test
   - report
+  - deploy
 
 variables:
   COMPOSE_HTTP_TIMEOUT: 120
@@ -14,32 +15,45 @@ test-job:
   script:
     - docker build -f Dockerfile.base -t base-service .
     - docker compose -f docker-compose.yaml up -d --build
-
     - python3.12 -m venv venv
     - source venv/bin/activate
-
     - pip install --upgrade pip
     - pip install -r requirements.txt
+    - pip install swagger-coverage-tool
     - mkdir -p allure-results
     - python -m pytest -m "regression" --alluredir=./allure-results
-
   after_script:
     - docker compose -f docker-compose.yaml down -v
-
   artifacts:
     when: always
     paths:
       - allure-results
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
 
-pages:
+generate-report:
   stage: report
+  allow_failure: true
   needs:
     - job: test-job
       artifacts: true
-      optional: true
   script:
     - mkdir -p public
     - docker run --rm -v "$PWD/allure-results:/allure-results" -v "$PWD/public:/public" frankescobar/allure-docker-service allure generate /allure-results -o /public --clean
+  artifacts:
+    when: always
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+
+pages:
+  stage: deploy
+  needs:
+    - job: generate-report
+      artifacts: true
+  script:
+    - ls -la public
   artifacts:
     paths:
       - public
