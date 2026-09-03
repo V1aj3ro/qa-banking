@@ -16,6 +16,8 @@ logger = get_test_logger("CARDS_GATEWAY_ASSERTIONS")
 
 @allure.step("Check card")
 def assert_card(actual: Card, expected: Card):
+    logger.info("Check card")
+
     assert_equal(actual.id, expected.id, "id")
     assert_equal(actual.account_id, expected.account_id, "account_id")
     assert_equal(actual.status, expected.status, "status")
