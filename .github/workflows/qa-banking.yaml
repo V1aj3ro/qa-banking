@@ -24,7 +24,7 @@ jobs:
           python-version: '3.12'
 
       - name: Build base Docker image
-        run: docker build -t base-service .
+        run: docker build -f Dockerfile.base -t base-service .
 
       - name: Start test services
         run: docker compose -f docker-compose.ci.yaml up -d --build
