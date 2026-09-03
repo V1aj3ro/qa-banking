@@ -6,15 +6,12 @@ stages:
 
 test-job:
   stage: test
+  image: ubuntu:24.04
   allow_failure: true
   before_script:
     - export PYENV_ROOT="$HOME/.pyenv"
     - export PATH="$PYENV_ROOT/bin:$PATH"
     - eval "$(pyenv init -)"
-    - apt-get update
-    - apt-get install -y openjdk-11-jre wget tar
-    - wget https://github.com/allure-framework/allure2/releases/download/2.32.0/allure-2.32.0.tgz
-    - tar -xvf allure-2.32.0.tgz
   script:
     - docker build -f Dockerfile.base -t base-service .
     - docker compose -f docker-compose.yaml up -d --build
@@ -36,12 +33,17 @@ test-job:
 
 publish-report:
   stage: test
+  image: ubuntu:24.04
   allow_failure: true
-  needs:
-    - job: test-job
-      artifacts: true
+
+  before_script:
+    - apt-get update
+    - apt-get install -y openjdk-11-jre wget tar
+    - wget https://github.com/allure-framework/allure2/releases/download/2.32.0/allure-2.32.0.tgz
+    - tar -xvf allure-2.32.0.tgz
   script:
     - allure-2.32.0/bin/allure generate allure-results -o allure-report --clean
+  needs: ["test-job"]
   artifacts:
     when: always
     paths:
@@ -51,12 +53,12 @@ publish-report:
 
 pages:
   stage: deploy
-  needs: ["publish-report"]
   script:
     - mkdir -p public
     - cp -r allure-report/* public/;
   artifacts:
     paths:
       - public
+  needs: ["publish-report"]
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
