@@ -11,7 +11,7 @@ test-job:
     - export PYENV_ROOT="$HOME/.pyenv"
     - export PATH="$PYENV_ROOT/bin:$PATH"
     - eval "$(pyenv init -)"
-    - wget https://github.com/allure-framework/allure2/releases/download/2.32.0/allure-2.32.0.tgz
+    - apt-get update
     - apt-get install -y openjdk-11-jre wget tar
     - wget https://github.com/allure-framework/allure2/releases/download/2.32.0/allure-2.32.0.tgz
     - tar -xvf allure-2.32.0.tgz
