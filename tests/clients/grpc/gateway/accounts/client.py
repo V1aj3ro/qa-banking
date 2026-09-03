@@ -40,10 +40,9 @@ class AccountsGatewayGRPCTestClient(GRPCTestClient):
             request: GetAccountsRequest,
             context: Optional[RequestContext] = None
     ) -> GetAccountsResponse:
-        return self.stub.GetAccounts(
-            request,
-            metadata=build_grpc_test_metadata(context)
-        )
+        metadata = build_grpc_test_metadata(context)
+        print(f"Sending metadata: {metadata}")
+        return self.stub.GetAccounts(request, metadata=metadata)
 
     @allure.step("Open deposit account")
     def open_deposit_account_api(
