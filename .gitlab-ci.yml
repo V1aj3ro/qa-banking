@@ -22,8 +22,6 @@ test-job:
     when: always
     paths:
       - allure-results
-  tags:
-    - docker
 
 pages:
   stage: report
