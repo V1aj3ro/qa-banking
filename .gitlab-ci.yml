@@ -21,7 +21,7 @@ test-job:
     - pip install --upgrade pip
     - pip install -r requirements.txt
 
-    - python -m pytest -m "regression" --alluredir=./allure-results || True
+    - python -m pytest -m "regression" --alluredir=./allure-results
 
   after_script:
     - docker compose -f docker-compose.yaml down -v
@@ -33,13 +33,15 @@ test-job:
 
 pages:
   stage: report
+  needs:
+    - job: test-job
+      artifacts: true
+      optional: true
   script:
     - mkdir -p public
     - docker run --rm -v "$PWD/allure-results:/allure-results" -v "$PWD/public:/public" frankescobar/allure-docker-service allure generate /allure-results -o /public --clean
   artifacts:
     paths:
       - public
-  dependencies:
-    - test-job
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
