@@ -4,22 +4,36 @@ stages:
 
 test-job:
   stage: test
+  image: docker:latest
+  services:
+    - docker:dind
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ""
   script:
     - docker build -f Dockerfile.base -t base-service .
     - docker compose -f docker-compose.yaml up -d --build
-    - pip install -r requirements.txt
-    - python -m pytest -m "regression" --alluredir=./allure-results
+    - docker compose exec -T app pip install -r requirements.txt
+    - docker compose exec -T app python -m pytest -m "regression" --alluredir=/app/allure-results
   after_script:
     - docker compose -f docker-compose.yaml down -v
   artifacts:
     when: always
     paths:
       - allure-results
-  rules:
-    - if: $CI_COMMIT_BRANCH == "main" || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
+  tags:
+    - docker
 
 pages:
   stage: report
+  image: docker:latest
+  services:
+    - docker:dind
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ""
   script:
     - mkdir -p public
     - docker run --rm -v "$PWD/allure-results:/allure-results" -v "$PWD/public:/public" frankescobar/allure-docker-service allure generate /allure-results -o /public --clean
@@ -28,5 +42,7 @@ pages:
       - public
   dependencies:
     - test-job
+  tags:
+    - docker
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
