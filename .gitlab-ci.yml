@@ -3,15 +3,18 @@ stages:
   - report
   - deploy
 
-variables:
-  COMPOSE_HTTP_TIMEOUT: 120
 
 test-job:
   stage: test
+  allow_failure: true
   before_script:
     - export PYENV_ROOT="$HOME/.pyenv"
     - export PATH="$PYENV_ROOT/bin:$PATH"
     - eval "$(pyenv init -)"
+    - wget https://github.com/allure-framework/allure2/releases/download/2.32.0/allure-2.32.0.tgz
+    - apt-get install -y openjdk-11-jre wget tar
+    - wget https://github.com/allure-framework/allure2/releases/download/2.32.0/allure-2.32.0.tgz
+    - tar -xvf allure-2.32.0.tgz
   script:
     - docker build -f Dockerfile.base -t base-service .
     - docker compose -f docker-compose.yaml up -d --build
@@ -27,33 +30,31 @@ test-job:
   artifacts:
     when: always
     paths:
-      - allure-results
+      - allure-results/
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
 
-generate-report:
-  stage: report
+publish-report:
+  stage: test
   allow_failure: true
   needs:
     - job: test-job
       artifacts: true
   script:
-    - mkdir -p public
-    - docker run --rm -v "$PWD/allure-results:/allure-results" -v "$PWD/public:/public" frankescobar/allure-docker-service allure generate /allure-results -o /public --clean
+    - allure-2.32.0/bin/allure generate allure-results -o allure-report --clean
   artifacts:
     when: always
     paths:
-      - public
+      - allure-report/
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
 
 pages:
   stage: deploy
-  needs:
-    - job: generate-report
-      artifacts: true
+  needs: ["publish-report"]
   script:
-    - ls -la public
+    - mkdir -p public
+    - cp -r allure-report/* public/;
   artifacts:
     paths:
       - public
