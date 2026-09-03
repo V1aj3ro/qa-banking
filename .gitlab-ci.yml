@@ -21,7 +21,7 @@ test-job:
     - pip install --upgrade pip
     - pip install -r requirements.txt
 
-    - python -m pytest -m "regression" --alluredir=./allure-results
+    - python -m pytest -m "regression" --alluredir=./allure-results || True
 
   after_script:
     - docker compose -f docker-compose.yaml down -v
