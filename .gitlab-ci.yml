@@ -2,22 +2,14 @@ stages:
   - test
   - report
 
+
 test-job:
   stage: test
-  image: python:3.12-slim
-  services:
-    - docker:dind
-  variables:
-    DOCKER_HOST: tcp://docker:2375
-    DOCKER_DRIVER: overlay2
-    DOCKER_TLS_CERTDIR: ""
-  before_script:
-    - apt-get update && apt-get install -y docker.io docker-compose-v2
-    - pip install --upgrade pip
-    - pip install -r requirements.txt
   script:
     - docker build -f Dockerfile.base -t base-service .
     - docker compose -f docker-compose.yaml up -d --build
+    - pip install --upgrade pip
+    - pip install -r requirements.txt
     - python -m pytest -m "regression" --alluredir=./allure-results
   after_script:
     - docker compose -f docker-compose.yaml down -v
@@ -28,13 +20,6 @@ test-job:
 
 pages:
   stage: report
-  image: docker:latest
-  services:
-    - docker:dind
-  variables:
-    DOCKER_HOST: tcp://docker:2375
-    DOCKER_DRIVER: overlay2
-    DOCKER_TLS_CERTDIR: ""
   script:
     - mkdir -p public
     - docker run --rm -v "$PWD/allure-results:/allure-results" -v "$PWD/public:/public" frankescobar/allure-docker-service allure generate /allure-results -o /public --clean
