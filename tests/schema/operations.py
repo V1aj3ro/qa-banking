@@ -1,8 +1,11 @@
-from datetime import date
+from datetime import date, datetime
+from typing import Self
 
-from pydantic import BaseModel, Field, ConfigDict
+from fastapi import Query
+from pydantic import BaseModel, Field, ConfigDict, UUID4
 from pydantic.alias_generators import to_camel
 
+from libs.schema.query import QuerySchema
 from tests.tools.fakers import fake
 from tests.types.operations import OperationTestType, OperationTestStatus
 
@@ -43,7 +46,7 @@ class GetOperationResponseTestSchema(BaseModel):
     operation: OperationTestSchema
 
 
-class GetOperationsQueryTestSchema(BaseModel):
+class GetOperationsQueryTestSchema(QuerySchema):
     model_config = ConfigDict(
         alias_generator=to_camel,
         validate_by_alias=True,
@@ -51,12 +54,15 @@ class GetOperationsQueryTestSchema(BaseModel):
     )
     account_id: str
 
+    @classmethod
+    async def as_query(cls, account_id: str = Query(alias="accountId")) -> Self:
+        return GetOperationsSummaryQueryTestSchema(account_id=account_id)
 
 class GetOperationsResponseTestSchema(BaseModel):
     operations: list[OperationTestSchema]
 
 
-class GetOperationsSummaryQueryTestSchema(BaseModel):
+class GetOperationsSummaryQueryTestSchema(QuerySchema):
     model_config = ConfigDict(
         alias_generator=to_camel,
         validate_by_alias=True,
@@ -64,6 +70,10 @@ class GetOperationsSummaryQueryTestSchema(BaseModel):
     )
 
     account_id: str
+
+    @classmethod
+    async def as_query(cls, account_id: str = Query(alias="accountId")) -> Self:
+        return GetOperationsSummaryQueryTestSchema(account_id=account_id)
 
 
 class GetOperationsSummaryResponseTestSchema(BaseModel):
@@ -141,3 +151,27 @@ class MakeCashWithdrawalOperationRequestTestSchema(MakeOperationRequestTestSchem
 
 class MakeCashWithdrawalOperationResponseTestSchema(BaseModel):
     operation: OperationTestSchema
+
+
+
+# Schemas for mocks
+
+
+
+class CreateOperationRequestTestSchema(BaseModel):
+    type: OperationTestType
+    status: OperationTestStatus
+    amount: float
+    card_id: UUID4
+    category: str
+    created_at: datetime
+    account_id: UUID4
+
+
+class CreateOperationResponseTestSchema(BaseModel):
+    operation: OperationTestSchema
+
+
+
+class GetOperationsSummaryResponseSchema(BaseModel):
+    summary: OperationsSummaryTestSchema

@@ -1,4 +1,5 @@
 import time
+import uuid
 
 from faker import Faker
 from faker.providers.python import TEnum
@@ -8,6 +9,9 @@ from google.protobuf.internal.enum_type_wrapper import EnumTypeWrapper
 class Fake:
     def __init__(self, faker: Faker):
         self.faker = faker
+
+    def uuid(self) -> uuid.UUID:
+        return self.faker.uuid4(cast_to=None)
 
     def enum(self, value: type[TEnum]) -> TEnum:
         return self.faker.enum(value)

@@ -1,0 +1,9 @@
+{
+  "account": {
+    "id": "c366654e-a231-4309-b965-2c593a54d8f8",
+    "type": "ACCOUNT_TYPE_DEPOSIT",
+    "status": "ACCOUNT_STATUS_ACTIVE",
+    "userId": "2d412ec4-52a5-41c1-885e-65acffb1f42f",
+    "balance": 25000
+  }
+}

@@ -1,3 +1,6 @@
+from typing import Optional
+
+from tests.context.base import build_grpc_test_metadata, RequestContext
 import allure
 from grpc import Channel
 
@@ -56,108 +59,248 @@ class OperationsGatewayGRPCTestClient(GRPCTestClient):
         self.stub = OperationsGatewayServiceStub(channel)
 
     @allure.step("Get operation")
-    def get_operation_api(self, request: GetOperationRequest) -> GetOperationResponse:
-        return self.stub.GetOperation(request)
+    def get_operation_api(
+            self,
+            request: GetOperationRequest,
+            context: Optional[RequestContext] = None
+    ) -> GetOperationResponse:
+        return self.stub.GetOperation(
+            request,
+            metadata=build_grpc_test_metadata(context)
+        )
 
     @allure.step("Get operation receipt")
-    def get_operation_receipt_api(self, request: GetOperationReceiptRequest) -> GetOperationReceiptResponse:
-        return self.stub.GetOperationReceipt(request)
+    def get_operation_receipt_api(
+            self,
+            request: GetOperationReceiptRequest,
+            context: Optional[RequestContext] = None
+    ) -> GetOperationReceiptResponse:
+        return self.stub.GetOperationReceipt(
+            request,
+            metadata=build_grpc_test_metadata(context)
+        )
 
     @allure.step("Get operations")
-    def get_operations_api(self, request: GetOperationsRequest) -> GetOperationsResponse:
-        return self.stub.GetOperations(request)
+    def get_operations_api(
+            self,
+            request: GetOperationsRequest,
+            context: Optional[RequestContext] = None
+    ) -> GetOperationsResponse:
+        return self.stub.GetOperations(
+            request,
+            metadata=build_grpc_test_metadata(context)
+        )
 
     @allure.step("Get operations summary")
-    def get_operations_summary_api(self, request: GetOperationsSummaryRequest) -> GetOperationsSummaryResponse:
-        return self.stub.GetOperationsSummary(request)
+    def get_operations_summary_api(
+            self,
+            request: GetOperationsSummaryRequest,
+            context: Optional[RequestContext] = None
+    ) -> GetOperationsSummaryResponse:
+        return self.stub.GetOperationsSummary(
+            request,
+            metadata=build_grpc_test_metadata(context)
+        )
 
     @allure.step("Make fee operation")
-    def make_fee_operation_api(self, request: MakeFeeOperationRequest) -> MakeFeeOperationResponse:
-        return self.stub.MakeFeeOperation(request)
+    def make_fee_operation_api(
+            self,
+            request: MakeFeeOperationRequest,
+            context: Optional[RequestContext] = None
+    ) -> MakeFeeOperationResponse:
+        return self.stub.MakeFeeOperation(
+            request,
+            metadata=build_grpc_test_metadata(context)
+        )
 
     @allure.step("Make top up operation")
-    def make_top_up_operation_api(self, request: MakeTopUpOperationRequest) -> MakeTopUpOperationResponse:
-        return self.stub.MakeTopUpOperation(request)
+    def make_top_up_operation_api(
+            self,
+            request: MakeTopUpOperationRequest,
+            context: Optional[RequestContext] = None
+    ) -> MakeTopUpOperationResponse:
+        return self.stub.MakeTopUpOperation(
+            request,
+            metadata=build_grpc_test_metadata(context)
+        )
 
     @allure.step("Make cashback operation")
-    def make_cashback_operation_api(self, request: MakeCashbackOperationRequest) -> MakeCashbackOperationResponse:
-        return self.stub.MakeCashbackOperation(request)
+    def make_cashback_operation_api(
+            self,
+            request: MakeCashbackOperationRequest,
+            context: Optional[RequestContext] = None
+    ) -> MakeCashbackOperationResponse:
+        return self.stub.MakeCashbackOperation(
+            request,
+            metadata=build_grpc_test_metadata(context)
+        )
 
     @allure.step("Make transfer operation")
-    def make_transfer_operation_api(self, request: MakeTransferOperationRequest) -> MakeTransferOperationResponse:
-        return self.stub.MakeTransferOperation(request)
+    def make_transfer_operation_api(
+            self,
+            request: MakeTransferOperationRequest,
+            context: Optional[RequestContext] = None
+    ) -> MakeTransferOperationResponse:
+        return self.stub.MakeTransferOperation(
+            request,
+            metadata=build_grpc_test_metadata(context)
+        )
 
     @allure.step("Make purchase operation")
-    def make_purchase_operation_api(self, request: MakePurchaseOperationRequest) -> MakePurchaseOperationResponse:
-        return self.stub.MakePurchaseOperation(request)
+    def make_purchase_operation_api(
+            self,
+            request: MakePurchaseOperationRequest,
+            context: Optional[RequestContext] = None
+    ) -> MakePurchaseOperationResponse:
+        return self.stub.MakePurchaseOperation(
+            request,
+            metadata=build_grpc_test_metadata(context)
+        )
 
     @allure.step("Make bill payment operation")
     def make_bill_payment_operation_api(
             self,
-            request: MakeBillPaymentOperationRequest
+            request: MakeBillPaymentOperationRequest,
+            context: Optional[RequestContext] = None
     ) -> MakeBillPaymentOperationResponse:
-        return self.stub.MakeBillPaymentOperation(request)
+        return self.stub.MakeBillPaymentOperation(
+            request,
+            metadata=build_grpc_test_metadata(context)
+        )
 
     @allure.step("Make cash withdrawal operation")
     def make_cash_withdrawal_operation_api(
             self,
-            request: MakeCashWithdrawalOperationRequest
+            request: MakeCashWithdrawalOperationRequest,
+            context: Optional[RequestContext] = None
     ) -> MakeCashWithdrawalOperationResponse:
-        return self.stub.MakeCashWithdrawalOperation(request)
+        return self.stub.MakeCashWithdrawalOperation(
+            request,
+            metadata=build_grpc_test_metadata(context)
+        )
 
-    def get_operation(self, operation_id: str) -> GetOperationResponse:
+    def get_operation(
+            self,
+            operation_id: Optional[str] = None,
+            context: Optional[RequestContext] = None
+    ) -> GetOperationResponse:
+        if operation_id is None:
+            operation_id = str(fake.uuid())
         request = GetOperationRequest(id=operation_id)
-        return self.get_operation_api(request)
+        return self.get_operation_api(request, context)
 
-    def get_operation_receipt(self, operation_id: str) -> GetOperationReceiptResponse:
+    def get_operation_receipt(
+            self,
+            operation_id: Optional[str] = None,
+            context: Optional[RequestContext] = None
+    ) -> GetOperationReceiptResponse:
+        if operation_id is None:
+            operation_id = str(fake.uuid())
         request = GetOperationReceiptRequest(operation_id=operation_id)
-        return self.get_operation_receipt_api(request)
+        return self.get_operation_receipt_api(request, context)
 
-    def get_operations(self, account_id: str) -> GetOperationsResponse:
+    def get_operations(
+            self,
+            account_id: Optional[str] = None,
+            context: Optional[RequestContext] = None
+    ) -> GetOperationsResponse:
+        if account_id is None:
+            account_id = str(fake.uuid())
         request = GetOperationsRequest(account_id=account_id)
-        return self.get_operations_api(request)
+        return self.get_operations_api(request, context)
 
-    def get_operations_summary(self, account_id: str) -> GetOperationsSummaryResponse:
+    def get_operations_summary(
+            self,
+            account_id: Optional[str] = None,
+            context: Optional[RequestContext] = None
+    ) -> GetOperationsSummaryResponse:
+        if account_id is None:
+            account_id = str(fake.uuid())
         request = GetOperationsSummaryRequest(account_id=account_id)
-        return self.get_operations_summary_api(request)
+        return self.get_operations_summary_api(request, context)
 
-    def make_fee_operation(self, card_id: str, account_id: str) -> MakeFeeOperationResponse:
+    def make_fee_operation(
+            self,
+            card_id: Optional[str] = None,
+            account_id: Optional[str] = None,
+            context: Optional[RequestContext] = None
+    ) -> MakeFeeOperationResponse:
+        if card_id is None:
+            card_id = str(fake.uuid())
+        if account_id is None:
+            account_id = str(fake.uuid())
         request = MakeFeeOperationRequest(
             status=fake.proto_enum(OperationStatus),
             amount=fake.amount(),
             card_id=card_id,
             account_id=account_id
         )
-        return self.make_fee_operation_api(request)
+        return self.make_fee_operation_api(request, context)
 
-    def make_top_up_operation(self, card_id: str, account_id: str) -> MakeTopUpOperationResponse:
+    def make_top_up_operation(
+            self,
+            card_id: Optional[str] = None,
+            account_id: Optional[str] = None,
+            context: Optional[RequestContext] = None
+    ) -> MakeTopUpOperationResponse:
+        if card_id is None:
+            card_id = str(fake.uuid())
+        if account_id is None:
+            account_id = str(fake.uuid())
         request = MakeTopUpOperationRequest(
             status=fake.proto_enum(OperationStatus),
             amount=fake.amount(),
             card_id=card_id,
             account_id=account_id
         )
-        return self.make_top_up_operation_api(request)
+        return self.make_top_up_operation_api(request, context)
 
-    def make_cashback_operation(self, card_id: str, account_id: str) -> MakeCashbackOperationResponse:
+    def make_cashback_operation(
+            self,
+            card_id: Optional[str] = None,
+            account_id: Optional[str] = None,
+            context: Optional[RequestContext] = None
+    ) -> MakeCashbackOperationResponse:
+        if card_id is None:
+            card_id = str(fake.uuid())
+        if account_id is None:
+            account_id = str(fake.uuid())
         request = MakeCashbackOperationRequest(
             status=fake.proto_enum(OperationStatus),
             amount=fake.amount(),
             card_id=card_id,
             account_id=account_id
         )
-        return self.make_cashback_operation_api(request)
+        return self.make_cashback_operation_api(request, context)
 
-    def make_transfer_operation(self, card_id: str, account_id: str) -> MakeTransferOperationResponse:
+    def make_transfer_operation(
+            self,
+            card_id: Optional[str] = None,
+            account_id: Optional[str] = None,
+            context: Optional[RequestContext] = None
+    ) -> MakeTransferOperationResponse:
+        if card_id is None:
+            card_id = str(fake.uuid())
+        if account_id is None:
+            account_id = str(fake.uuid())
         request = MakeTransferOperationRequest(
             status=fake.proto_enum(OperationStatus),
             amount=fake.amount(),
             card_id=card_id,
             account_id=account_id
         )
-        return self.make_transfer_operation_api(request)
+        return self.make_transfer_operation_api(request, context)
 
-    def make_purchase_operation(self, card_id: str, account_id: str) -> MakePurchaseOperationResponse:
+    def make_purchase_operation(
+            self,
+            card_id: Optional[str] = None,
+            account_id: Optional[str] = None,
+            context: Optional[RequestContext] = None
+    ) -> MakePurchaseOperationResponse:
+        if card_id is None:
+            card_id = str(fake.uuid())
+        if account_id is None:
+            account_id = str(fake.uuid())
         request = MakePurchaseOperationRequest(
             status=fake.proto_enum(OperationStatus),
             amount=fake.amount(),
@@ -165,25 +308,43 @@ class OperationsGatewayGRPCTestClient(GRPCTestClient):
             category=fake.category(),
             account_id=account_id
         )
-        return self.make_purchase_operation_api(request)
+        return self.make_purchase_operation_api(request, context)
 
-    def make_bill_payment_operation(self, card_id: str, account_id: str) -> MakeBillPaymentOperationResponse:
+    def make_bill_payment_operation(
+            self,
+            card_id: Optional[str] = None,
+            account_id: Optional[str] = None,
+            context: Optional[RequestContext] = None
+    )-> MakeBillPaymentOperationResponse:
+        if card_id is None:
+            card_id = str(fake.uuid())
+        if account_id is None:
+            account_id = str(fake.uuid())
         request = MakeBillPaymentOperationRequest(
             status=fake.proto_enum(OperationStatus),
             amount=fake.amount(),
             card_id=card_id,
             account_id=account_id
         )
-        return self.make_bill_payment_operation_api(request)
+        return self.make_bill_payment_operation_api(request, context)
 
-    def make_cash_withdrawal_operation(self, card_id: str, account_id: str) -> MakeCashWithdrawalOperationResponse:
+    def make_cash_withdrawal_operation(
+            self,
+            card_id: Optional[str] = None,
+            account_id: Optional[str] = None,
+            context: Optional[RequestContext] = None
+    ) -> MakeCashWithdrawalOperationResponse:
+        if card_id is None:
+            card_id = str(fake.uuid())
+        if account_id is None:
+            account_id = str(fake.uuid())
         request = MakeCashWithdrawalOperationRequest(
             status=fake.proto_enum(OperationStatus),
             amount=fake.amount(),
             card_id=card_id,
             account_id=account_id
         )
-        return self.make_cash_withdrawal_operation_api(request)
+        return self.make_cash_withdrawal_operation_api(request, context)
 
 
 def build_operations_gateway_grpc_test_client() -> OperationsGatewayGRPCTestClient:

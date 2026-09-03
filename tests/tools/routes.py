@@ -7,3 +7,8 @@ class APITestRoutes(StrEnum):
     DOCUMENTS = "/api/v1/documents"
     ACCOUNTS = '/api/v1/accounts'
     OPERATIONS = '/api/v1/operations'
+    CONTRACTS = '/api/v1/contracts'
+    TARIFFS = '/api/v1/tariffs'
+    RECEIPTS = '/api/v1/receipts'
+    PAYMENTS = '/api/v1/payments'
+

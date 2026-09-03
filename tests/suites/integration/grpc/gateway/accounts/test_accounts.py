@@ -22,6 +22,7 @@ from tests.tools.allure import AllureTag, AllureFeature, AllureEpic, AllureStory
 @pytest.mark.gateway
 @pytest.mark.gateway_accounts
 @pytest.mark.regression
+@pytest.mark.integration
 @allure.tag(AllureTag.GRPC, AllureTag.GATEWAY_SERVICE)
 @allure.epic(AllureEpic.GATEWAY_SERVICE)
 @allure.feature(AllureFeature.ACCOUNTS_GATEWAY_SERVICE)

@@ -39,3 +39,4 @@ class CreateUserRequestTestSchema(BaseModel):
 class CreateUserResponseTestSchema(BaseModel):
     user: UserTestSchema
 
+

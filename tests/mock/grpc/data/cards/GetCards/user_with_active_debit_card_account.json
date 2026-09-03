@@ -1,0 +1,28 @@
+{
+  "cards": [
+    {
+      "id": "f0d1aa99-7cc8-4852-940f-bd9eb0ee7681",
+      "pin": "123",
+      "cvv": "321",
+      "type": "CARD_TYPE_PHYSICAL",
+      "status": "CARD_STATUS_ACTIVE",
+      "accountId": "25e8dcef-cb67-41f1-9fe5-6a6973f4a0e8",
+      "cardNumber": "0000000000000000",
+      "cardHolder": "Anton Gomes",
+      "expiryDate": "2029-06-27",
+      "paymentSystem": "CARD_PAYMENT_SYSTEM_MASTERCARD"
+    },
+    {
+      "id": "09c4b3c3-1a9b-474d-925f-d543c027ece5",
+      "pin": "123",
+      "cvv": "321",
+      "type": "CARD_TYPE_VIRTUAL",
+      "status": "CARD_STATUS_ACTIVE",
+      "accountId": "25e8dcef-cb67-41f1-9fe5-6a6973f4a0e8",
+      "cardNumber": "0000000000000000",
+      "cardHolder": "Anton Gomes",
+      "expiryDate": "2029-06-27",
+      "paymentSystem": "CARD_PAYMENT_SYSTEM_VISA"
+    }
+  ]
+}

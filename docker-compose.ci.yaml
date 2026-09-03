@@ -17,13 +17,13 @@ services:
   http-mock:
     <<: *python-service
     ports: [ "8008:8008" ]
-    command: "services.mock.server.http"
+    command: "tests.mock.http.server"
     container_name: "http-mock"
 
   grpc-mock:
     <<: *python-service
     ports: [ "9008:9008" ]
-    command: "services.mock.server.grpc"
+    command: "tests.mock.grpc.server"
     container_name: "grpc-mock"
 
   # gateway-services

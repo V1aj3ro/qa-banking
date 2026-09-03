@@ -27,6 +27,8 @@ logger = get_test_logger("OPERATIONS_GATEWAY_ASSERTIONS")
 
 @allure.step("Check operation")
 def assert_operation(actual: OperationTestSchema, expected: OperationTestSchema) -> None:
+    logger.info("Check operation")
+
     assert_equal(actual.status, expected.status, "status")
     assert_equal(actual.type, expected.type, "type")
     assert_equal(actual.account_id, expected.account_id, "account_id")

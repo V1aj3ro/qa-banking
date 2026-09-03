@@ -1,0 +1,14 @@
+{
+  "card": {
+    "id": "96af71f1-5739-4147-bb55-19474c9afa78",
+    "pin": "123",
+    "cvv": "321",
+    "type": "PHYSICAL",
+    "status": "ACTIVE",
+    "accountId": "25e8dcef-cb67-41f1-9fe5-6a6973f4a0e8",
+    "cardNumber": "0000000000000000",
+    "cardHolder": "Anton Gomes",
+    "expiryDate": "2029-06-27",
+    "paymentSystem": "MASTERCARD"
+  }
+}

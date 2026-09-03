@@ -28,6 +28,15 @@ class GetAccountsQueryTestSchema(BaseModel):
 
     user_id: str
 
+class GetAccountResponseTestSchema(BaseModel):
+    model_config = ConfigDict(
+        alias_generator=to_camel,
+        validate_by_alias=True,
+        validate_by_name=True
+    )
+
+    account: AccountTestSchema
+
 
 class GetAccountsResponseTestSchema(BaseModel):
     model_config = ConfigDict(
@@ -92,3 +101,31 @@ class OpenCreditCardAccountRequestTestSchema(BaseModel):
 
 class OpenCreditCardAccountResponseTestSchema(BaseModel):
     account: AccountTestSchema
+
+
+# Schemas for mocks
+
+class CreateAccountRequestTestSchema(BaseModel):
+    model_config = ConfigDict(
+        alias_generator=to_camel,
+        validate_by_alias=True,
+        validate_by_name=True
+    )
+
+
+    type: AccountTestType
+    status: AccountTestStatus
+    user_id: str
+    balance: float
+
+class CreateAccountResponseTestSchema(BaseModel):
+    account: AccountTestSchema
+
+class UpdateAccountBalanceRequestTestSchema(BaseModel):
+    balance: float
+    account_id: str
+
+
+class UpdateAccountBalanceResponseTestSchema(BaseModel):
+    account: AccountTestSchema
+

@@ -1,0 +1,24 @@
+{
+  "operations": [
+    {
+      "id": "2b75538b-c63d-4451-8806-7cca8ad5ae81",
+      "type": "OPERATION_TYPE_PURCHASE",
+      "status": "OPERATION_STATUS_COMPLETED",
+      "amount": -2500,
+      "cardId": "09c4b3c3-1a9b-474d-925f-d543c027ece5",
+      "category": "taxi",
+      "createdAt": "2025-06-27T16:50:06.374Z",
+      "accountId": "25e8dcef-cb67-41f1-9fe5-6a6973f4a0e8"
+    },
+    {
+      "id": "1cbce86b-484b-46cd-9ae7-3cff96b0700f",
+      "type": "OPERATION_TYPE_TOP_UP",
+      "status": "OPERATION_STATUS_IN_PROGRESS",
+      "amount": 15000,
+      "cardId": "09c4b3c3-1a9b-474d-925f-d543c027ece5",
+      "category": "money_in",
+      "createdAt": "2025-06-27T16:50:06.374Z",
+      "accountId": "25e8dcef-cb67-41f1-9fe5-6a6973f4a0e8"
+    }
+  ]
+}

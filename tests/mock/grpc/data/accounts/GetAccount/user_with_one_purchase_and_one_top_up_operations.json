@@ -1,0 +1,9 @@
+{
+  "account": {
+    "id": "76936706-200d-493b-9d80-b9a0b7ebffc2",
+    "type": "CREDIT_CARD",
+    "status": "ACTIVE",
+    "userId": "2d412ec4-52a5-41c1-885e-65acffb1f42f",
+    "balance": 25000
+  }
+}
