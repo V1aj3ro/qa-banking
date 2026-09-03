@@ -10,18 +10,13 @@ test-job:
   script:
     - docker build -f Dockerfile.base -t base-service .
     - docker compose -f docker-compose.yaml up -d --build
-
     - python -m venv venv
     - source venv/bin/activate
-
     - pip install --upgrade pip
     - pip install -r requirements.txt
-
     - python -m pytest -m "regression" --alluredir=./allure-results
-
   after_script:
     - docker compose -f docker-compose.yaml down -v
-
   artifacts:
     when: always
     paths:
