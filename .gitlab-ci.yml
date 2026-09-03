@@ -4,18 +4,21 @@ stages:
 
 test-job:
   stage: test
-  image: docker:latest
+  image: python:3.12-slim
   services:
     - docker:dind
   variables:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_DRIVER: overlay2
     DOCKER_TLS_CERTDIR: ""
+  before_script:
+    - apt-get update && apt-get install -y docker.io docker-compose-v2
+    - pip install --upgrade pip
+    - pip install -r requirements.txt
   script:
     - docker build -f Dockerfile.base -t base-service .
     - docker compose -f docker-compose.yaml up -d --build
-    - docker compose exec -T app pip install -r requirements.txt
-    - docker compose exec -T app python -m pytest -m "regression" --alluredir=/app/allure-results
+    - python -m pytest -m "regression" --alluredir=./allure-results
   after_script:
     - docker compose -f docker-compose.yaml down -v
   artifacts:
