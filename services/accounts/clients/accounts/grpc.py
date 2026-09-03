@@ -6,8 +6,10 @@ from contracts.services.accounts.rpc_get_account_pb2 import GetAccountRequest, G
 from contracts.services.accounts.rpc_get_accounts_pb2 import GetAccountsRequest, GetAccountsResponse
 from contracts.services.accounts.rpc_update_account_balance_pb2 import UpdateAccountBalanceRequest, \
     UpdateAccountBalanceResponse
+from libs.context.grpc import build_grpc_metadata
 from libs.grpc.client.base import GRPCClient
 from libs.logger import get_logger
+from tests.context.base import RequestContext
 
 
 class AccountsGRPCClient(GRPCClient):
@@ -17,8 +19,8 @@ class AccountsGRPCClient(GRPCClient):
     async def get_account_api(self, request: GetAccountRequest) -> GetAccountResponse:
         return await self.stub.GetAccount(request)
 
-    async def get_accounts_api(self, request: GetAccountsRequest) -> GetAccountsResponse:
-        return await self.stub.GetAccounts(request)
+    async def get_accounts_api(self, request: GetAccountsRequest, context: RequestContext) -> GetAccountsResponse:
+        return await self.stub.GetAccounts(request, metadata=build_grpc_metadata(context))
 
     async def create_account_api(self, request: CreateAccountRequest) -> CreateAccountResponse:
         return await self.stub.CreateAccount(request)
@@ -31,9 +33,9 @@ class AccountsGRPCClient(GRPCClient):
         response = await self.get_account_api(request)
         return response.account
 
-    async def get_accounts(self, user_id: str) -> list[Account]:
+    async def get_accounts(self, user_id: str, context: RequestContext) -> list[Account]:
         request = GetAccountsRequest(user_id=user_id)
-        response = await self.get_accounts_api(request)
+        response = await self.get_accounts_api(request, context)
         return response.accounts
 
     async def update_account_balance(self, account_id: str, balance: float) -> Account:

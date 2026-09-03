@@ -27,6 +27,7 @@ from services.accounts.clients.accounts.grpc import AccountsGRPCClient
 from services.cards.clients.cards.grpc import CardsGRPCClient
 from services.documents.services.kafka.producer import DocumentsKafkaProducerClient
 from services.users.clients.users.grpc import UsersGRPCClient
+from tests.context.base import RequestContext
 
 
 def build_account_view(cards: tuple[Card, ...] | list[Card], account: Account) -> AccountView:
@@ -42,9 +43,11 @@ def build_account_view(cards: tuple[Card, ...] | list[Card], account: Account) -
 async def get_accounts(
         request: GetAccountsRequest,
         cards_grpc_client: CardsGRPCClient,
-        accounts_grpc_client: AccountsGRPCClient
+        accounts_grpc_client: AccountsGRPCClient,
+        context: ServicerContext,
+        request_context: RequestContext
 ) -> GetAccountsResponse:
-    accounts = await accounts_grpc_client.get_accounts(request.user_id)
+    accounts = await accounts_grpc_client.get_accounts(user_id=request.user_id, context=request_context)
 
     results: list[AccountView] = []
     for account in accounts:

@@ -12,7 +12,7 @@ class RequestContext(BaseModel):
 def build_grpc_test_metadata(context: Optional[RequestContext] | None) -> list[tuple[str, str]] | None:
     if context is None:
         return None
-    return [("x-test-scenario", context.scenario)]
+    return [("x-test-scenario", context)]
 
 
 def build_http_test_headers(context: Optional[RequestContext] | None) -> dict[str, str] | None:

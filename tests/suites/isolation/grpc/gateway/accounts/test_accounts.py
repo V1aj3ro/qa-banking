@@ -36,7 +36,8 @@ class TestAccountsGRPC:
             accounts_gateway_grpc_test_client: AccountsGatewayGRPCTestClient
     ):
         response = accounts_gateway_grpc_test_client.get_accounts(
-            context = RequestContext(scenario=Scenario.USER_WITH_ACTIVE_DEBIT_CARD_ACCOUNT)
+            RequestContext(scenario=Scenario.USER_WITH_ACTIVE_CREDIT_CARD_ACCOUNT)
         )
+
 
 

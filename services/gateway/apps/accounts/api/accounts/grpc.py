@@ -18,6 +18,7 @@ from contracts.services.gateway.accounts.rpc_open_savings_account_pb2 import (
     OpenSavingsAccountRequest,
     OpenSavingsAccountResponse
 )
+from libs.context.grpc import get_grpc_request_context
 from services.accounts.clients.accounts.grpc import get_accounts_grpc_client
 from services.cards.clients.cards.grpc import get_cards_grpc_client
 from services.documents.services.kafka.producer import get_documents_kafka_producer_client
@@ -35,6 +36,8 @@ class AccountsGatewayService(AccountsGatewayServiceServicer):
     async def GetAccounts(self, request: GetAccountsRequest, context: ServicerContext) -> GetAccountsResponse:
         return await get_accounts(
             request,
+            context=context,
+            request_context=get_grpc_request_context(context),
             cards_grpc_client=get_cards_grpc_client(),
             accounts_grpc_client=get_accounts_grpc_client()
         )
