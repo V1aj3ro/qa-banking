@@ -23,7 +23,7 @@ download-history:
           mkdir -p $ALLURE_HISTORY_DIR
         fi
       else
-        echo "Ветка allure-history не существует, создаём пустую историю"
+        echo "Ветка allure-history не существует, создаём пустую историю "
         mkdir -p $ALLURE_HISTORY_DIR
       fi
   artifacts:
