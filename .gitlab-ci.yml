@@ -12,7 +12,7 @@ download-history:
   stage: prepare
   script:
     - mkdir -p $ALLURE_HISTORY_DIR
-    - echo "Загружаем историю из ветки allure-history..."
+    - echo "Загружаем историю из ветки allure-history... "
     - |
       if git ls-remote --heads origin allure-history | grep -q allure-history; then
         git fetch origin allure-history
