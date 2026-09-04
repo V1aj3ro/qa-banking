@@ -11,7 +11,7 @@ download-history:
   stage: prepare
   script:
     - mkdir -p $ALLURE_HISTORY_DIR
-    - echo "Загружаем историю из артефактов предыдущего пайплайна..."
+    - echo "Загружаем историю из артефактов предыдущего пайплайна... "
     - |
       if [ -n "$CI_PIPELINE_SOURCE" ] && [ "$CI_COMMIT_BRANCH" == "main" ]; then
         echo "Скачиваем историю с GitLab Pages..."
