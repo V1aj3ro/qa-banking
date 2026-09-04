@@ -51,13 +51,3 @@ class TestUsersPositiveHTTP:
 
         validate_json_schema(response.json(), response_data.model_json_schema())
 
-    @allure.story(AllureStory.GET_USER)
-    @allure.title("[HTTP] Get user with incorrect user id")
-    def test_get_user_with_incorrect_user_id(self, users_gateway_http_test_client: UsersGatewayHTTPTestClient):
-        response = users_gateway_http_test_client.get_user_api(user_id="incorrect-user-id")
-        response_data = ValidationErrorResponseSchema.model_validate_json(response.text)
-
-        assert_status_code(response.status_code, HTTPStatus.UNPROCESSABLE_ENTITY)
-        assert_get_user_response_with_incorrect_user_id(response_data)
-
-        validate_json_schema(response.json(), response_data.model_json_schema())
