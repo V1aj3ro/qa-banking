@@ -3,7 +3,6 @@ stages:
   - report
   - deploy
 
-
 test-job:
   stage: test
   allow_failure: true
@@ -31,26 +30,30 @@ test-job:
     - if: $CI_COMMIT_BRANCH == "main"
 
 publish-report:
-  stage: test
+  stage: report
   allow_failure: true
+  needs:
+    - job: test-job
+      artifacts: true
   script:
     - mkdir -p public
     - docker run --rm -v "$PWD/allure-results:/allure-results" -v "$PWD/public:/public" frankescobar/allure-docker-service allure generate /allure-results -o /public --clean
-  needs: ["test-job"]
   artifacts:
     when: always
     paths:
-      - allure-report/
+      - public/
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
 
 pages:
   stage: deploy
+  needs:
+    - job: publish-report
+      artifacts: true
   script:
-   - ls -la public
+    - ls -la public
   artifacts:
     paths:
       - public
-  needs: ["publish-report"]
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
