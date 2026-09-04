@@ -90,7 +90,7 @@ publish-report:
       cp -r public/history allure-history 2>/dev/null || mkdir -p allure-history
       touch allure-history/.gitkeep
       git add allure-history
-      git commit -m "Update Allure history for pipeline $CI_PIPELINE_ID" || echo "Нет изменений"
+      git commit -m "Update Allure history for pipeline $CI_PIPELINE_ID" || echo "Нет изменений "
       git push https://oauth2:$GITLAB_TOKEN@gitlab.com/${CI_PROJECT_PATH}.git allure-history
   artifacts:
     when: always
