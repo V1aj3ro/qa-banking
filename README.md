@@ -92,6 +92,8 @@ Use markers (defined in `pytest.ini`), for example:
 
 ```bash
 pytest -m "regression"      # Regression tests
+pytest -m "positive"      # Positive tests
+pytest -m "negative"      # Negative tests
 ```
 
 You can also run tests for a specific service or protocol:
