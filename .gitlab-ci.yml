@@ -17,10 +17,8 @@ download-history:
       PIPELINE_ID=$(curl -s --header "PRIVATE-TOKEN: $CI_JOB_TOKEN" "https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/pipelines?ref=main&status=success&per_page=1" | grep -o '"id":[0-9]*' | head -1 | cut -d':' -f2)
       if [ -n "$PIPELINE_ID" ] && [ "$PIPELINE_ID" != "null" ]; then
         echo "Найден пайплайн ID: $PIPELINE_ID"
-        # Скачиваем артефакты задачи publish-report из этого пайплайна
         curl -L --header "PRIVATE-TOKEN: $CI_JOB_TOKEN" "https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/pipelines/$PIPELINE_ID/jobs/artifacts?job=publish-report" -o artifacts.zip || echo "Артефакты не найдены"
         if [ -f artifacts.zip ] && [ -s artifacts.zip ]; then
-          # Проверяем, что это zip-архив
           if unzip -t artifacts.zip >/dev/null 2>&1; then
             unzip -o artifacts.zip -d .
             rm artifacts.zip
@@ -31,7 +29,6 @@ download-history:
           fi
         fi
       fi
-      # Если история не загружена, создаём пустую папку
       if [ ! -d "$ALLURE_HISTORY_DIR" ] || [ -z "$(ls -A $ALLURE_HISTORY_DIR)" ]; then
         echo "История не найдена, создаём пустую"
         mkdir -p $ALLURE_HISTORY_DIR
@@ -84,9 +81,7 @@ publish-report:
     - allure generate allure-results -o public --clean
     - mkdir -p allure-history
     - cp -r public/history/* allure-history/ 2>/dev/null || true
-    # Сохраняем историю как артефакт для следующего запуска
     - zip -r history.zip allure-history/ 2>/dev/null || true
-    # Копируем архив в public для Pages (опционально)
     - cp history.zip public/ || true
   artifacts:
     when: always
