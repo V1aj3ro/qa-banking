@@ -11,26 +11,19 @@ download-history:
   stage: prepare
   script:
     - mkdir -p $ALLURE_HISTORY_DIR
-    - echo "Загружаем историю из артефактов предыдущего пайплайна..."
+    - echo "Загружаем историю из ветки allure-history..."
     - |
-      # Получаем ID последнего успешного пайплайна для ветки main
-      PIPELINE_ID=$(curl -s --header "PRIVATE-TOKEN: $CI_JOB_TOKEN" "https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/pipelines?ref=main&status=success&per_page=1" | grep -o '"id":[0-9]*' | head -1 | cut -d':' -f2)
-      if [ -n "$PIPELINE_ID" ] && [ "$PIPELINE_ID" != "null" ]; then
-        echo "Найден пайплайн ID: $PIPELINE_ID"
-        curl -L --header "PRIVATE-TOKEN: $CI_JOB_TOKEN" "https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/pipelines/$PIPELINE_ID/jobs/artifacts?job=publish-report" -o artifacts.zip || echo "Артефакты не найдены"
-        if [ -f artifacts.zip ] && [ -s artifacts.zip ]; then
-          if unzip -t artifacts.zip >/dev/null 2>&1; then
-            unzip -o artifacts.zip -d .
-            rm artifacts.zip
-            echo "История загружена"
-          else
-            echo "Скачанный файл не zip, удаляем"
-            rm artifacts.zip
-          fi
+      git fetch origin allure-history 2>/dev/null || echo "Ветка allure-history не найдена"
+      if git ls-remote --heads origin allure-history | grep -q allure-history; then
+        git checkout origin/allure-history -- $ALLURE_HISTORY_DIR 2>/dev/null || echo "Папка истории не найдена в ветке"
+        if [ -d "$ALLURE_HISTORY_DIR" ] && [ -n "$(ls -A $ALLURE_HISTORY_DIR)" ]; then
+          echo "История загружена из ветки allure-history"
+        else
+          echo "Папка истории пуста, создаём пустую"
+          mkdir -p $ALLURE_HISTORY_DIR
         fi
-      fi
-      if [ ! -d "$ALLURE_HISTORY_DIR" ] || [ -z "$(ls -A $ALLURE_HISTORY_DIR)" ]; then
-        echo "История не найдена, создаём пустую"
+      else
+        echo "Ветка allure-history не существует, создаём пустую историю"
         mkdir -p $ALLURE_HISTORY_DIR
       fi
   artifacts:
@@ -81,14 +74,26 @@ publish-report:
     - allure generate allure-results -o public --clean
     - mkdir -p allure-history
     - cp -r public/history/* allure-history/ 2>/dev/null || true
-    - zip -r history.zip allure-history/ 2>/dev/null || true
-    - cp history.zip public/ || true
+    - |
+      git config user.email "ci@gitlab.com"
+      git config user.name "GitLab CI"
+      if git ls-remote --heads origin allure-history | grep -q allure-history; then
+        git fetch origin allure-history
+        git checkout -b allure-history origin/allure-history || git checkout allure-history
+      else
+        git checkout --orphan allure-history
+        git rm -rf . 2>/dev/null || true
+      fi
+      rm -rf allure-history
+      cp -r public/history allure-history 2>/dev/null || mkdir -p allure-history
+      git add allure-history
+      git commit -m "Update Allure history for pipeline $CI_PIPELINE_ID" || echo "Нет изменений в истории"
+      git push origin allure-history
   artifacts:
     when: always
     paths:
       - public/
       - allure-history/
-      - history.zip
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
 
