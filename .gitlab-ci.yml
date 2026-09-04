@@ -14,7 +14,6 @@ download-history:
     - mkdir -p $ALLURE_HISTORY_DIR
     - echo "Загружаем историю из ветки allure-history..."
     - |
-      # Проверяем наличие ветки
       if git ls-remote --heads origin allure-history | grep -q allure-history; then
         git fetch origin allure-history
         git checkout origin/allure-history -- $ALLURE_HISTORY_DIR 2>/dev/null || echo "Папка истории не найдена"
@@ -76,13 +75,10 @@ publish-report:
     - allure generate allure-results -o public --clean
     - mkdir -p allure-history
     - cp -r public/history/* allure-history/ 2>/dev/null || true
-    # Если allure-history пуста, создаём хотя бы .gitkeep, чтобы коммит был
     - touch allure-history/.gitkeep
-    # Сохраняем историю в ветку allure-history с использованием токена
     - |
       git config user.email "ci@gitlab.com"
       git config user.name "GitLab CI"
-      # Переключаемся на ветку allure-history или создаём её
       if git ls-remote --heads origin allure-history | grep -q allure-history; then
         git fetch origin allure-history
         git checkout -b allure-history origin/allure-history || git checkout allure-history
@@ -90,13 +86,11 @@ publish-report:
         git checkout --orphan allure-history
         git rm -rf . 2>/dev/null || true
       fi
-      # Копируем свежую историю поверх существующей
       rm -rf allure-history
       cp -r public/history allure-history 2>/dev/null || mkdir -p allure-history
       touch allure-history/.gitkeep  # чтобы папка не была пустой для git
       git add allure-history
       git commit -m "Update Allure history for pipeline $CI_PIPELINE_ID" || echo "Нет изменений для коммита"
-      # Пуш с использованием токена
       git push https://oauth2:$GITLAB_TOKEN@gitlab.com/${CI_PROJECT_PATH}.git allure-history
   artifacts:
     when: always
