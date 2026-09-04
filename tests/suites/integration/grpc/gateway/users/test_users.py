@@ -12,7 +12,8 @@ from tests.tools.fakers import fake
 @pytest.mark.gateway
 @pytest.mark.gateway_users
 @pytest.mark.regression
-@allure.tag(AllureTag.GRPC, AllureTag.GATEWAY_SERVICE)
+@pytest.mark.positive
+@allure.tag(AllureTag.GRPC, AllureTag.GATEWAY_SERVICE, AllureTag.POSITIVE)
 @allure.epic(AllureEpic.GATEWAY_SERVICE)
 @allure.feature(AllureFeature.USERS_GATEWAY_SERVICE)
 class TestUsersGRPC:

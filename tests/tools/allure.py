@@ -8,6 +8,8 @@ class AllureTag(StrEnum):
     POSTGRES = "POSTGRES"
 
     GATEWAY_SERVICE = "GATEWAY_SERVICE"
+    POSITIVE = "POSITIVE"
+    NEGATIVE = "NEGATIVE"
 
 
 class AllureStory(StrEnum):

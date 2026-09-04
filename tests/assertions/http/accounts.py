@@ -2,6 +2,7 @@ import allure
 
 from tests.assertions.base import assert_equal, assert_length
 from tests.assertions.http.cards import assert_card
+from tests.assertions.http.errors import assert_validation_error_response
 from tests.schema.accounts import (
     AccountTestSchema,
     GetAccountsResponseTestSchema,
@@ -14,6 +15,7 @@ from tests.schema.accounts import (
     OpenSavingsAccountRequestTestSchema,
     OpenDepositAccountRequestTestSchema
 )
+from tests.schema.errors import ValidationErrorResponseSchema, ValidationErrorSchema
 from tests.tools.logger import get_test_logger
 from tests.types.accounts import AccountTestType
 
@@ -82,4 +84,44 @@ def assert_open_credit_card_account_response(
     assert_equal(open_credit_card_account_response.account.type, AccountTestType.CREDIT_CARD, "Account type")
 
 
+@allure.step("Check get accounts response with incorrect user id")
+def assert_get_accounts_response_with_incorrect_user_id(actual: ValidationErrorResponseSchema) -> None:
+    logger.info("Check get accounts response with incorrect user id")
+    expected = ValidationErrorResponseSchema(
+        detail=[
+            ValidationErrorSchema(
+                type="uuid_parsing",
+                location=[
+                    "query",
+                    "userId"
+                ],
+                message="Input should be a valid UUID, invalid character: expected an optional prefix of `urn:uuid:` followed by [0-9a-fA-F-], found `i` at 1",
+                input="incorrect-user-id",
+                context={
+                    "error": "invalid character: expected an optional prefix of `urn:uuid:` followed by [0-9a-fA-F-], found `i` at 1"
+             },
+            )
+        ]
+    )
+    assert_validation_error_response(actual, expected)
 
+@allure.step("Check open account response with incorrect user id")
+def assert_open_account_response_with_incorrect_user_id(actual: ValidationErrorResponseSchema) -> None:
+    logger.info("Check open account response with incorrect user id")
+    expected = ValidationErrorResponseSchema(
+        detail=[
+            ValidationErrorSchema(
+                type="uuid_parsing",
+                location=[
+                    "body",
+                    "userId"
+                ],
+                message="Input should be a valid UUID, invalid character: expected an optional prefix of `urn:uuid:` followed by [0-9a-fA-F-], found `i` at 1",
+                input="incorrect-user-id",
+                context={
+                    "error": "invalid character: expected an optional prefix of `urn:uuid:` followed by [0-9a-fA-F-], found `i` at 1"
+             },
+            )
+        ]
+    )
+    assert_validation_error_response(actual, expected)

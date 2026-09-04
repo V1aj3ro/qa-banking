@@ -1,5 +1,3 @@
-from uuid import UUID
-
 import allure
 from httpx import Response
 
@@ -14,6 +12,7 @@ from tests.schema.documents import (
 )
 from tests.tools.logger import get_test_logger
 from tests.tools.routes import APITestRoutes
+
 
 class DocumentsGatewayHTTPTestClient(HTTPTestClient):
     @allure.step("Get tariff document")

@@ -21,10 +21,11 @@ from tests.tools.allure import AllureTag, AllureEpic, AllureFeature, AllureStory
 @pytest.mark.gateway
 @pytest.mark.gateway_cards
 @pytest.mark.regression
-@allure.tag(AllureTag.HTTP, AllureTag.GATEWAY_SERVICE)
+@pytest.mark.positive
+@allure.tag(AllureTag.HTTP, AllureTag.GATEWAY_SERVICE, AllureTag.POSITIVE)
 @allure.epic(AllureEpic.GATEWAY_SERVICE)
 @allure.feature(AllureFeature.CARDS_GATEWAY_SERVICE)
-class TestCardsHTTP:
+class TestCardsPositiveHTTP:
     @allure.story(AllureStory.ISSUE_VIRTUAL_CARD)
     @allure.title("[HTTP] Issue virtual card")
     def test_issue_virtual_card(

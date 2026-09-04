@@ -126,6 +126,8 @@ swagger-coverage-tool save-report
 ### Coverage report
 ![Coverage report](/tests/reports/coverage-report.png)
 
+![Coverage report](/tests/reports/coverage-report-2.png)
+
 ### Allure report overview
 ![Allure report overview](/tests/reports/allure-report-overview.png)
 

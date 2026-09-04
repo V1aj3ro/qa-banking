@@ -14,7 +14,8 @@ from tests.tools.allure import AllureTag, AllureEpic, AllureFeature, AllureStory
 @pytest.mark.gateway
 @pytest.mark.gateway_cards
 @pytest.mark.regression
-@allure.tag(AllureTag.GRPC, AllureTag.GATEWAY_SERVICE)
+@pytest.mark.positive
+@allure.tag(AllureTag.GRPC, AllureTag.GATEWAY_SERVICE, AllureTag.POSITIVE)
 @allure.epic(AllureEpic.GATEWAY_SERVICE)
 @allure.feature(AllureFeature.CARDS_GATEWAY_SERVICE)
 class TestCardsGRPC:

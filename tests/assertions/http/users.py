@@ -1,6 +1,8 @@
 import allure
 
 from tests.assertions.base import assert_equal
+from tests.assertions.http.errors import assert_validation_error_response
+from tests.schema.errors import ValidationErrorSchema, ValidationErrorResponseSchema
 from tests.schema.users import (
     UserTestSchema,
     CreateUserRequestTestSchema,
@@ -40,3 +42,24 @@ def assert_get_user_response(
     logger.info("Check get user response")
 
     assert_user(get_user_response.user, create_user_response.user)
+
+@allure.step("Check get user response with incorrect user id")
+def assert_get_user_response_with_incorrect_user_id(actual: ValidationErrorResponseSchema) -> None:
+    logger.info("Check get user response with incorrect user id")
+    expected = ValidationErrorResponseSchema(
+        detail=[
+            ValidationErrorSchema(
+                type="uuid_parsing",
+                location=[
+                    "path",
+                    "user_id"
+                ],
+                message="Input should be a valid UUID, invalid character: expected an optional prefix of `urn:uuid:` followed by [0-9a-fA-F-], found `i` at 1",
+                input="incorrect-user-id",
+                context={
+                    "error": "invalid character: expected an optional prefix of `urn:uuid:` followed by [0-9a-fA-F-], found `i` at 1"
+                },
+            )
+        ]
+    )
+    assert_validation_error_response(actual, expected)

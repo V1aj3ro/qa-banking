@@ -1,5 +1,4 @@
 from http import HTTPStatus
-from time import sleep
 
 import allure
 import pytest
@@ -18,11 +17,12 @@ from tests.assertions.http.operations import (
 )
 from tests.assertions.http.schema import validate_json_schema
 from tests.clients.http.gateway.operations.client import OperationsGatewayHTTPTestClient
+from tests.fixtures.http.gateway.accounts.fixtures import function_credit_card_http_account
 from tests.fixtures.http.gateway.accounts.schema import (
     DepositAccountHTTPFixture,
     CreditCardAccountHTTPFixture,
 )
-from tests.fixtures.http.gateway.accounts.fixtures import function_credit_card_http_account
+from tests.fixtures.http.gateway.cards.fixtures import function_virtual_http_card
 from tests.fixtures.http.gateway.cards.schema import VirtualCardHTTPFixture
 from tests.fixtures.http.gateway.operations.schema import FeeOperationHTTPFixture
 from tests.schema.operations import (
@@ -53,10 +53,11 @@ from tests.tools.allure import AllureTag, AllureEpic, AllureFeature, AllureStory
 @pytest.mark.gateway
 @pytest.mark.gateway_operations
 @pytest.mark.regression
-@allure.tag(AllureTag.HTTP, AllureTag.GATEWAY_SERVICE)
+@pytest.mark.positive
+@allure.tag(AllureTag.HTTP, AllureTag.GATEWAY_SERVICE, AllureTag.POSITIVE)
 @allure.epic(AllureEpic.GATEWAY_SERVICE)
 @allure.feature(AllureFeature.OPERATIONS_GATEWAY_SERVICE)
-class TestOperationsHTTP:
+class TestOperationsPositiveHTTP:
     @allure.story(AllureStory.GET_OPERATIONS)
     @allure.title("[HTTP] Get operations")
     def test_get_operations(
@@ -87,10 +88,11 @@ class TestOperationsHTTP:
         response_data = GetOperationsSummaryResponseTestSchema.model_validate_json(response.text)
 
         assert_status_code(response.status_code, HTTPStatus.OK)
+        validate_json_schema(response.json(), response_data.model_json_schema())
 
     @allure.story(AllureStory.GET_OPERATION_RECEIPT)
     @allure.title("[HTTP] Get operation receipt")
-    def test_get_operations_receipt(
+    def test_get_operation_receipt(
             self,
             function_credit_card_http_account: CreditCardAccountHTTPFixture,
             function_fee_http_operation: FeeOperationHTTPFixture,

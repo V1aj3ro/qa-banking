@@ -4,27 +4,40 @@ import allure
 import pytest
 
 from tests.assertions.base import assert_status_code
-from tests.assertions.http.accounts import assert_open_debit_card_account_response, \
-    assert_open_savings_account_response, assert_open_deposit_account_response, \
-    assert_open_credit_card_account_response, assert_get_accounts_response
+from tests.assertions.http.accounts import (
+    assert_open_debit_card_account_response,
+    assert_open_savings_account_response,
+    assert_open_deposit_account_response,
+    assert_open_credit_card_account_response,
+    assert_get_accounts_response
+)
 from tests.assertions.http.schema import validate_json_schema
 from tests.clients.http.gateway.accounts.client import AccountsGatewayHTTPTestClient
 from tests.fixtures.http.gateway.accounts.schema import CreditCardAccountHTTPFixture
 from tests.fixtures.http.gateway.users.schema import UserHTTPFixture
-from tests.schema.accounts import OpenDebitCardAccountRequestTestSchema, OpenDebitCardAccountResponseTestSchema, \
-    OpenSavingsAccountRequestTestSchema, OpenSavingsAccountResponseTestSchema, OpenDepositAccountResponseTestSchema, \
-    OpenDepositAccountRequestTestSchema, OpenCreditCardAccountRequestTestSchema, \
-    OpenCreditCardAccountResponseTestSchema, GetAccountsQueryTestSchema, GetAccountsResponseTestSchema
+from tests.schema.accounts import (
+    OpenDebitCardAccountRequestTestSchema,
+    OpenDebitCardAccountResponseTestSchema,
+    OpenSavingsAccountRequestTestSchema,
+    OpenSavingsAccountResponseTestSchema,
+    OpenDepositAccountResponseTestSchema,
+    OpenDepositAccountRequestTestSchema,
+    OpenCreditCardAccountRequestTestSchema,
+    OpenCreditCardAccountResponseTestSchema,
+    GetAccountsQueryTestSchema,
+    GetAccountsResponseTestSchema
+)
 from tests.tools.allure import AllureTag, AllureFeature, AllureEpic, AllureStory
 
 
 @pytest.mark.gateway
 @pytest.mark.gateway_accounts
 @pytest.mark.regression
-@allure.tag(AllureTag.HTTP, AllureTag.GATEWAY_SERVICE)
+@pytest.mark.positive
+@allure.tag(AllureTag.HTTP, AllureTag.GATEWAY_SERVICE, AllureTag.POSITIVE)
 @allure.epic(AllureEpic.GATEWAY_SERVICE)
 @allure.feature(AllureFeature.ACCOUNTS_GATEWAY_SERVICE)
-class TestAccountsHTTP:
+class TestAccountsPositiveHTTP:
     @allure.story(AllureStory.GET_ACCOUNTS)
     @allure.title("[HTTP] Get accounts")
     def test_get_accounts(
