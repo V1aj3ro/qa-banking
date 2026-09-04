@@ -37,7 +37,7 @@ publish-report:
       artifacts: true
   script:
     - mkdir -p public
-    - docker run --rm -v "$PWD/allure-results:/allure-results" -v "$PWD/public:/public" frankescobar/allure-docker-service allure generate /allure-results -o /public --clean
+    - allure generate allure-results -o public --clean
   artifacts:
     when: always
     paths:
