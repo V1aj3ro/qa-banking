@@ -1,11 +1,42 @@
 stages:
+  - prepare
   - test
   - report
   - deploy
 
+variables:
+  ALLURE_HISTORY_DIR: "allure-history"
+
+download-history:
+  stage: prepare
+  script:
+    - mkdir -p $ALLURE_HISTORY_DIR
+    - echo "Загружаем историю из артефактов предыдущего пайплайна..."
+    - |
+      if [ -n "$CI_PIPELINE_SOURCE" ] && [ "$CI_COMMIT_BRANCH" == "main" ]; then
+        echo "Скачиваем историю с GitLab Pages..."
+        curl -L -o history.zip "https://${CI_PROJECT_ROOT_NAMESPACE}.gitlab.io/${CI_PROJECT_NAME}/history.zip" 2>/dev/null || echo "История не найдена, создаём новую"
+        if [ -f history.zip ]; then
+          unzip -o history.zip -d $ALLURE_HISTORY_DIR
+          rm history.zip
+          echo "История загружена"
+        else
+          echo "История не найдена, начнём с новой"
+        fi
+      fi
+  artifacts:
+    paths:
+      - $ALLURE_HISTORY_DIR
+    expire_in: 7 days
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+
 test-job:
   stage: test
   allow_failure: true
+  needs:
+    - job: download-history
+      artifacts: true
   before_script:
     - export PYENV_ROOT="$HOME/.pyenv"
     - export PATH="$PYENV_ROOT/bin:$PATH"
@@ -19,6 +50,7 @@ test-job:
     - pip install -r requirements.txt
     - pip install swagger-coverage-tool
     - mkdir -p allure-results
+    - cp -r $ALLURE_HISTORY_DIR/* allure-results/ 2>/dev/null || true
     - python -m pytest -m "regression" --alluredir=./allure-results
   after_script:
     - docker compose -f docker-compose.yaml down -v
@@ -38,10 +70,15 @@ publish-report:
   script:
     - mkdir -p public
     - allure generate allure-results -o public --clean
+    - mkdir -p allure-history
+    - cp -r public/history/* allure-history/ 2>/dev/null || true
+    - zip -r history.zip allure-history/ 2>/dev/null || true
   artifacts:
     when: always
     paths:
       - public/
+      - allure-history/
+      - history.zip
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
 
@@ -52,6 +89,7 @@ pages:
       artifacts: true
   script:
     - ls -la public
+    - ls -la public/history/ 2>/dev/null || echo "История пока пуста"
   artifacts:
     paths:
       - public
