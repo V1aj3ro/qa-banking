@@ -117,7 +117,7 @@ This opens an interactive HTML report in your default browser.
 
 ---
 
-### Coverage report
+## Coverage report
 
 After running tests generate report to `tests/reports/coverage.html`:
 ```bash
