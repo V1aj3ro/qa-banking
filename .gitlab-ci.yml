@@ -79,9 +79,10 @@ publish-report:
     - |
       git config user.email "ci@gitlab.com"
       git config user.name "GitLab CI"
+      git branch -D allure-history 2>/dev/null || true
       if git ls-remote --heads origin allure-history | grep -q allure-history; then
         git fetch origin allure-history
-        git checkout -b allure-history origin/allure-history || git checkout allure-history
+        git checkout -b allure-history origin/allure-history
       else
         git checkout --orphan allure-history
         git rm -rf . 2>/dev/null || true
@@ -90,7 +91,7 @@ publish-report:
       cp -r public/history allure-history 2>/dev/null || mkdir -p allure-history
       touch allure-history/.gitkeep
       git add allure-history
-      git commit -m "Update Allure history for pipeline $CI_PIPELINE_ID" || echo "Нет изменений "
+      git commit -m "Update Allure history for pipeline $CI_PIPELINE_ID" || echo "Нет изменений"
       git push https://oauth2:$GITLAB_TOKEN@gitlab.com/${CI_PROJECT_PATH}.git allure-history
   artifacts:
     when: always
