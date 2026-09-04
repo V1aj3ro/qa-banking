@@ -29,7 +29,7 @@ The project is designed for learning and practicing API automation.
 - `suites/` – Actual test cases (integration tests, grouped by service and protocol).  
 - `tools/` – Utilities (Allure helpers, configuration, data factories, logging).  
 - `types/` – Common type definitions (enums).  
-- `conftest.py` – Global fixtures and hooks.
+- `conftest.py` – Global fixtures.
 
 ---
 
