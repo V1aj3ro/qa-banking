@@ -73,7 +73,7 @@ publish-report:
     - mkdir -p allure-history
     - cp -r public/history/* allure-history/ 2>/dev/null || true
     - zip -r history.zip allure-history/ 2>/dev/null || true
-    - cp history.zip public/   # <-- ключевое исправление
+    - cp history.zip public/
   artifacts:
     when: always
     paths:
