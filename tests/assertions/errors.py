@@ -36,6 +36,6 @@ def assert_internal_error_response(
         actual: InternalErrorResponseSchema,
         expected: InternalErrorResponseSchema
 ):
-    logger.info("Check internal error response")
+    logger.info("Check internal error  response")
 
     assert_equal(actual.details, expected.details, "details")
