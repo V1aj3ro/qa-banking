@@ -1,0 +1,21 @@
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/users - Waiting for response
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/users - Status 200
+INFO     ACCOUNTS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/accounts/open-credit-card-account - Waiting for response
+INFO     ACCOUNTS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/accounts/open-credit-card-account - Status 200
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/operations/make-fee-operation - Waiting for response
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/operations/make-fee-operation - Status 200
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 GET http://127.0.0.1:8003/api/v1/operations?accountId=8425b906-7835-44df-a87b-c9c446b3ac5b - Waiting for response
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 GET http://127.0.0.1:8003/api/v1/operations?accountId=8425b906-7835-44df-a87b-c9c446b3ac5b - Status 200
+INFO     BASE_ASSERTIONS:base.py:13 Assert status code equals to 200
+INFO     OPERATIONS_GATEWAY_ASSERTIONS:operations.py:48 Check get operations response
+INFO     BASE_ASSERTIONS:base.py:45 Check that length of "Operations list" equals to 1
+INFO     OPERATIONS_GATEWAY_ASSERTIONS:operations.py:32 Check operation
+INFO     BASE_ASSERTIONS:base.py:24 Check that "status" equals to COMPLETED
+INFO     BASE_ASSERTIONS:base.py:24 Check that "type" equals to FEE
+INFO     BASE_ASSERTIONS:base.py:24 Check that "account_id" equals to 8425b906-7835-44df-a87b-c9c446b3ac5b
+INFO     BASE_ASSERTIONS:base.py:24 Check that "id" equals to bd63c2a1-7f90-4c91-b624-fbcea0f5cdbe
+INFO     BASE_ASSERTIONS:base.py:24 Check that "card_id" equals to 3bdb9454-ad8a-4dae-8d9b-5c009c048d82
+INFO     BASE_ASSERTIONS:base.py:24 Check that "amount" equals to -482.82
+INFO     BASE_ASSERTIONS:base.py:24 Check that "category" equals to fee
+INFO     BASE_ASSERTIONS:base.py:24 Check that "created_at" equals to 2026-09-05T12:28:17.304350
+INFO     SCHEMA_ASSERTIONS:schema.py:14 Validating JSON schema

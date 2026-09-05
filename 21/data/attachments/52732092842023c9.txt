@@ -1,0 +1,14 @@
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/users - Waiting for response
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/users - Status 200
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 GET http://127.0.0.1:8003/api/v1/users/15206d6f-df39-4fa0-90c7-3c42a1a8139f - Waiting for response
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 GET http://127.0.0.1:8003/api/v1/users/15206d6f-df39-4fa0-90c7-3c42a1a8139f - Status 200
+INFO     BASE_ASSERTIONS:base.py:13 Assert status code equals to 200
+INFO     USERS_GATEWAY_ASSERTIONS:users.py:42 Check get user response
+INFO     USERS_GATEWAY_ASSERTIONS:users.py:18 Check user
+INFO     BASE_ASSERTIONS:base.py:24 Check that "id" equals to 15206d6f-df39-4fa0-90c7-3c42a1a8139f
+INFO     BASE_ASSERTIONS:base.py:24 Check that "email" equals to 1788611305.952327.pnelson@example.com
+INFO     BASE_ASSERTIONS:base.py:24 Check that "phone_number" equals to 984.393.5498
+INFO     BASE_ASSERTIONS:base.py:24 Check that "middle_name" equals to Brian
+INFO     BASE_ASSERTIONS:base.py:24 Check that "first_name" equals to Jeffrey
+INFO     BASE_ASSERTIONS:base.py:24 Check that "last_name" equals to Guerra
+INFO     SCHEMA_ASSERTIONS:schema.py:14 Validating JSON schema

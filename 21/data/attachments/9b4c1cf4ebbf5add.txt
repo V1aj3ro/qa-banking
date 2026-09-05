@@ -1,0 +1,36 @@
+INFO     USERS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:11 REQUEST: /contracts.services.gateway.users.UsersGatewayService/CreateUser
+INFO     USERS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:13 RESPONSE: /contracts.services.gateway.users.UsersGatewayService/CreateUser
+INFO     ACCOUNTS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:11 REQUEST: /contracts.services.gateway.accounts.AccountsGatewayService/OpenCreditCardAccount
+INFO     ACCOUNTS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:13 RESPONSE: /contracts.services.gateway.accounts.AccountsGatewayService/OpenCreditCardAccount
+INFO     ACCOUNTS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:11 REQUEST: /contracts.services.gateway.accounts.AccountsGatewayService/GetAccounts
+INFO     ACCOUNTS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:13 RESPONSE: /contracts.services.gateway.accounts.AccountsGatewayService/GetAccounts
+INFO     ACCOUNTS_GATEWAY_ASSERTIONS:accounts.py:50 Check get accounts response
+INFO     BASE_ASSERTIONS:base.py:45 Check that length of "Accounts list" equals to 1
+INFO     ACCOUNTS_GATEWAY_ASSERTIONS:accounts.py:31 Check account
+INFO     BASE_ASSERTIONS:base.py:24 Check that "id" equals to 8481d796-1202-4425-86f2-7ef0962b09b7
+INFO     BASE_ASSERTIONS:base.py:24 Check that "type" equals to 2
+INFO     BASE_ASSERTIONS:base.py:24 Check that "status" equals to 1
+INFO     BASE_ASSERTIONS:base.py:24 Check that "balance" equals to 25000.0
+INFO     BASE_ASSERTIONS:base.py:45 Check that length of "accounts cards" equals to 2
+INFO     CARDS_GATEWAY_ASSERTIONS:cards.py:19 Check card
+INFO     BASE_ASSERTIONS:base.py:24 Check that "id" equals to 13e04384-c9a1-4cd8-bb08-3d9914f1d4de
+INFO     BASE_ASSERTIONS:base.py:24 Check that "account_id" equals to 8481d796-1202-4425-86f2-7ef0962b09b7
+INFO     BASE_ASSERTIONS:base.py:24 Check that "status" equals to 1
+INFO     BASE_ASSERTIONS:base.py:24 Check that "card_holder" equals to Brenda Blackwell
+INFO     BASE_ASSERTIONS:base.py:24 Check that "card_number" equals to 30362921773469
+INFO     BASE_ASSERTIONS:base.py:24 Check that "cvv" equals to 469
+INFO     BASE_ASSERTIONS:base.py:24 Check that "expiry_date" equals to 03-09-2033
+INFO     BASE_ASSERTIONS:base.py:24 Check that "payment_system" equals to 1
+INFO     BASE_ASSERTIONS:base.py:24 Check that "pin" equals to 0205
+INFO     BASE_ASSERTIONS:base.py:24 Check that "type" equals to 1
+INFO     CARDS_GATEWAY_ASSERTIONS:cards.py:19 Check card
+INFO     BASE_ASSERTIONS:base.py:24 Check that "id" equals to bac33e53-54a0-4cab-b004-651d80b0f693
+INFO     BASE_ASSERTIONS:base.py:24 Check that "account_id" equals to 8481d796-1202-4425-86f2-7ef0962b09b7
+INFO     BASE_ASSERTIONS:base.py:24 Check that "status" equals to 1
+INFO     BASE_ASSERTIONS:base.py:24 Check that "card_holder" equals to Brenda Blackwell
+INFO     BASE_ASSERTIONS:base.py:24 Check that "card_number" equals to 3556712068473885
+INFO     BASE_ASSERTIONS:base.py:24 Check that "cvv" equals to 899
+INFO     BASE_ASSERTIONS:base.py:24 Check that "expiry_date" equals to 03-09-2033
+INFO     BASE_ASSERTIONS:base.py:24 Check that "payment_system" equals to 1
+INFO     BASE_ASSERTIONS:base.py:24 Check that "pin" equals to 3909
+INFO     BASE_ASSERTIONS:base.py:24 Check that "type" equals to 2
