@@ -14,16 +14,11 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v7
 
-      - name: Start Docker service
-        run: |
-          systemctl --user start docker 2>/dev/null || sudo systemctl start docker
-          docker info  # проверка, что команда работает без sudo
-
       - name: Build base Docker image
         run: docker build -f Dockerfile.base -t base-service .
 
       - name: Start test services
-        run: docker compose -f docker-compose.yaml up -d --build
+        run: docker compose -f docker-compose.ci.yaml up -d --build
 
       - name: Set up Python virtual environment
         run: |
@@ -44,7 +39,7 @@ jobs:
 
       - name: Stop test services
         if: always()
-        run: docker compose -f docker-compose.yaml down -v
+        run: docker compose -f docker-compose.ci.yaml down -v
 
       - name: Upload Allure results
         if: always()
@@ -72,16 +67,20 @@ jobs:
           path: allure-results
 
       - name: Generate Allure Report with history
-        uses: simple-elf/allure-report-action@v1.15
-        if: always()
-        with:
-          allure_results: allure-results
-          allure_history: allure-history
+        run: |
+          if [ -d "allure-results" ] && [ "$(ls -A allure-results)" ]; then
+            allure generate allure-results -o allure-history --clean
+          else
+            echo "No test results found, creating empty report."
+            mkdir -p allure-history
+            echo '<html><body><h1>No tests executed</h1></body></html>' > allure-history/index.html
+          fi
 
       - name: Deploy report to Github Pages
-        if: always()
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: allure-history
+          publish_dir: ./allure-history
+          keep_files: false
+          force_orphan: false
