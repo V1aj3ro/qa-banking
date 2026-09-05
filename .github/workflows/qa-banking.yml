@@ -95,34 +95,30 @@ jobs:
           name: allure-results
           path: allure-results
 
-      - name: Generate Allure Report with history in subfolder
+      - name: Generate Allure Report with history
         run: |
           REPORT_DIR="allure-history/${{ github.run_number }}"
           HISTORY_DIR="allure-history/history"
           
-          # Если есть папка истории из предыдущих запусков, используем её
-          if [ -d "$HISTORY_DIR" ]; then
-            echo "Using existing history from $HISTORY_DIR"
-            HISTORY_OPT="--history $HISTORY_DIR"
-          else
-            echo "No history found, starting fresh"
-            HISTORY_OPT=""
-          fi
+          # Создаём папку истории, если её нет
+          mkdir -p "$HISTORY_DIR"
           
           if [ -d "allure-results" ] && [ "$(ls -A allure-results)" ]; then
-            allure generate allure-results -o "$REPORT_DIR" --clean $HISTORY_OPT
+            allure generate allure-results -o "$REPORT_DIR" --clean --history "$HISTORY_DIR"
           else
             echo "No test results found, creating empty report."
             mkdir -p "$REPORT_DIR"
             echo '<html><body><h1>No tests executed</h1></body></html>' > "$REPORT_DIR/index.html"
           fi
           
-          if [ -d "$REPORT_DIR/history" ]; then
-            mkdir -p "$HISTORY_DIR"
-            cp -r "$REPORT_DIR/history/"* "$HISTORY_DIR/"
-          fi
-          
+          # Создаём корневой index.html с редиректом на последний запуск
           echo "<html><head><meta http-equiv='refresh' content='0; url=./${{ github.run_number }}/index.html' /></head><body><a href='./${{ github.run_number }}/index.html'>Latest report</a></body></html>" > allure-history/index.html
+          
+          # Отладочная информация: проверим, что история обновилась
+          echo "Contents of history directory:"
+          ls -la "$HISTORY_DIR"
+          echo "Sample history file:"
+          cat "$HISTORY_DIR/history.json" || echo "history.json not found"
 
       - name: Deploy report to Github Pages
         uses: peaceiris/actions-gh-pages@v4
