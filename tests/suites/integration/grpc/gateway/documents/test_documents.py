@@ -12,6 +12,7 @@ from tests.tools.allure import AllureTag, AllureEpic, AllureFeature, AllureStory
 @pytest.mark.gateway_documents
 @pytest.mark.regression
 @pytest.mark.positive
+@pytest.mark.order(1)
 @allure.tag(AllureTag.GRPC, AllureTag.GATEWAY_SERVICE, AllureTag.POSITIVE)
 @allure.epic(AllureEpic.GATEWAY_SERVICE)
 @allure.feature(AllureFeature.DOCUMENTS_GATEWAY_SERVICE)

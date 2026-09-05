@@ -90,6 +90,7 @@ class TestOperationsPositiveHTTP:
         assert_status_code(response.status_code, HTTPStatus.OK)
         validate_json_schema(response.json(), response_data.model_json_schema())
 
+    @pytest.mark.order(1)
     @allure.story(AllureStory.GET_OPERATION_RECEIPT)
     @allure.title("[HTTP] Get operation receipt")
     def test_get_operation_receipt(

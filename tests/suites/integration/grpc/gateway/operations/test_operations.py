@@ -1,5 +1,3 @@
-from time import sleep
-
 import allure
 import pytest
 
@@ -28,11 +26,11 @@ from tests.assertions.grpc.operations import (
     assert_get_operation_response
 )
 from tests.clients.grpc.gateway.operations.client import OperationsGatewayGRPCTestClient
+from tests.fixtures.grpc.gateway.accounts.fixtures import function_credit_card_grpc_account
 from tests.fixtures.grpc.gateway.accounts.schema import (
     DepositAccountGRPCFixture,
     CreditCardAccountGRPCFixture,
 )
-from tests.fixtures.grpc.gateway.accounts.fixtures import function_credit_card_grpc_account
 from tests.fixtures.grpc.gateway.cards.schema import VirtualCardGRPCFixture
 from tests.fixtures.grpc.gateway.operations.schema import FeeOperationGRPCFixture
 from tests.tools.allure import AllureTag, AllureEpic, AllureFeature, AllureStory
@@ -74,6 +72,7 @@ class TestOperationsGRPC:
 
     @allure.story(AllureStory.GET_OPERATION_RECEIPT)
     @allure.title("[gRPC] Get operation receipt")
+    @pytest.mark.order(1)
     def test_get_operations_receipt(
             self,
             function_credit_card_grpc_account: CreditCardAccountGRPCFixture,

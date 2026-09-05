@@ -20,6 +20,9 @@ jobs:
       - name: Start test services
         run: docker compose -f docker-compose.yaml up -d --build
 
+      - name: Fully start test services waiting
+        run: sleep 20
+
       - name: Set up Python virtual environment
         run: |
           python3.12 -m venv venv
