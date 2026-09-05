@@ -87,7 +87,7 @@ jobs:
         uses: actions/checkout@v7
         with:
           ref: gh-pages
-          path: gh-pages
+          path: gh-pages-dir
 
       - name: Download Allure results
         uses: actions/download-artifact@v8
@@ -95,44 +95,46 @@ jobs:
           name: allure-results
           path: allure-results
 
-      - name: Generate Allure Report with history in subfolder
+      - name: Generate Allure Report with history
         run: |
-          REPORT_DIR="allure-history/${{ github.run_number }}"
-          HISTORY_DIR="allure-history/history"
+          # Ветка gh-pages склонирована в папку gh-pages-dir
+          # Старая глобальная история лежит в gh-pages-dir/history
+          GLOBAL_HISTORY_DIR="gh-pages-dir/history"
+          NEW_REPORT_DIR="gh-pages-dir/${{ github.run_number }}"
 
-          # Создаём папку для истории, если её нет
-          mkdir -p "$HISTORY_DIR"
-
-          # Копируем историю из общей папки в allure-results (если она есть)
-          if [ -d "$HISTORY_DIR" ] && [ "$(ls -A "$HISTORY_DIR")" ]; then
-            echo "Copying history from $HISTORY_DIR to allure-results/history"
+          # 1. Если старая история существует, копируем её в allure-results
+          if [ -d "$GLOBAL_HISTORY_DIR" ] && [ "$(ls -A "$GLOBAL_HISTORY_DIR")" ]; then
+            echo "Copying global history to allure-results/history..."
             mkdir -p allure-results/history
-            cp -r "$HISTORY_DIR/"* allure-results/history/
+            cp -r "$GLOBAL_HISTORY_DIR/"* allure-results/history/
           else
-            echo "No previous history found, starting fresh."
+            echo "No previous history found, creating fresh report."
           fi
 
+          # 2. Генерируем новый отчет прямо в папку с номером сборки внутри gh-pages-dir
           if [ -d "allure-results" ] && [ "$(ls -A allure-results)" ]; then
-            allure generate allure-results -o "$REPORT_DIR" --clean
+            allure generate allure-results -o "$NEW_REPORT_DIR" --clean
           else
             echo "No test results found, creating empty report."
-            mkdir -p "$REPORT_DIR"
-            echo '<html><body><h1>No tests executed</h1></body></html>' > "$REPORT_DIR/index.html"
+            mkdir -p "$NEW_REPORT_DIR"
+            echo '<html><body><h1>No tests executed</h1></body></html>' > "$NEW_REPORT_DIR/index.html"
           fi
 
-          if [ -d "$REPORT_DIR/history" ]; then
-            echo "Updating global history from $REPORT_DIR/history"
-            mkdir -p "$HISTORY_DIR"
-            cp -r "$REPORT_DIR/history/"* "$HISTORY_DIR/"
+          # 3. Обновляем глобальную историю последними данными для следующего запуска
+          if [ -d "$NEW_REPORT_DIR/history" ]; then
+            echo "Updating global history from new report..."
+            mkdir -p "$GLOBAL_HISTORY_DIR"
+            cp -r "$NEW_REPORT_DIR/history/"* "$GLOBAL_HISTORY_DIR/"
           fi
 
-          echo "<html><head><meta http-equiv='refresh' content='0; url=./${{ github.run_number }}/index.html' /></head><body><a href='./${{ github.run_number }}/index.html'>Latest report</a></body></html>" > allure-history/index.html
+          # 4. Создаем редирект в корне, чтобы при открытии основной ссылки перекидывало на последний отчет
+          echo "<html><head><meta http-equiv='refresh' content='0; url=./${{ github.run_number }}/index.html' /></head><body><a href='./${{ github.run_number }}/index.html'>Latest report</a></body></html>" > gh-pages-dir/index.html
 
       - name: Deploy report to Github Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: ./allure-history
+          publish_dir: ./gh-pages-dir
           keep_files: true
           force_orphan: false
