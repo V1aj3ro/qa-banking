@@ -111,10 +111,8 @@ jobs:
             echo '<html><body><h1>No tests executed</h1></body></html>' > "$REPORT_DIR/index.html"
           fi
           
-          # Создаём корневой index.html с редиректом на последний запуск
           echo "<html><head><meta http-equiv='refresh' content='0; url=./${{ github.run_number }}/index.html' /></head><body><a href='./${{ github.run_number }}/index.html'>Latest report</a></body></html>" > allure-history/index.html
           
-          # Отладочная информация: проверим, что история обновилась
           echo "Contents of history directory:"
           ls -la "$HISTORY_DIR"
           echo "Sample history file:"
