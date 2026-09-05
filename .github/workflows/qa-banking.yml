@@ -114,5 +114,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: ./allure-history
-          keep_files: true   # не удаляем старые папки
+          keep_files: true
           force_orphan: false
