@@ -100,7 +100,6 @@ jobs:
           REPORT_DIR="allure-history/${{ github.run_number }}"
           HISTORY_DIR="allure-history/history"
           
-          # Всегда создаём папку истории
           mkdir -p "$HISTORY_DIR"
           
           echo "Creating report with history from $HISTORY_DIR"
@@ -113,7 +112,6 @@ jobs:
             echo '<html><body><h1>No tests executed</h1></body></html>' > "$REPORT_DIR/index.html"
           fi
           
-          # Если после генерации появилась папка history в отчёте, копируем её в общую
           if [ -d "$REPORT_DIR/history" ]; then
             cp -r "$REPORT_DIR/history/"* "$HISTORY_DIR/" 2>/dev/null || true
           fi
