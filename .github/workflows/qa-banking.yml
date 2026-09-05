@@ -112,12 +112,10 @@ jobs:
             echo '<html><body><h1>No tests executed</h1></body></html>' > "$REPORT_DIR/index.html"
           fi
 
-          # Копируем свежую историю из отчёта в общую папку (если она появилась)
           if [ -d "$REPORT_DIR/history" ]; then
             cp -r "$REPORT_DIR/history/"* "$HISTORY_DIR/" 2>/dev/null || true
           fi
 
-          # Создаём корневой index.html с редиректом
           echo "<html><head><meta http-equiv='refresh' content='0; url=./${{ github.run_number }}/index.html' /></head><body><a href='./${{ github.run_number }}/index.html'>Latest report</a></body></html>" > allure-history/index.html
 
       - name: Deploy report to Github Pages
