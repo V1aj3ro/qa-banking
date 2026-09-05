@@ -95,28 +95,30 @@ jobs:
           name: allure-results
           path: allure-results
 
-      - name: Generate Allure Report with history
+      - name: Generate Allure Report with history in subfolder
         run: |
           REPORT_DIR="allure-history/${{ github.run_number }}"
           HISTORY_DIR="allure-history/history"
-          
-          # Создаём папку истории, если её нет
+
+          # Всегда создаём папку для истории (даже если она пустая)
           mkdir -p "$HISTORY_DIR"
-          
+
           if [ -d "allure-results" ] && [ "$(ls -A allure-results)" ]; then
+            # Генерируем отчёт, передавая историю (Allure сам обновит её)
             allure generate allure-results -o "$REPORT_DIR" --clean --history "$HISTORY_DIR"
           else
             echo "No test results found, creating empty report."
             mkdir -p "$REPORT_DIR"
             echo '<html><body><h1>No tests executed</h1></body></html>' > "$REPORT_DIR/index.html"
           fi
-          
+
+          # Копируем свежую историю из отчёта в общую папку (если она появилась)
+          if [ -d "$REPORT_DIR/history" ]; then
+            cp -r "$REPORT_DIR/history/"* "$HISTORY_DIR/" 2>/dev/null || true
+          fi
+
+          # Создаём корневой index.html с редиректом
           echo "<html><head><meta http-equiv='refresh' content='0; url=./${{ github.run_number }}/index.html' /></head><body><a href='./${{ github.run_number }}/index.html'>Latest report</a></body></html>" > allure-history/index.html
-          
-          echo "Contents of history directory:"
-          ls -la "$HISTORY_DIR"
-          echo "Sample history file:"
-          cat "$HISTORY_DIR/history.json" || echo "history.json not found"
 
       - name: Deploy report to Github Pages
         uses: peaceiris/actions-gh-pages@v4
