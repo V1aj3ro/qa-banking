@@ -1,0 +1,19 @@
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/users - Waiting for response
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/users - Status 200
+INFO     ACCOUNTS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/accounts/open-debit-card-account - Waiting for response
+INFO     ACCOUNTS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/accounts/open-debit-card-account - Status 200
+INFO     CARDS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/cards/issue-virtual-card - Waiting for response
+INFO     CARDS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/cards/issue-virtual-card - Status 200
+INFO     ACCOUNTS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/accounts/open-deposit-account - Waiting for response
+INFO     ACCOUNTS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/accounts/open-deposit-account - Status 200
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/operations/make-purchase-operation - Waiting for response
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/operations/make-purchase-operation - Status 200
+INFO     BASE_ASSERTIONS:base.py:13 Assert status code equals to 200
+INFO     OPERATIONS_GATEWAY_ASSERTIONS:operations.py:146 Check make purchase operation response
+INFO     BASE_ASSERTIONS:base.py:24 Check that "status" equals to UNSPECIFIED
+INFO     BASE_ASSERTIONS:base.py:24 Check that "amount" equals to -737.38
+INFO     BASE_ASSERTIONS:base.py:24 Check that "card_id" equals to 6d9f6284-ca57-4b5d-bb13-a694845fcade
+INFO     BASE_ASSERTIONS:base.py:24 Check that "account_id" equals to af05c733-e2e1-4543-ab66-2a442253c296
+INFO     BASE_ASSERTIONS:base.py:24 Check that "type" equals to PURCHASE
+INFO     BASE_ASSERTIONS:base.py:24 Check that "category" equals to parking
+INFO     SCHEMA_ASSERTIONS:schema.py:14 Validating JSON schema

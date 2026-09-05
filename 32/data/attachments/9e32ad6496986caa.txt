@@ -1,0 +1,16 @@
+INFO     USERS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:11 REQUEST: /contracts.services.gateway.users.UsersGatewayService/CreateUser
+INFO     USERS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:13 RESPONSE: /contracts.services.gateway.users.UsersGatewayService/CreateUser
+INFO     ACCOUNTS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:11 REQUEST: /contracts.services.gateway.accounts.AccountsGatewayService/OpenDebitCardAccount
+INFO     ACCOUNTS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:13 RESPONSE: /contracts.services.gateway.accounts.AccountsGatewayService/OpenDebitCardAccount
+INFO     CARDS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:11 REQUEST: /contracts.services.gateway.cards.CardsGatewayService/IssueVirtualCard
+INFO     CARDS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:13 RESPONSE: /contracts.services.gateway.cards.CardsGatewayService/IssueVirtualCard
+INFO     ACCOUNTS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:11 REQUEST: /contracts.services.gateway.accounts.AccountsGatewayService/OpenDepositAccount
+INFO     ACCOUNTS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:13 RESPONSE: /contracts.services.gateway.accounts.AccountsGatewayService/OpenDepositAccount
+INFO     OPERATIONS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:11 REQUEST: /contracts.services.gateway.operations.OperationsGatewayService/MakeTopUpOperation
+INFO     OPERATIONS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:13 RESPONSE: /contracts.services.gateway.operations.OperationsGatewayService/MakeTopUpOperation
+INFO     OPERATIONS_GATEWAY_ASSERTIONS:operations.py:118 Check make top up operation response
+INFO     BASE_ASSERTIONS:base.py:24 Check that "status" equals to 0
+INFO     BASE_ASSERTIONS:base.py:24 Check that "amount" equals to 0.0
+INFO     BASE_ASSERTIONS:base.py:24 Check that "card_id" equals to 28892eef-44c8-4f2c-b710-45c3ce7effd4
+INFO     BASE_ASSERTIONS:base.py:24 Check that "account_id" equals to 0940ff1a-49dc-459a-a821-09e10ef9fc9d
+INFO     BASE_ASSERTIONS:base.py:24 Check that "type" equals to 3
