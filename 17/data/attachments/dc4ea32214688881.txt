@@ -1,0 +1,14 @@
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/users - Waiting for response
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/users - Status 200
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 GET http://127.0.0.1:8003/api/v1/users/3ff8f6c8-1895-4d5e-8e2d-e9ec397078a0 - Waiting for response
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 GET http://127.0.0.1:8003/api/v1/users/3ff8f6c8-1895-4d5e-8e2d-e9ec397078a0 - Status 200
+INFO     BASE_ASSERTIONS:base.py:13 Assert status code equals to 200
+INFO     USERS_GATEWAY_ASSERTIONS:users.py:42 Check get user response
+INFO     USERS_GATEWAY_ASSERTIONS:users.py:18 Check user
+INFO     BASE_ASSERTIONS:base.py:24 Check that "id" equals to 3ff8f6c8-1895-4d5e-8e2d-e9ec397078a0
+INFO     BASE_ASSERTIONS:base.py:24 Check that "email" equals to 1788609867.2455401.marypeterson@example.net
+INFO     BASE_ASSERTIONS:base.py:24 Check that "phone_number" equals to (789)529-8613x3311
+INFO     BASE_ASSERTIONS:base.py:24 Check that "middle_name" equals to Kelly
+INFO     BASE_ASSERTIONS:base.py:24 Check that "first_name" equals to Martin
+INFO     BASE_ASSERTIONS:base.py:24 Check that "last_name" equals to Reed
+INFO     SCHEMA_ASSERTIONS:schema.py:14 Validating JSON schema

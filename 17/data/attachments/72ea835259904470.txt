@@ -1,0 +1,16 @@
+INFO     USERS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:11 REQUEST: /contracts.services.gateway.users.UsersGatewayService/CreateUser
+INFO     USERS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:13 RESPONSE: /contracts.services.gateway.users.UsersGatewayService/CreateUser
+INFO     ACCOUNTS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:11 REQUEST: /contracts.services.gateway.accounts.AccountsGatewayService/OpenDebitCardAccount
+INFO     ACCOUNTS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:13 RESPONSE: /contracts.services.gateway.accounts.AccountsGatewayService/OpenDebitCardAccount
+INFO     CARDS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:11 REQUEST: /contracts.services.gateway.cards.CardsGatewayService/IssueVirtualCard
+INFO     CARDS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:13 RESPONSE: /contracts.services.gateway.cards.CardsGatewayService/IssueVirtualCard
+INFO     ACCOUNTS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:11 REQUEST: /contracts.services.gateway.accounts.AccountsGatewayService/OpenDepositAccount
+INFO     ACCOUNTS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:13 RESPONSE: /contracts.services.gateway.accounts.AccountsGatewayService/OpenDepositAccount
+INFO     OPERATIONS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:11 REQUEST: /contracts.services.gateway.operations.OperationsGatewayService/MakeFeeOperation
+INFO     OPERATIONS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:13 RESPONSE: /contracts.services.gateway.operations.OperationsGatewayService/MakeFeeOperation
+INFO     OPERATIONS_GATEWAY_ASSERTIONS:operations.py:79 Check make fee operation response
+INFO     BASE_ASSERTIONS:base.py:24 Check that "status" equals to 0
+INFO     BASE_ASSERTIONS:base.py:24 Check that "amount" equals to -0.0
+INFO     BASE_ASSERTIONS:base.py:24 Check that "card_id" equals to 12959d94-a7b8-49ce-8722-761035d11d25
+INFO     BASE_ASSERTIONS:base.py:24 Check that "account_id" equals to 7a38b3a1-aae4-4c42-bb64-ad18e9e93047
+INFO     BASE_ASSERTIONS:base.py:24 Check that "type" equals to 1
