@@ -1,0 +1,11 @@
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/users - Waiting for response
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/users - Status 200
+INFO     ACCOUNTS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/accounts/open-debit-card-account - Waiting for response
+INFO     ACCOUNTS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/accounts/open-debit-card-account - Status 200
+INFO     CARDS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/cards/issue-virtual-card - Waiting for response
+INFO     CARDS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/cards/issue-virtual-card - Status 200
+INFO     BASE_ASSERTIONS:base.py:13 Assert status code equals to 200
+INFO     CARDS_GATEWAY_ASSERTIONS:cards.py:48 Check issue virtual card response
+INFO     BASE_ASSERTIONS:base.py:24 Check that "Card type" equals to VIRTUAL
+INFO     BASE_ASSERTIONS:base.py:24 Check that "Account id" equals to 037bf31e-074a-483e-ad51-de16c5990fc3
+INFO     SCHEMA_ASSERTIONS:schema.py:14 Validating JSON schema
