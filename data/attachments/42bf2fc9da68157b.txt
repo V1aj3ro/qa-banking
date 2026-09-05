@@ -1,1 +1,0 @@
-INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/operations/make-cash-withdrawal-operation - Waiting for response
