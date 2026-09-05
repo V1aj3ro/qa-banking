@@ -1,0 +1,18 @@
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/users - Waiting for response
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/users - Status 200
+INFO     ACCOUNTS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/accounts/open-debit-card-account - Waiting for response
+INFO     ACCOUNTS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/accounts/open-debit-card-account - Status 200
+INFO     CARDS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/cards/issue-virtual-card - Waiting for response
+INFO     CARDS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/cards/issue-virtual-card - Status 200
+INFO     ACCOUNTS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/accounts/open-deposit-account - Waiting for response
+INFO     ACCOUNTS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/accounts/open-deposit-account - Status 200
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/operations/make-fee-operation - Waiting for response
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/operations/make-fee-operation - Status 200
+INFO     BASE_ASSERTIONS:base.py:13 Assert status code equals to 200
+INFO     OPERATIONS_GATEWAY_ASSERTIONS:operations.py:68 Check make fee operation response
+INFO     BASE_ASSERTIONS:base.py:24 Check that "status" equals to IN_PROGRESS
+INFO     BASE_ASSERTIONS:base.py:24 Check that "amount" equals to -124.29
+INFO     BASE_ASSERTIONS:base.py:24 Check that "card_id" equals to 06fe075c-f428-4091-b838-db54f331d47c
+INFO     BASE_ASSERTIONS:base.py:24 Check that "account_id" equals to 30bcb770-e288-4ebf-b21c-9ab18abb7851
+INFO     BASE_ASSERTIONS:base.py:24 Check that "type" equals to FEE
+INFO     SCHEMA_ASSERTIONS:schema.py:14 Validating JSON schema
