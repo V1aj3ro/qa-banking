@@ -18,8 +18,8 @@ jobs:
 
       - name: Install system dependencies (CachyOS / Arch)
         run: |
-          sudo pacman -Syu --noconfirm
-          sudo pacman -S --noconfirm docker docker-compose python python-pip
+          pacman -Syu --noconfirm
+          pacman -S --noconfirm docker docker-compose python python-pip
 
       - name: Start Docker service
         run: |
