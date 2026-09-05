@@ -57,7 +57,7 @@ class TestOperationsNegativeHTTP:
 
         validate_json_schema(response.json(), response_data.model_json_schema())
 
-    @allure.story(AllureStory.GET_OPERATIONS)
+    @allure.story(AllureStory.GET_OPERATIONS_SUMMARY)
     @allure.title("[HTTP] Get operations summary with incorrect account id")
     def test_get_operations_summary_with_incorrect_account_id(
             self,
@@ -72,7 +72,7 @@ class TestOperationsNegativeHTTP:
 
         validate_json_schema(response.json(), response_data.model_json_schema())
 
-    @allure.story(AllureStory.GET_OPERATIONS)
+    @allure.story(AllureStory.GET_OPERATION_RECEIPT)
     @allure.title("[HTTP] Get operation receipt with incorrect operation id")
     def test_get_operation_receipt_with_incorrect_operation_id(
             self,
@@ -86,7 +86,7 @@ class TestOperationsNegativeHTTP:
 
         validate_json_schema(response.json(), response_data.model_json_schema())
 
-    @allure.story(AllureStory.GET_OPERATIONS)
+    @allure.story(AllureStory.GET_OPERATION)
     @allure.title("[HTTP] Get operation with incorrect operation id")
     def test_get_operation_with_incorrect_operation_id(
             self,

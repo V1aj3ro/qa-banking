@@ -33,7 +33,7 @@ from tests.tools.allure import AllureTag, AllureEpic, AllureFeature, AllureStory
 @allure.feature(AllureFeature.CARDS_GATEWAY_SERVICE)
 class TestCardsNegativeHTTP:
     @allure.story(AllureStory.ISSUE_PHYSICAL_CARD)
-    @allure.title("[HTTP] Issue physical card with incorrect user id")
+    @allure.title("[HTTP] Issue virtual card with incorrect user id")
     def test_issue_virtual_card_with_incorrect_user_id(
             self,
             function_debit_card_http_account: DebitCardAccountHTTPFixture,
@@ -69,7 +69,7 @@ class TestCardsNegativeHTTP:
         validate_json_schema(response.json(), response_data.model_json_schema())
 
     @allure.story(AllureStory.ISSUE_PHYSICAL_CARD)
-    @allure.title("[HTTP] Issue physical card with incorrect account id")
+    @allure.title("[HTTP] Issue virtual card with incorrect account id")
     def test_issue_virtual_card_with_incorrect_account_id(
             self,
             function_http_user: UserHTTPFixture,
@@ -106,7 +106,7 @@ class TestCardsNegativeHTTP:
 
 
     @allure.story(AllureStory.ISSUE_PHYSICAL_CARD)
-    @allure.title("[HTTP] Issue physical card with incorrect user id and account id")
+    @allure.title("[HTTP] Issue virtual card with incorrect user id and account id")
     def test_issue_virtual_card_with_incorrect_user_id_and_account_id(
             self,
             cards_gateway_http_test_client: CardsGatewayHTTPTestClient

@@ -15,11 +15,11 @@ from tests.tools.allure import AllureTag, AllureEpic, AllureFeature, AllureStory
 @pytest.mark.gateway_documents
 @pytest.mark.regression
 @pytest.mark.positive
-@allure.tag(AllureTag.HTTP, AllureTag.GATEWAY_SERVICE)
+@allure.tag(AllureTag.HTTP, AllureTag.GATEWAY_SERVICE, AllureTag.POSITIVE)
 @allure.epic(AllureEpic.GATEWAY_SERVICE)
 @allure.feature(AllureFeature.DOCUMENTS_GATEWAY_SERVICE)
 class TestDocumentsPositiveHTTP:
-    @allure.story(AllureStory.GET_TARIFF_DOCUMENT, AllureTag.POSITIVE)
+    @allure.story(AllureStory.GET_TARIFF_DOCUMENT)
     @allure.title("[HTTP] Get tariff document")
     def test_get_tariff_document(
             self,

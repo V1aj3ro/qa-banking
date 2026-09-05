@@ -39,6 +39,7 @@ jobs:
 
       - name: Restore Coverage history
         uses: actions/cache/restore@v6
+        if: always()
         with:
           path: coverage-history.json
           key: coverage-history-${{ github.run_id }}
@@ -46,6 +47,7 @@ jobs:
             coverage-history-
 
       - name: Generate Coverage report
+        if: always()
         run: |
           swagger-coverage-tool save-report
 
