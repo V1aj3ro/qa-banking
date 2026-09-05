@@ -14,18 +14,10 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v7
 
-      # Убедимся, что Docker запущен (теперь без sudo)
       - name: Start Docker service
         run: |
           systemctl --user start docker 2>/dev/null || sudo systemctl start docker
-          # Если docker работает как пользовательский сервис, используйте systemctl --user,
-          # иначе оставьте sudo (но тогда нужно настроить NOPASSWD в sudoers)
-          docker info  # проверяем, что команда работает
-
-      - name: Set up Python
-        uses: actions/setup-python@v7
-        with:
-          python-version: '3.12'
+          docker info  # проверка, что команда работает без sudo
 
       - name: Build base Docker image
         run: docker build -f Dockerfile.base -t base-service .
@@ -33,13 +25,22 @@ jobs:
       - name: Start test services
         run: docker compose -f docker-compose.ci.yaml up -d --build
 
+      - name: Set up Python virtual environment
+        run: |
+          python3.12 -m venv venv
+          source venv/bin/activate
+          python --version
+          pip install --upgrade pip
+
       - name: Install Python dependencies
         run: |
-          python -m pip install --upgrade pip
+          source venv/bin/activate
           pip install -r requirements.txt
 
       - name: Run regressions tests and generate Allure report
-        run: python -m pytest -m "regression" --alluredir=./allure-results
+        run: |
+          source venv/bin/activate
+          pytest -m "regression" --alluredir=./allure-results
 
       - name: Stop test services
         if: always()
