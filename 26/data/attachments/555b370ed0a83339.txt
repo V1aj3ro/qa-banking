@@ -1,0 +1,18 @@
+INFO     USERS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:11 REQUEST: /contracts.services.gateway.users.UsersGatewayService/CreateUser
+INFO     USERS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:13 RESPONSE: /contracts.services.gateway.users.UsersGatewayService/CreateUser
+INFO     ACCOUNTS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:11 REQUEST: /contracts.services.gateway.accounts.AccountsGatewayService/OpenCreditCardAccount
+INFO     ACCOUNTS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:13 RESPONSE: /contracts.services.gateway.accounts.AccountsGatewayService/OpenCreditCardAccount
+INFO     OPERATIONS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:11 REQUEST: /contracts.services.gateway.operations.OperationsGatewayService/MakeFeeOperation
+INFO     OPERATIONS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:13 RESPONSE: /contracts.services.gateway.operations.OperationsGatewayService/MakeFeeOperation
+INFO     OPERATIONS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:11 REQUEST: /contracts.services.gateway.operations.OperationsGatewayService/GetOperation
+INFO     OPERATIONS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:13 RESPONSE: /contracts.services.gateway.operations.OperationsGatewayService/GetOperation
+INFO     OPERATIONS_GATEWAY_ASSERTIONS:operations.py:70 Check get operation response
+INFO     OPERATIONS_GATEWAY_ASSERTIONS:operations.py:42 Check operation
+INFO     BASE_ASSERTIONS:base.py:24 Check that "status" equals to 2
+INFO     BASE_ASSERTIONS:base.py:24 Check that "type" equals to 1
+INFO     BASE_ASSERTIONS:base.py:24 Check that "account_id" equals to 1685722f-3812-43af-b466-f21d5b356f80
+INFO     BASE_ASSERTIONS:base.py:24 Check that "id" equals to 8c3f86b0-e7b8-4b0d-8fa8-37ebb128ad91
+INFO     BASE_ASSERTIONS:base.py:24 Check that "card_id" equals to 9370850e-92f6-41ae-b8f3-b58895470ff6
+INFO     BASE_ASSERTIONS:base.py:24 Check that "amount" equals to -859.5800170898438
+INFO     BASE_ASSERTIONS:base.py:24 Check that "category" equals to fee
+INFO     BASE_ASSERTIONS:base.py:24 Check that "created_at" equals to 05-09-2026 12:54:34

@@ -1,0 +1,19 @@
+INFO     USERS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:11 REQUEST: /contracts.services.gateway.users.UsersGatewayService/CreateUser
+INFO     USERS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:13 RESPONSE: /contracts.services.gateway.users.UsersGatewayService/CreateUser
+INFO     ACCOUNTS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:11 REQUEST: /contracts.services.gateway.accounts.AccountsGatewayService/OpenCreditCardAccount
+INFO     ACCOUNTS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:13 RESPONSE: /contracts.services.gateway.accounts.AccountsGatewayService/OpenCreditCardAccount
+INFO     OPERATIONS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:11 REQUEST: /contracts.services.gateway.operations.OperationsGatewayService/MakeFeeOperation
+INFO     OPERATIONS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:13 RESPONSE: /contracts.services.gateway.operations.OperationsGatewayService/MakeFeeOperation
+INFO     OPERATIONS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:11 REQUEST: /contracts.services.gateway.operations.OperationsGatewayService/GetOperations
+INFO     OPERATIONS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:13 RESPONSE: /contracts.services.gateway.operations.OperationsGatewayService/GetOperations
+INFO     OPERATIONS_GATEWAY_ASSERTIONS:operations.py:59 Check get operations response
+INFO     BASE_ASSERTIONS:base.py:45 Check that length of "Operations list" equals to 1
+INFO     OPERATIONS_GATEWAY_ASSERTIONS:operations.py:42 Check operation
+INFO     BASE_ASSERTIONS:base.py:24 Check that "status" equals to 0
+INFO     BASE_ASSERTIONS:base.py:24 Check that "type" equals to 1
+INFO     BASE_ASSERTIONS:base.py:24 Check that "account_id" equals to 12da51a2-e85d-4031-9d77-2c2bb3909f68
+INFO     BASE_ASSERTIONS:base.py:24 Check that "id" equals to 90ee2770-0715-49e2-becf-b352221b7a6e
+INFO     BASE_ASSERTIONS:base.py:24 Check that "card_id" equals to 13b3bc21-f3b4-4214-a895-f8aa8b197555
+INFO     BASE_ASSERTIONS:base.py:24 Check that "amount" equals to -754.780029296875
+INFO     BASE_ASSERTIONS:base.py:24 Check that "category" equals to fee
+INFO     BASE_ASSERTIONS:base.py:24 Check that "created_at" equals to 05-09-2026 12:54:29
