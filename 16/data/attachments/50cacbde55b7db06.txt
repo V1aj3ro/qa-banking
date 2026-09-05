@@ -1,0 +1,19 @@
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/users - Waiting for response
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/users - Status 200
+INFO     ACCOUNTS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/accounts/open-debit-card-account - Waiting for response
+INFO     ACCOUNTS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/accounts/open-debit-card-account - Status 200
+INFO     CARDS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/cards/issue-virtual-card - Waiting for response
+INFO     CARDS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/cards/issue-virtual-card - Status 200
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/operations/make-bill-payment-operation - Waiting for response
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/operations/make-bill-payment-operation - Status 422
+INFO     BASE_ASSERTIONS:base.py:13 Assert status code equals to 422
+INFO     OPERATIONS_GATEWAY_ASSERTIONS:operations.py:262 Check make operation response with incorrect account id
+INFO     ERRORS_ASSERTIONS:errors.py:26 Check validation error response
+INFO     BASE_ASSERTIONS:base.py:45 Check that length of "details" equals to 1
+INFO     ERRORS_ASSERTIONS:errors.py:12 Check validation error
+INFO     BASE_ASSERTIONS:base.py:24 Check that "type" equals to uuid_parsing
+INFO     BASE_ASSERTIONS:base.py:24 Check that "input" equals to incorrect-account-id
+INFO     BASE_ASSERTIONS:base.py:24 Check that "context" equals to {'error': 'invalid character: expected an optional prefix of `urn:uuid:` followed by [0-9a-fA-F-], found `i` at 1'}
+INFO     BASE_ASSERTIONS:base.py:24 Check that "message" equals to Input should be a valid UUID, invalid character: expected an optional prefix of `urn:uuid:` followed by [0-9a-fA-F-], found `i` at 1
+INFO     BASE_ASSERTIONS:base.py:24 Check that "location" equals to ['body', 'accountId']
+INFO     SCHEMA_ASSERTIONS:schema.py:14 Validating JSON schema

@@ -1,0 +1,12 @@
+INFO     USERS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:11 REQUEST: /contracts.services.gateway.users.UsersGatewayService/CreateUser
+INFO     USERS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:13 RESPONSE: /contracts.services.gateway.users.UsersGatewayService/CreateUser
+INFO     USERS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:11 REQUEST: /contracts.services.gateway.users.UsersGatewayService/GetUser
+INFO     USERS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:13 RESPONSE: /contracts.services.gateway.users.UsersGatewayService/GetUser
+INFO     USERS_GATEWAY_ASSERTIONS:users.py:37 Check get user response
+INFO     USERS_GATEWAY_ASSERTIONS:users.py:13 Check user
+INFO     BASE_ASSERTIONS:base.py:24 Check that "id" equals to 17de38d7-a236-4f9a-a84a-2e0c23321d59
+INFO     BASE_ASSERTIONS:base.py:24 Check that "email" equals to 1788609586.3263605.bowmankevin@example.net
+INFO     BASE_ASSERTIONS:base.py:24 Check that "phone_number" equals to 407.513.3784x327
+INFO     BASE_ASSERTIONS:base.py:24 Check that "middle_name" equals to Erin
+INFO     BASE_ASSERTIONS:base.py:24 Check that "first_name" equals to Andrea
+INFO     BASE_ASSERTIONS:base.py:24 Check that "last_name" equals to Weiss
