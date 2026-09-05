@@ -1,0 +1,8 @@
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/users - Waiting for response
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/users - Status 200
+INFO     ACCOUNTS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/accounts/open-credit-card-account - Waiting for response
+INFO     ACCOUNTS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/accounts/open-credit-card-account - Status 200
+INFO     BASE_ASSERTIONS:base.py:13 Assert status code equals to 200
+INFO     ACCOUNTS_GATEWAY_ASSERTIONS:accounts.py:82 Check open credit card account response
+INFO     BASE_ASSERTIONS:base.py:24 Check that "Account type" equals to CREDIT_CARD
+INFO     SCHEMA_ASSERTIONS:schema.py:14 Validating JSON schema

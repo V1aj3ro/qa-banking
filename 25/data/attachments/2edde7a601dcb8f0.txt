@@ -1,0 +1,16 @@
+INFO     USERS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:11 REQUEST: /contracts.services.gateway.users.UsersGatewayService/CreateUser
+INFO     USERS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:13 RESPONSE: /contracts.services.gateway.users.UsersGatewayService/CreateUser
+INFO     ACCOUNTS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:11 REQUEST: /contracts.services.gateway.accounts.AccountsGatewayService/OpenDebitCardAccount
+INFO     ACCOUNTS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:13 RESPONSE: /contracts.services.gateway.accounts.AccountsGatewayService/OpenDebitCardAccount
+INFO     CARDS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:11 REQUEST: /contracts.services.gateway.cards.CardsGatewayService/IssueVirtualCard
+INFO     CARDS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:13 RESPONSE: /contracts.services.gateway.cards.CardsGatewayService/IssueVirtualCard
+INFO     ACCOUNTS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:11 REQUEST: /contracts.services.gateway.accounts.AccountsGatewayService/OpenDepositAccount
+INFO     ACCOUNTS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:13 RESPONSE: /contracts.services.gateway.accounts.AccountsGatewayService/OpenDepositAccount
+INFO     OPERATIONS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:11 REQUEST: /contracts.services.gateway.operations.OperationsGatewayService/MakeCashWithdrawalOperation
+INFO     OPERATIONS_GATEWAY_GRPC_TEST_CLIENT:logger_interceptor.py:13 RESPONSE: /contracts.services.gateway.operations.OperationsGatewayService/MakeCashWithdrawalOperation
+INFO     OPERATIONS_GATEWAY_ASSERTIONS:operations.py:92 Check make cash withdrawal operation response
+INFO     BASE_ASSERTIONS:base.py:24 Check that "status" equals to 0
+INFO     BASE_ASSERTIONS:base.py:24 Check that "amount" equals to -0.0
+INFO     BASE_ASSERTIONS:base.py:24 Check that "card_id" equals to ffe81cc0-a46d-4c44-8452-3ebd4ce499a6
+INFO     BASE_ASSERTIONS:base.py:24 Check that "account_id" equals to de38c81d-9be0-487a-9f6d-b938482d96e8
+INFO     BASE_ASSERTIONS:base.py:24 Check that "type" equals to 8
