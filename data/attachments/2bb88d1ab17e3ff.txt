@@ -1,0 +1,20 @@
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/users - Waiting for response
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/users - Status 200
+INFO     ACCOUNTS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/accounts/open-credit-card-account - Waiting for response
+INFO     ACCOUNTS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/accounts/open-credit-card-account - Status 200
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/operations/make-fee-operation - Waiting for response
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/operations/make-fee-operation - Status 200
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 GET http://127.0.0.1:8003/api/v1/operations/91c601cc-04a4-4d39-b4c4-c6681bdc81fa - Waiting for response
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 GET http://127.0.0.1:8003/api/v1/operations/91c601cc-04a4-4d39-b4c4-c6681bdc81fa - Status 200
+INFO     BASE_ASSERTIONS:base.py:13 Assert status code equals to 200
+INFO     OPERATIONS_GATEWAY_ASSERTIONS:operations.py:59 Check get operation response
+INFO     OPERATIONS_GATEWAY_ASSERTIONS:operations.py:32 Check operation
+INFO     BASE_ASSERTIONS:base.py:24 Check that "status" equals to UNSPECIFIED
+INFO     BASE_ASSERTIONS:base.py:24 Check that "type" equals to FEE
+INFO     BASE_ASSERTIONS:base.py:24 Check that "account_id" equals to c7dd3d7f-bd68-4aaf-9a2f-6d345d8d7f84
+INFO     BASE_ASSERTIONS:base.py:24 Check that "id" equals to 91c601cc-04a4-4d39-b4c4-c6681bdc81fa
+INFO     BASE_ASSERTIONS:base.py:24 Check that "card_id" equals to cfbe4ad4-77f5-484d-9ba4-1f6b09382de9
+INFO     BASE_ASSERTIONS:base.py:24 Check that "amount" equals to -863.36
+INFO     BASE_ASSERTIONS:base.py:24 Check that "category" equals to fee
+INFO     BASE_ASSERTIONS:base.py:24 Check that "created_at" equals to 2026-09-05T11:48:20.113607
+INFO     SCHEMA_ASSERTIONS:schema.py:14 Validating JSON schema
