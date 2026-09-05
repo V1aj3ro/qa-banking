@@ -100,6 +100,7 @@ jobs:
           REPORT_DIR="allure-history/${{ github.run_number }}"
           HISTORY_DIR="allure-history/history"
           
+          # Если есть папка истории из предыдущих запусков, используем её
           if [ -d "$HISTORY_DIR" ]; then
             echo "Using existing history from $HISTORY_DIR"
             HISTORY_OPT="--history $HISTORY_DIR"
@@ -116,11 +117,13 @@ jobs:
             echo '<html><body><h1>No tests executed</h1></body></html>' > "$REPORT_DIR/index.html"
           fi
           
+          # После генерации обновляем общую историю, скопировав новую папку history из отчёта
           if [ -d "$REPORT_DIR/history" ]; then
             mkdir -p "$HISTORY_DIR"
             cp -r "$REPORT_DIR/history/"* "$HISTORY_DIR/"
           fi
           
+          # Создаём корневой index.html с редиректом на последний запуск
           echo "<html><head><meta http-equiv='refresh' content='0; url=./${{ github.run_number }}/index.html' /></head><body><a href='./${{ github.run_number }}/index.html'>Latest report</a></body></html>" > allure-history/index.html
 
       - name: Deploy report to Github Pages
