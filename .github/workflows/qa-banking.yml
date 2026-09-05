@@ -14,19 +14,19 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v7
 
-      # Устанавливаем системные пакеты (если они ещё не стоят).
-      # Если уже установлены – этот шаг быстро пропустится.
-      - name: Install system dependencies (CachyOS / Arch)
-        run: |
-          sudo pacman -Syu --noconfirm
-          sudo pacman -S --noconfirm docker docker-compose python python-pip
-
+      # Убедимся, что Docker запущен (теперь без sudo)
       - name: Start Docker service
         run: |
-          sudo systemctl start docker
-          sudo systemctl enable docker
+          systemctl --user start docker 2>/dev/null || sudo systemctl start docker
+          # Если docker работает как пользовательский сервис, используйте systemctl --user,
+          # иначе оставьте sudo (но тогда нужно настроить NOPASSWD в sudoers)
+          docker info  # проверяем, что команда работает
 
-      # Теперь все docker-команды без sudo
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
       - name: Build base Docker image
         run: docker build -f Dockerfile.base -t base-service .
 
