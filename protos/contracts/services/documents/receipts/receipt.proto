@@ -1,8 +1,0 @@
-syntax = "proto3";
-
-package contracts.services.documents.receipts;
-
-message Receipt {
-  string url = 1;
-  bytes document = 2;
-}
