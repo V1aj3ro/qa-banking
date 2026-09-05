@@ -1,0 +1,38 @@
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/users - Waiting for response
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/users - Status 200
+INFO     ACCOUNTS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/accounts/open-credit-card-account - Waiting for response
+INFO     ACCOUNTS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/accounts/open-credit-card-account - Status 200
+INFO     ACCOUNTS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 GET http://127.0.0.1:8003/api/v1/accounts?userId=db1d91cf-24c5-4bc9-a2bb-dc123606e367 - Waiting for response
+INFO     ACCOUNTS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 GET http://127.0.0.1:8003/api/v1/accounts?userId=db1d91cf-24c5-4bc9-a2bb-dc123606e367 - Status 200
+INFO     BASE_ASSERTIONS:base.py:13 Assert status code equals to 200
+INFO     ACCOUNTS_GATEWAY_ASSERTIONS:accounts.py:44 Check get accounts response
+INFO     BASE_ASSERTIONS:base.py:45 Check that length of "Accounts list" equals to 1
+INFO     ACCOUNTS_GATEWAY_ASSERTIONS:accounts.py:27 Check account
+INFO     BASE_ASSERTIONS:base.py:24 Check that "id" equals to 306c152b-0137-4271-b0de-cb07961b139f
+INFO     BASE_ASSERTIONS:base.py:24 Check that "type" equals to CREDIT_CARD
+INFO     BASE_ASSERTIONS:base.py:24 Check that "status" equals to ACTIVE
+INFO     BASE_ASSERTIONS:base.py:24 Check that "balance" equals to 25000.0
+INFO     BASE_ASSERTIONS:base.py:45 Check that length of "accounts cards" equals to 2
+INFO     CARDS_GATEWAY_ASSERTIONS:cards.py:20 Check card
+INFO     BASE_ASSERTIONS:base.py:24 Check that "id" equals to 79a60af7-5911-421d-860f-5a96f5b023c4
+INFO     BASE_ASSERTIONS:base.py:24 Check that "account_id" equals to 306c152b-0137-4271-b0de-cb07961b139f
+INFO     BASE_ASSERTIONS:base.py:24 Check that "status" equals to ACTIVE
+INFO     BASE_ASSERTIONS:base.py:24 Check that "card_holder" equals to Christopher Patel
+INFO     BASE_ASSERTIONS:base.py:24 Check that "card_number" equals to 2284716808254977
+INFO     BASE_ASSERTIONS:base.py:24 Check that "cvv" equals to 9125
+INFO     BASE_ASSERTIONS:base.py:24 Check that "expiry_date" equals to 2033-09-03
+INFO     BASE_ASSERTIONS:base.py:24 Check that "payment_system" equals to MASTERCARD
+INFO     BASE_ASSERTIONS:base.py:24 Check that "pin" equals to 7810
+INFO     BASE_ASSERTIONS:base.py:24 Check that "type" equals to VIRTUAL
+INFO     CARDS_GATEWAY_ASSERTIONS:cards.py:20 Check card
+INFO     BASE_ASSERTIONS:base.py:24 Check that "id" equals to e02ec04e-bac2-466a-a317-77ab541d78f6
+INFO     BASE_ASSERTIONS:base.py:24 Check that "account_id" equals to 306c152b-0137-4271-b0de-cb07961b139f
+INFO     BASE_ASSERTIONS:base.py:24 Check that "status" equals to ACTIVE
+INFO     BASE_ASSERTIONS:base.py:24 Check that "card_holder" equals to Christopher Patel
+INFO     BASE_ASSERTIONS:base.py:24 Check that "card_number" equals to 4712034078184
+INFO     BASE_ASSERTIONS:base.py:24 Check that "cvv" equals to 606
+INFO     BASE_ASSERTIONS:base.py:24 Check that "expiry_date" equals to 2033-09-03
+INFO     BASE_ASSERTIONS:base.py:24 Check that "payment_system" equals to MASTERCARD
+INFO     BASE_ASSERTIONS:base.py:24 Check that "pin" equals to 5921
+INFO     BASE_ASSERTIONS:base.py:24 Check that "type" equals to PHYSICAL
+INFO     SCHEMA_ASSERTIONS:schema.py:14 Validating JSON schema

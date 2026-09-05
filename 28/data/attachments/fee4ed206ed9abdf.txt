@@ -1,0 +1,10 @@
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/users - Waiting for response
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/users - Status 200
+INFO     BASE_ASSERTIONS:base.py:13 Assert status code equals to 200
+INFO     USERS_GATEWAY_ASSERTIONS:users.py:29 Check create user response
+INFO     BASE_ASSERTIONS:base.py:24 Check that "email" equals to 1788613612.912132.steven17@example.com
+INFO     BASE_ASSERTIONS:base.py:24 Check that "phone_number" equals to 263.304.6592
+INFO     BASE_ASSERTIONS:base.py:24 Check that "middle_name" equals to Jeremy
+INFO     BASE_ASSERTIONS:base.py:24 Check that "first_name" equals to Bonnie
+INFO     BASE_ASSERTIONS:base.py:24 Check that "last_name" equals to Roberts
+INFO     SCHEMA_ASSERTIONS:schema.py:14 Validating JSON schema

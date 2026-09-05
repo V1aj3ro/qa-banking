@@ -1,0 +1,18 @@
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/users - Waiting for response
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/users - Status 200
+INFO     ACCOUNTS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/accounts/open-debit-card-account - Waiting for response
+INFO     ACCOUNTS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/accounts/open-debit-card-account - Status 200
+INFO     CARDS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/cards/issue-virtual-card - Waiting for response
+INFO     CARDS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/cards/issue-virtual-card - Status 200
+INFO     ACCOUNTS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/accounts/open-deposit-account - Waiting for response
+INFO     ACCOUNTS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/accounts/open-deposit-account - Status 200
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:19 POST http://127.0.0.1:8003/api/v1/operations/make-cash-withdrawal-operation - Waiting for response
+INFO     USERS_GATEWAY_HTTP_TEST_CLIENT:logger_event_hook.py:25 POST http://127.0.0.1:8003/api/v1/operations/make-cash-withdrawal-operation - Status 200
+INFO     BASE_ASSERTIONS:base.py:13 Assert status code equals to 200
+INFO     OPERATIONS_GATEWAY_ASSERTIONS:operations.py:81 Check make cash withdrawal operation response
+INFO     BASE_ASSERTIONS:base.py:24 Check that "status" equals to IN_PROGRESS
+INFO     BASE_ASSERTIONS:base.py:24 Check that "amount" equals to -503.72
+INFO     BASE_ASSERTIONS:base.py:24 Check that "card_id" equals to 75d5b4d0-9e89-4db8-b483-4b7473d7397c
+INFO     BASE_ASSERTIONS:base.py:24 Check that "account_id" equals to d415b431-cd45-4544-bb06-df8dfe0dd676
+INFO     BASE_ASSERTIONS:base.py:24 Check that "type" equals to CASH_WITHDRAWAL
+INFO     SCHEMA_ASSERTIONS:schema.py:14 Validating JSON schema
